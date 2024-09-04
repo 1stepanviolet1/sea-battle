@@ -24,12 +24,12 @@ private:
 public:
     Ship(std::uint8_t _len, Orientation _orie);
     Ship(const Ship &other);
-    Ship(Ship&&);
+    Ship(Ship&&) noexcept;
 
     ~Ship() = default;
 
     Ship& operator=(const Ship &other);
-    Ship& operator=(Ship&&);
+    Ship& operator=(Ship&&) noexcept;
 
     void hit(std::uint8_t _i);
     std::uint8_t len() const noexcept;

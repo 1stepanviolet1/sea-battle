@@ -27,7 +27,7 @@ Ship::Ship(std::uint8_t len, Orientation orie)
     
 }
 
-Ship::Ship(const Ship &other) noexcept 
+Ship::Ship(const Ship &other)  
 : _len(other.len()), _orientation(other.orientation()), _segments(other.segments())
 {    }
 
@@ -48,7 +48,7 @@ Ship::operator=(const Ship &other)
 }
 
 Ship& 
-Ship::operator=(Ship &&other)
+Ship::operator=(Ship &&other) noexcept
 {
     if (this != &other)
     {
