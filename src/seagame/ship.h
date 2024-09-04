@@ -26,6 +26,8 @@ public:
     Ship(const Ship &other);
     Ship(Ship&&);
 
+    ~Ship() = default;
+
     Ship& operator=(const Ship &other);
     Ship& operator=(Ship&&);
 
