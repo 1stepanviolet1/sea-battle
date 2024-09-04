@@ -32,7 +32,7 @@ Ship::Ship(const Ship &other)
 {    }
 
 Ship::Ship(Ship &&other) noexcept 
-: _len(other.len()), _orientation(other.orientation()), _segments(std::move(other._segments))
+: _len(other.len()), _orientation(other.orientation()), _segments(std::move(other.segments()))
 {    }
 
 Ship& 
