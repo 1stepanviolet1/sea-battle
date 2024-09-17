@@ -17,7 +17,16 @@ enum Ship::Integrity
     DESTROYED
 };
 
-Ship::Ship(std::uint8_t len, Orientation orie)
+enum Ship::Lens
+{
+    ONE = 1,
+    TWO = 2,
+    THREE = 3,
+    FOUR = 4
+};
+
+
+Ship::Ship(Lens len, Orientation orie)
 {
     this->_len = len;
     this->_orientation = orie;
@@ -27,7 +36,7 @@ Ship::Ship(std::uint8_t len, Orientation orie)
     
 }
 
-Ship::Ship(const Ship &other)  
+Ship::Ship(const Ship &other) // TODO: check deep copy
 : _len(other.len()), _orientation(other.orientation()), _segments(other.segments())
 {    }
 
@@ -42,7 +51,7 @@ Ship::operator=(const Ship &other)
     {
         this->_len = other.len();
         this->_orientation = other.orientation();
-        this->_segments = other.segments();
+        this->_segments = other.segments(); // TODO: check deep copy
     }
     return *this;
 }
@@ -83,7 +92,7 @@ Ship::hit(std::uint8_t _i)
     }
 }
 
-std::uint8_t 
+const Ship::Lens&
 Ship::len() const noexcept
 { return this->_len; }
 
