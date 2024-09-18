@@ -18,6 +18,7 @@ class ShipManager
 public:
     ShipManager(std::initializer_list<Ship::Len> _lens);
     ShipManager();
+
     ShipManager(const ShipManager &other);
     ShipManager(ShipManager &&other) noexcept;
 
@@ -26,11 +27,13 @@ public:
     ShipManager& operator=(const ShipManager &other);
     ShipManager& operator=(ShipManager &&other) noexcept;
 
-    std::size_t new_ship(Ship::Len _len, Ship::Orientation _orie);
-    
-    Ship& operator[](std::uint64_t _id);
-    const Ship& operator[](std::size_t _id) const;
+    std::uint64_t new_ship(Ship::Len _len, Ship::Orientation _orie);
+    std::uint64_t new_ship(Ship::Len _len);
 
+    Ship& operator[](std::uint64_t _id);
+    const Ship& operator[](std::uint64_t _id) const;
+
+    const std::vector<Ship>& container() const noexcept;
     std::size_t amt() const noexcept;
 
 private:

@@ -24,7 +24,9 @@ private:
 
 public:
     Ship(Len _len, Orientation _orie);
+    Ship(Len _len);
     Ship();
+
     Ship(const Ship &other);
     Ship(Ship &&other) noexcept;
 
@@ -40,7 +42,7 @@ public:
 
 };
 
-}
+} // seagame
 
 
 #endif // _SHIP_HPP

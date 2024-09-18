@@ -1,5 +1,7 @@
 #include "../ship.h"
 
+#include <stdexcept>
+
 
 namespace seagame
 {
@@ -27,21 +29,25 @@ enum Ship::Len
 
 
 Ship::Ship(Len len, Orientation orie)
+: _len(len), _orientation(orie)
 {
-    this->_len = len;
-    this->_orientation = orie;
-
     for (std::uint8_t i = 0; i < _len; ++i)
         this->_segments.push_back(Integrity::WHOLE);
     
 }
 
-Ship::Ship(const Ship &other) // TODO: check deep copy
+Ship::Ship(Len _len) : Ship(_len, Ship::Orientation::HORIZONTAL)
+{    }
+
+Ship::Ship() : Ship(Ship::Len::ONE)
+{    }
+
+Ship::Ship(const Ship &other)
 : _len(other.len()), _orientation(other.orientation()), _segments(other.segments())
 {    }
 
 Ship::Ship(Ship &&other) noexcept 
-: _len(other.len()), _orientation(other.orientation()), _segments(std::move(other.segments()))
+: _len(other._len), _orientation(other._orientation), _segments(std::move(other._segments))
 {    }
 
 Ship& 
@@ -51,7 +57,7 @@ Ship::operator=(const Ship &other)
     {
         this->_len = other.len();
         this->_orientation = other.orientation();
-        this->_segments = other.segments(); // TODO: check deep copy
+        this->_segments = other.segments();
     }
     return *this;
 }
@@ -61,9 +67,9 @@ Ship::operator=(Ship &&other) noexcept
 {
     if (this != &other)
     {
-        this->_len = other.len();
-        this->_orientation = other.orientation();
-        this->_segments = std::move(other.segments());
+        this->_len = other._len;
+        this->_orientation = other._orientation;
+        this->_segments = std::move(other._segments);
     }
     return *this;
 }
@@ -72,7 +78,7 @@ void
 Ship::hit(std::uint8_t _i)
 {
     if (_i >= this->_len)
-        throw std::exception("bad segment");
+        throw std::out_of_range("bad segment");
     
     switch (this->_segments[_i])
     {
@@ -104,4 +110,5 @@ const std::vector<Ship::Integrity>&
 Ship::segments() const noexcept
 { return this->_segments; }
 
-}
+} // seagame
+
