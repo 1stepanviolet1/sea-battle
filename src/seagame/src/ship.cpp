@@ -17,7 +17,7 @@ enum Ship::Integrity
     DESTROYED
 };
 
-enum Ship::Lens
+enum Ship::Len
 {
     ONE = 1,
     TWO = 2,
@@ -26,7 +26,7 @@ enum Ship::Lens
 };
 
 
-Ship::Ship(Lens len, Orientation orie)
+Ship::Ship(Len len, Orientation orie)
 {
     this->_len = len;
     this->_orientation = orie;
@@ -92,7 +92,7 @@ Ship::hit(std::uint8_t _i)
     }
 }
 
-const Ship::Lens&
+const Ship::Len&
 Ship::len() const noexcept
 { return this->_len; }
 

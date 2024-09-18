@@ -15,25 +15,26 @@ class Ship
 public:
     enum Orientation;
     enum Integrity;
-    enum Lens;
+    enum Len;
 
 private:
-    Lens _len;
+    Len _len;
     Orientation _orientation;
     std::vector<Integrity> _segments;
 
 public:
-    Ship(Lens _len, Orientation _orie);
+    Ship(Len _len, Orientation _orie);
+    Ship();
     Ship(const Ship &other);
-    Ship(Ship&&) noexcept;
+    Ship(Ship &&other) noexcept;
 
     ~Ship() = default;
 
     Ship& operator=(const Ship &other);
-    Ship& operator=(Ship&&) noexcept;
+    Ship& operator=(Ship &&other) noexcept;
 
     void hit(std::uint8_t _i);
-    const Lens& len() const noexcept;
+    const Len& len() const noexcept;
     const Orientation& orientation() const noexcept;
     const std::vector<Integrity>& segments() const noexcept;
 
