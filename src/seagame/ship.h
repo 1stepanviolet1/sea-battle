@@ -23,8 +23,8 @@ private:
     std::vector<Integrity> _segments;
 
 public:
-    Ship(Len _len, Orientation _orie);
-    Ship(Len _len);
+    explicit Ship(Len _len, Orientation _orie);
+    explicit Ship(Len _len);
     Ship();
 
     Ship(const Ship &other);
@@ -36,6 +36,7 @@ public:
     Ship& operator=(Ship &&other) noexcept;
 
     void hit(std::uint8_t _i);
+    
     const Len& len() const noexcept;
     const Orientation& orientation() const noexcept;
     const std::vector<Integrity>& segments() const noexcept;

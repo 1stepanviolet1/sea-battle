@@ -28,7 +28,7 @@ enum Ship::Len
 };
 
 
-Ship::Ship(Len len, Orientation orie)
+explicit Ship::Ship(Len len, Orientation orie)
 : _len(len), _orientation(orie)
 {
     for (std::uint8_t i = 0; i < _len; ++i)
@@ -36,7 +36,7 @@ Ship::Ship(Len len, Orientation orie)
     
 }
 
-Ship::Ship(Len _len) : Ship(_len, Ship::Orientation::HORIZONTAL)
+explicit Ship::Ship(Len _len) : Ship(_len, Ship::Orientation::HORIZONTAL)
 {    }
 
 Ship::Ship() : Ship(Ship::Len::ONE)
