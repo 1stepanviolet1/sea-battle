@@ -16,7 +16,14 @@ namespace seagame
 class ShipManager
 {
 public:
-    ShipManager(std::initializer_list<Ship::Len> _lens);
+    using ArrayOfLens = std::initializer_list<Ship::Len>;
+
+private:
+    std::vector<Ship> _container;
+    // если кораблям понадобятся идентификаторы, то взять за таковые индексы в векторе
+
+public:
+    ShipManager(ArrayOfLens _lens);
     ShipManager();
 
     ShipManager(const ShipManager &other);
@@ -35,10 +42,6 @@ public:
 
     const std::vector<Ship>& container() const noexcept;
     std::size_t amt() const noexcept;
-
-private:
-    std::vector<Ship> _container;
-    // если кораблям понадобятся идентификаторы, то взять за таковые индексы в векторе
 
 };
 

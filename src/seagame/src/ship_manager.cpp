@@ -4,7 +4,7 @@
 namespace seagame
 {
 
-ShipManager::ShipManager(std::initializer_list<Ship::Len> _lens)
+ShipManager::ShipManager(ArrayOfLens _lens)
 {
     for (const auto &_len : _lens)
         this->new_ship(_len);
