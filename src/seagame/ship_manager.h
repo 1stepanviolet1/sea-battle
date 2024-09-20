@@ -49,4 +49,3 @@ public:
 
 
 #endif // _SHIP_MANAGER_H
-

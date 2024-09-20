@@ -13,9 +13,26 @@ namespace seagame
 class Ship
 {
 public:
-    enum Orientation;
-    enum Integrity;
-    enum Len;
+    enum Orientation
+    {
+        HORIZONTAL,
+        VERTICAL
+    };
+    
+    enum Integrity
+    {
+        WHOLE,
+        HALF_DESTROYED,
+        DESTROYED
+    };
+    
+    enum Len
+    {
+        ONE = 1,
+        TWO = 2,
+        THREE = 3,
+        FOUR = 4
+    };
 
 private:
     Len _len;

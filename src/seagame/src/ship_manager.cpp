@@ -15,15 +15,15 @@ ShipManager::ShipManager() : ShipManager({})
 {    }
 
 ShipManager::ShipManager(const ShipManager &other)
-: _container(other.container())
+    : _container(other.container())
 {    }
 
 ShipManager::ShipManager(ShipManager &&other) noexcept
-: _container(std::move(other._container))
+    : _container(std::move(other._container))
 {    }
 
 ShipManager&
-operator=(const ShipManager &other)
+ShipManager::operator=(const ShipManager &other)
 {
     if (this != &other)
     {
@@ -33,7 +33,7 @@ operator=(const ShipManager &other)
 }
 
 ShipManager&
-operator=(ShipManager &&other) noexcept
+ShipManager::operator=(ShipManager &&other) noexcept
 {
     if (this != &other)
     {
@@ -57,11 +57,11 @@ ShipManager::new_ship(Ship::Len _len)
 
 
 Ship&
-operator[](std::uint64_t _id)
+ShipManager::operator[](std::uint64_t _id)
 { return this->_container.at(_id); }
 
 const Ship&
-operator[](std::uint64_t _id) const
+ShipManager::operator[](std::uint64_t _id) const
 { return this->_container.at(_id); }
 
 

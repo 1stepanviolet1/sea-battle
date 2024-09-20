@@ -6,48 +6,28 @@
 namespace seagame
 {
 
-enum Ship::Orientation
-{
-    HORIZONTAL,
-    VERTICAL
-};
-
-enum Ship::Integrity
-{
-    WHOLE,
-    HALF_DESTROYED,
-    DESTROYED
-};
-
-enum Ship::Len
-{
-    ONE = 1,
-    TWO = 2,
-    THREE = 3,
-    FOUR = 4
-};
-
-
 explicit Ship::Ship(Len len, Orientation orie)
-: _len(len), _orientation(orie)
+    : _len(len), _orientation(orie)
 {
     for (std::uint8_t i = 0; i < _len; ++i)
         this->_segments.push_back(Integrity::WHOLE);
     
 }
 
-explicit Ship::Ship(Len _len) : Ship(_len, Ship::Orientation::HORIZONTAL)
+explicit Ship::Ship(Len _len) 
+    : Ship(_len, Ship::Orientation::HORIZONTAL)
 {    }
 
-Ship::Ship() : Ship(Ship::Len::ONE)
+Ship::Ship() 
+    : Ship(Ship::Len::ONE)
 {    }
 
 Ship::Ship(const Ship &other)
-: _len(other.len()), _orientation(other.orientation()), _segments(other.segments())
+    : _len(other.len()), _orientation(other.orientation()), _segments(other.segments())
 {    }
 
 Ship::Ship(Ship &&other) noexcept 
-: _len(other._len), _orientation(other._orientation), _segments(std::move(other._segments))
+    : _len(other._len), _orientation(other._orientation), _segments(std::move(other._segments))
 {    }
 
 Ship& 
