@@ -4,18 +4,18 @@
 namespace seagame
 {
 
-explicit Field::Size::Size(std::uint64_t m, std::uint64_t n)
+explicit Field::Size::Size(std::uint64_t _m, std::uint64_t _n)
 {
     { // validation args
-        std::int64_t __m = static_cast<std::int64_t>(m);
-        std::int64_t __n = static_cast<std::int64_t>(n);
+        std::int64_t __m = static_cast<std::int64_t>(_m);
+        std::int64_t __n = static_cast<std::int64_t>(_n);
 
         if (__m < 0 or __n < 0)
             throw std::std::invalid_argument("invalid size component");
     } // validation args
 
-    this->_m = m;
-    this->_n = n;
+    this->_m = _m;
+    this->_n = _n;
 
 }
 
@@ -59,12 +59,12 @@ std::uint64_t Field::Size::n() const noexcept
 { return this->_n; }
 
 
-Field::Field(std::uint64_t m, std::uint64_t n)
-    : _size(m, n)
+explicit Field::Field(std::uint64_t _m, std::uint64_t _n)
+    : _size(_m, _n)
 {    }
 
-Field::Field(Size size)
-    : _size(size)
+Field::Field(Size _size)
+    : _size(_size)
 {    }
 
 

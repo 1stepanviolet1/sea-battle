@@ -6,8 +6,8 @@
 namespace seagame
 {
 
-explicit Ship::Ship(Len len, Orientation orie)
-    : _len(len), _orientation(orie)
+explicit Ship::Ship(Len _len, Orientation _orie)
+    : _len(_len), _orientation(_orie)
 {
     for (std::uint8_t i = 0; i < _len; ++i)
         this->_segments.push_back(Integrity::WHOLE);
