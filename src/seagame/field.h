@@ -20,7 +20,7 @@ public:
     class Size
     {
     public:
-        Size(std::uint64_t m, std::uint64_t n);
+        explicit Size(std::uint64_t m, std::uint64_t n);
 
         Size(const Size &other);
         Size(Size &&other) noexcept;
@@ -47,6 +47,7 @@ private:
 
 public:
     explicit Field(std::uint64_t m, std::uint64_t n);
+    Field(Size size);
 
     Field(const Field &other);
     Field(Field &&other) noexcept;
@@ -56,11 +57,11 @@ public:
     Field& operator=(const Field &other);
     Field& operator=(Field &&other) noexcept;
 
-    void add_ship(Ship _ship, std::uint64_t x, std::uint64_t y);
-    void add_ship(Ship _ship, const Unit &_unit);
+    void add_ship(Ship &_ship, std::uint64_t x, std::uint64_t y);
+    void add_ship(Ship &_ship, const Unit &_unit);
 
     void shot(std::uint64_t x, std::uint64_t y);
-    void shot(Unit _unit);
+    void shot(const Unit &_unit);
 
     const Size& size() const noexcept;
     

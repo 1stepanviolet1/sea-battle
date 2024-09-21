@@ -71,10 +71,10 @@ Ship::hit(std::uint8_t _i)
         break;
     
     case Integrity::DESTROYED:
-        throw std::exception("bad hit");
+        throw std::logic_error("bad hit");
     
     default:
-        throw std::exception("bad Ship::Integrity");
+        throw std::logic_error("bad Ship::Integrity");
     }
 }
 
