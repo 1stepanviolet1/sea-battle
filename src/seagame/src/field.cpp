@@ -117,8 +117,21 @@ Field::operator=(Field &&other) noexcept
 void 
 Field::add_ship(Ship &_ship, const Unit &_unit)
 {
-    if (this->_unusable_units.find(_unit) != this->_unusable_units.end())
-        throw std::invalid_argument("bad unit for add ship");
+    Ship::Len i = Ship::Len::ONE;
+    do
+    {
+        if (this->_unusable_units.find(Unit(
+            _ship.orientation() == Ship::Orientation::HORIZONTAL 
+                ? _unit.x() + i - 1 
+                : _unit.x(),
+            _ship.orientation() == Ship::Orientation::VERTICAL 
+                ? _unit.y() + i - 1
+                : _unit.y()
+        )) != this->_unusable_units.end())
+            throw std::invalid_argument("bad unit for add ship");
+        
+        i = Ship::Len(i + 1);
+    } while (i != _ship.len());
     
 
     switch (_ship.orientation())
@@ -145,6 +158,8 @@ Field::add_ship(Ship &_ship, const Unit &_unit)
         throw std::logic_error("bad orientation");
     }
 
+
+    this->_deployed_ships.emplace(_ship, _unit);
 
     // TODO:
 

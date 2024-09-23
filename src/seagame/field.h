@@ -65,6 +65,9 @@ public:
     void shot(std::uint64_t _x, std::uint64_t _y);
 
     const Size& size() const noexcept;
+
+private:
+    // void __block_unit_for_add
     
 };
 
