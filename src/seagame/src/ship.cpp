@@ -6,7 +6,7 @@
 namespace seagame
 {
 
-explicit Ship::Ship(Len _len, Orientation _orie)
+Ship::Ship(Len _len, Orientation _orie)
     : _len(_len), _orientation(_orie)
 {
     for (std::uint8_t i = 0; i < _len; ++i)
@@ -14,7 +14,7 @@ explicit Ship::Ship(Len _len, Orientation _orie)
     
 }
 
-explicit Ship::Ship(Len _len) 
+Ship::Ship(Len _len) 
     : Ship(_len, Ship::Orientation::HORIZONTAL)
 {    }
 
@@ -92,3 +92,33 @@ Ship::segments() const noexcept
 
 } // seagame
 
+
+
+namespace std
+{
+
+std::size_t 
+hash<seagame::Ship>::operator()(const seagame::Ship& u) const
+{
+    return hash<string>()(to_string(u.len()) + to_string(u.orientation()));
+}
+
+bool 
+equal_to<seagame::Ship>::operator()(const seagame::Ship& lhs, const seagame::Ship& rhs) const
+{
+    return lhs.len() == rhs.len() && lhs.orientation() == rhs.orientation();
+}
+
+std::size_t 
+hash<std::reference_wrapper<seagame::Ship>>::operator()(const std::reference_wrapper<seagame::Ship>& u) const
+{
+    return hash<seagame::Ship>()(u.get());
+}
+
+bool 
+equal_to<std::reference_wrapper<seagame::Ship>>::operator()(const std::reference_wrapper<seagame::Ship>& lhs, const std::reference_wrapper<seagame::Ship>& rhs) const
+{
+    return equal_to<seagame::Ship>()(lhs.get(), rhs.get());
+}
+
+} // std

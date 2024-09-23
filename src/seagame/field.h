@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <functional>
+#include <stdexcept>
 
 #include "unit.h"
 #include "ship_manager.h"
@@ -20,7 +21,7 @@ public:
     class Size
     {
     public:
-        explicit Size(std::uint64_t m, std::uint64_t n);
+        Size(std::uint64_t m, std::uint64_t n);
 
         Size(const Size &other);
         Size(Size &&other) noexcept;
@@ -46,7 +47,7 @@ private:
     Size _size;
 
 public:
-    explicit Field(std::uint64_t _m, std::uint64_t _n);
+    Field(std::uint64_t _m, std::uint64_t _n);
     explicit Field(Size _size);
 
     Field(const Field &other);
@@ -57,11 +58,11 @@ public:
     Field& operator=(const Field &other);
     Field& operator=(Field &&other) noexcept;
 
-    void add_ship(Ship &_ship, std::uint64_t _x, std::uint64_t y);
     void add_ship(Ship &_ship, const Unit &_unit);
+    void add_ship(Ship &_ship, std::uint64_t _x, std::uint64_t y);
 
-    void shot(std::uint64_t _x, std::uint64_t _y);
     void shot(const Unit &_unit);
+    void shot(std::uint64_t _x, std::uint64_t _y);
 
     const Size& size() const noexcept;
     

@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <vector>
+#include <string>
 
 namespace seagame
 {
@@ -61,6 +62,36 @@ public:
 };
 
 } // seagame
+
+
+namespace std
+{
+
+template <>
+struct hash<seagame::Ship>
+{
+    std::size_t operator()(const seagame::Ship& u) const;
+};
+
+template <>
+struct equal_to<seagame::Ship>
+{
+    bool operator()(const seagame::Ship& lhs, const seagame::Ship& rhs) const;
+};
+
+template <>
+struct hash<std::reference_wrapper<seagame::Ship>>
+{
+    std::size_t operator()(const std::reference_wrapper<seagame::Ship>& u) const;
+};
+
+template <>
+struct equal_to<std::reference_wrapper<seagame::Ship>>
+{
+    bool operator()(const std::reference_wrapper<seagame::Ship>& lhs, const std::reference_wrapper<seagame::Ship>& rhs) const;
+};
+
+} // std
 
 
 #endif // _SHIP_HPP

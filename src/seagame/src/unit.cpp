@@ -4,11 +4,11 @@
 namespace seagame
 {
 
-explicit Unit::Unit(std::uint64_t x, std::uint64_t y, State state)
+Unit::Unit(std::uint64_t x, std::uint64_t y, State state)
     : _x(x), _y(y), _state(state)
 {    }
 
-explicit Unit::Unit(std::uint64_t x, std::uint64_t y)
+Unit::Unit(std::uint64_t x, std::uint64_t y)
     : Unit(x, y, State::UNDEFINED)
 {    }
 
@@ -57,3 +57,33 @@ const Unit::State& Unit::state() const noexcept
 { return this->_state; }
 
 } // seagame
+
+
+namespace std
+{
+
+std::size_t 
+hash<seagame::Unit>::operator()(const seagame::Unit& u) const
+{
+    return hash<string>()(to_string(u.x()) + to_string(u.y()));
+}
+
+bool 
+equal_to<seagame::Unit>::operator()(const seagame::Unit& lhs, const seagame::Unit& rhs) const
+{
+    return lhs.x() == rhs.x() && lhs.y() == rhs.y();
+}
+
+std::size_t 
+hash<std::reference_wrapper<seagame::Unit>>::operator()(const std::reference_wrapper<seagame::Unit>& u) const
+{
+    return hash<seagame::Unit>()(u.get());
+}
+
+bool 
+equal_to<std::reference_wrapper<seagame::Unit>>::operator()(const std::reference_wrapper<seagame::Unit>& lhs, const std::reference_wrapper<seagame::Unit>& rhs) const
+{
+    return equal_to<seagame::Unit>()(lhs.get(), rhs.get());
+}
+
+} // std

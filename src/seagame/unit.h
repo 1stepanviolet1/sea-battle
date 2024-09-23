@@ -5,6 +5,8 @@
 #define _UNIT_H
 
 #include <cstdint>
+#include <functional>
+#include <string>
 
 namespace seagame
 {
@@ -26,7 +28,7 @@ private:
 
 public:
     explicit Unit(std::uint64_t x, std::uint64_t y, State state);
-    explicit Unit(std::uint64_t x, std::uint64_t y);
+    Unit(std::uint64_t x, std::uint64_t y);
 
     Unit(const Unit &other);
     Unit(Unit &&other) noexcept;
@@ -43,6 +45,36 @@ public:
 };
 
 } // seagame
+
+
+namespace std
+{
+
+template <>
+struct hash<seagame::Unit>
+{
+    std::size_t operator()(const seagame::Unit& u) const;
+};
+
+template <>
+struct equal_to<seagame::Unit>
+{
+    bool operator()(const seagame::Unit& lhs, const seagame::Unit& rhs) const;
+};
+
+template <>
+struct hash<std::reference_wrapper<seagame::Unit>>
+{
+    std::size_t operator()(const std::reference_wrapper<seagame::Unit>& u) const;
+};
+
+template <>
+struct equal_to<std::reference_wrapper<seagame::Unit>>
+{
+    bool operator()(const std::reference_wrapper<seagame::Unit>& lhs, const std::reference_wrapper<seagame::Unit>& rhs) const;
+};
+
+} // std
 
 
 #endif // _UNIT_H
