@@ -17,6 +17,8 @@ int main()
 
     field.add_ship(sm[2], seagame::Unit(1, 1));
 
+    std::cout << std::equal_to<seagame::Unit>()(seagame::Unit(1, 3), seagame::Unit(1, 3)) << std::endl;
+
     return 0;
     
 }

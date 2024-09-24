@@ -177,6 +177,75 @@ Field::add_ship(Ship &_ship, std::uint64_t _x, std::uint64_t _y)
 void 
 Field::shot(const Unit &_unit)
 {
+    if (!this->__is_valid_unit(_unit)
+      || this->_hit_units.find(_unit) != this->_hit_units.end())
+        throw std::invalid_argument("bad unit for shot");
+
+    Unit _u;
+    Ship::Orientation _orie;
+    std::uint8_t i;
+
+
+_check_horizontal:
+    _orie = Ship::Orientation::HORIZONTAL;
+    for (i = 0; i < 4; ++i)
+    {
+        _u = Unit(
+            _unit.x() - i,
+            _unit.y()
+        );
+
+        if (!this->__is_valid_unit(_u))
+            break;
+
+
+        if (this->_deployed_ships.find(_u) != this->_deployed_ships.end())
+            goto _segment_found;
+    
+    }
+    
+
+_check_vertical:
+    _orie = Ship::Orientation::VERTICAL;
+    for (i = 0; i < 4; ++i)
+    {
+        _u = Unit(
+            _unit.x(),
+            _unit.y() - i
+        );
+    
+        if (!this->__is_valid_unit(_u))
+            break;
+
+        if (this->_deployed_ships.find(_u) != this->_deployed_ships.end())
+            goto _segment_found;
+    
+    }
+
+    _u = Unit();
+
+_segment_found:
+    if (std::equal_to<Unit>()(Unit(), _u)
+    {
+        this->_hit_units.insert(_u);
+        return;
+    }
+
+    Ship &_ship = this->_deployed_ships.at(_u).get();
+    
+    if (_ship.len() < i)
+        if (_orie == Ship::Orientation::HORIZONTAL)
+            goto _check_vertical;
+        else
+        {
+            this->_hit_units.insert(_u);
+            return;
+        }
+
+    _ship.hit(i);
+
+    _ship.segments()[i] == Ship::Integrity::DESTROYED;
+
     // TODO:
 }
 
