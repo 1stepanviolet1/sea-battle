@@ -1,16 +1,21 @@
-#include "seagame/field.h"
 #include "seagame/ship_manager.h"
+#include "seagame/field.h"
+
+#include <iostream>
 
 
 int main()
 {
-    // Example usage
     seagame::ShipManager sm({
-        seagame::Ship::Len::FOUR,
-        seagame::Ship::Len::THREE,
+        seagame::Ship::Len::ONE,
         seagame::Ship::Len::TWO,
-        seagame::Ship::Len::ONE
+        seagame::Ship::Len::THREE,
+        seagame::Ship::Len::FOUR
     });
+
+    seagame::Field field(3, 3);
+
+    field.add_ship(sm[2], seagame::Unit(1, 1));
 
     return 0;
     

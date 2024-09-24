@@ -46,7 +46,7 @@ ShipManager::operator=(ShipManager &&other) noexcept
 std::uint64_t
 ShipManager::new_ship(Ship::Len _len, Ship::Orientation _orie)
 {
-    this->_container.emplace_back(_len, _orie);
+    this->_container.push_back(Ship(_len, _orie));
     return this->amt() - 1;
 
 }

@@ -10,7 +10,7 @@
 #include <stdexcept>
 
 #include "unit.h"
-#include "ship_manager.h"
+#include "ship.h"
 
 namespace seagame
 {
@@ -67,8 +67,9 @@ public:
     const Size& size() const noexcept;
 
 private:
-    // void __block_unit_for_add
-    
+    void __block_unit_for_add(const Unit &_unit, const Ship::Orientation &_orie);
+    bool __is_valid_unit(const Unit &_u);
+    bool __is_valid_unit(std::uint64_t _x, std::uint64_t _y);
 };
 
 } // seagame

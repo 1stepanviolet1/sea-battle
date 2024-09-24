@@ -4,12 +4,16 @@
 namespace seagame
 {
 
-Unit::Unit(std::uint64_t x, std::uint64_t y, State state)
-    : _x(x), _y(y), _state(state)
+Unit::Unit(std::uint64_t _x, std::uint64_t _y, State _state)
+    : _x(_x), _y(_y), _state(_state)
 {    }
 
-Unit::Unit(std::uint64_t x, std::uint64_t y)
-    : Unit(x, y, State::UNDEFINED)
+Unit::Unit(std::uint64_t _x, std::uint64_t _y)
+    : Unit(_x, _y, State::UNDEFINED)
+{    }
+
+Unit::Unit()
+    : _x(0), _y(0)
 {    }
 
 
@@ -41,7 +45,7 @@ Unit::operator=(Unit &&other) noexcept
     {
         this->_x = other._x;
         this->_y = other._y;
-        this->_state = _state;
+        this->_state = other._state;
     }
     return *this;
 }
@@ -87,3 +91,4 @@ equal_to<std::reference_wrapper<seagame::Unit>>::operator()(const std::reference
 }
 
 } // std
+

@@ -11,8 +11,12 @@
 namespace seagame
 {
 
+class ShipManager;
+
 class Ship
 {
+    friend ShipManager;
+
 public:
     enum Orientation
     {
@@ -40,11 +44,11 @@ private:
     Orientation _orientation;
     std::vector<Integrity> _segments;
 
-public:
     explicit Ship(Len _len, Orientation _orie);
     explicit Ship(Len _len);
     Ship();
 
+public:
     Ship(const Ship &other);
     Ship(Ship &&other) noexcept;
 

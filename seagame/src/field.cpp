@@ -62,7 +62,7 @@ std::uint64_t Field::Size::n() const noexcept
 Field::Field(std::uint64_t _m, std::uint64_t _n)
     : _size(_m, _n)
 {
-    if (_m < 0 || _n < 0)
+    if (_m < 1 || _n < 1)
         throw std::invalid_argument("minimal field size: 1x1");
 
 }
@@ -105,7 +105,7 @@ Field::operator=(Field &&other) noexcept
 {
     if (this != &other)
     {
-        this->_size = _size;
+        this->_size = other._size;
         this->_deployed_ships = std::move(other._deployed_ships);
         this->_hit_units = std::move(other._hit_units);
         this->_unusable_units = std::move(other._unusable_units);
@@ -117,41 +117,36 @@ Field::operator=(Field &&other) noexcept
 void 
 Field::add_ship(Ship &_ship, const Unit &_unit)
 {
+    if (this->_unusable_units.find(_unit) != this->_unusable_units.end())
+        throw std::invalid_argument("bad unit for add ship");
+
     Ship::Len i = Ship::Len::ONE;
-    do
+    while (i != _ship.len())
     {
         if (this->_unusable_units.find(Unit(
             _ship.orientation() == Ship::Orientation::HORIZONTAL 
-                ? _unit.x() + i - 1 
+                ? _unit.x() + i 
                 : _unit.x(),
             _ship.orientation() == Ship::Orientation::VERTICAL 
-                ? _unit.y() + i - 1
+                ? _unit.y() + i
                 : _unit.y()
         )) != this->_unusable_units.end())
             throw std::invalid_argument("bad unit for add ship");
         
         i = Ship::Len(i + 1);
-    } while (i != _ship.len());
+    }
     
 
     switch (_ship.orientation())
     {
     case Ship::Orientation::HORIZONTAL:
-        if (
-            _unit.x() + _ship.len() > this->_size.m()
-            || _unit.y() > this->_size.n()
-           )
+        if (!this->__is_valid_unit(_unit.x() + _ship.len() - 1, _unit.y()))
             throw std::invalid_argument("bad unit for add ship");
-
         break;
 
     case Ship::Orientation::VERTICAL:
-        if (
-            _unit.y() + _ship.len() > this->_size.n()
-            || _unit.x() > this->_size.m()
-           )
+        if (!this->__is_valid_unit(_unit.x(), _unit.y() + _ship.len() - 1))
             throw std::invalid_argument("bad unit for add ship");
-
         break;
     
     default:
@@ -159,17 +154,24 @@ Field::add_ship(Ship &_ship, const Unit &_unit)
     }
 
 
-    this->_deployed_ships.emplace(_ship, _unit);
+    this->_deployed_ships.emplace(_unit, _ship);
+    
 
-    // TODO:
+    for (std::int8_t i = -1; i <= _ship.len(); ++i)
+        this->__block_unit_for_add(Unit(
+            _ship.orientation() == Ship::Orientation::HORIZONTAL
+                ? _unit.x() + i
+                : _unit.x(),
+            _ship.orientation() == Ship::Orientation::VERTICAL
+                ? _unit.y() + i
+                : _unit.y()
+        ), _ship.orientation());
 
 }
 
 void 
-Field::add_ship(Ship &_ship, std::uint64_t _x, std::uint64_t y)
-{
-    // TODO:
-}
+Field::add_ship(Ship &_ship, std::uint64_t _x, std::uint64_t _y)
+{ return this->add_ship(_ship, Unit(_x, _y)); }
 
 
 void 
@@ -189,4 +191,40 @@ const Field::Size&
 Field::size() const noexcept
 { return this->_size; }
 
+
+void 
+Field::__block_unit_for_add(const Unit &_unit, const Ship::Orientation &_orie)
+{
+    Unit _u;
+    for (std::int8_t i = -1; i < 2; ++i)
+    {
+        _u = Unit(
+            _orie == Ship::Orientation::VERTICAL
+                ? _unit.x() + i
+                : _unit.x(),
+            _orie == Ship::Orientation::HORIZONTAL
+                ? _unit.y() + i
+                : _unit.y()
+        );
+        
+        if (!this->__is_valid_unit(_u))
+            continue;
+
+        this->_unusable_units.insert(_u);
+    }
+
+}
+
+bool 
+Field::__is_valid_unit(const Unit &_u)
+{
+    return _u.x() > 0 && _u.x() <= this->_size.m() 
+        && _u.y() > 0 && _u.y() <= this->_size.n(); 
+}
+
+bool 
+Field::__is_valid_unit(std::uint64_t _x, std::uint64_t _y)
+{ return this->__is_valid_unit(Unit(_x, _y)); }
+
 } // namespace seagame
+
