@@ -67,10 +67,16 @@ public:
     const Size& size() const noexcept;
 
 private:
-    void __block_unit_for_add(const Unit &_unit, const Ship::Orientation &_orie);
+    void __block_unit(const Unit &_unit, const Ship::Orientation &_orie, bool _flag);
+    void __block_units(const Unit &_unit, const Ship &_ship, bool _flag);
+    void __block_units_for_add(const Unit &_unit, const Ship &_ship);
+    void __block_units_for_hit(const Unit &_unit, const Ship &_ship);
+
     bool __is_valid_unit(const Unit &_u) const noexcept;
     bool __is_valid_unit(std::uint64_t _x, std::uint64_t _y) const noexcept;
+    
     bool __is_same_ship(const Unit &_lu, const Unit &_unit, std::uint8_t _offset);
+    
     Unit __get_lu_seg_of_ship(const Unit &_unit, const Ship::Orientation &_orie, std::uint8_t &i);
 };
 

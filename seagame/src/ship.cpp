@@ -78,6 +78,18 @@ Ship::hit(std::uint8_t _i)
     }
 }
 
+bool 
+Ship::is_destroyed() const noexcept
+{
+    for (const auto &_seg : this->_segments)
+        if (_seg != Integrity::DESTROYED)
+            return false;
+
+    return true;
+
+}
+
+
 const Ship::Len&
 Ship::len() const noexcept
 { return this->_len; }
@@ -91,7 +103,6 @@ Ship::segments() const noexcept
 { return this->_segments; }
 
 } // seagame
-
 
 
 namespace std

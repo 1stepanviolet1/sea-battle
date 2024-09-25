@@ -26,9 +26,9 @@ public:
     
     enum Integrity
     {
-        WHOLE,
-        HALF_DESTROYED,
-        DESTROYED
+        WHOLE = 2,
+        HALF_DESTROYED = 1,
+        DESTROYED = 0
     };
     
     enum Len
@@ -58,6 +58,7 @@ public:
     Ship& operator=(Ship &&other) noexcept;
 
     void hit(std::uint8_t _i);
+    bool is_destroyed() const noexcept;
     
     const Len& len() const noexcept;
     const Orientation& orientation() const noexcept;

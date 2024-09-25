@@ -13,12 +13,22 @@ int main()
         seagame::Ship::Len::FOUR
     });
 
-    seagame::Field field(3, 3);
+    std::uint64_t i = sm.new_ship(
+        seagame::Ship::Len::THREE,
+        seagame::Ship::Orientation::VERTICAL
+    );
 
-    field.add_ship(sm[2], seagame::Unit(1, 1));
+    seagame::Field field(4, 4);
 
-    std::cout << std::equal_to<seagame::Unit>()(seagame::Unit(1, 3), seagame::Unit(1, 3)) << std::endl;
+    field.add_ship(sm[i], seagame::Unit(2, 1));
 
+    field.shot(2, 3);
+
+
+    std::cout << sm[4].segments()[0] << std::endl;
+    std::cout << sm[4].segments()[1] << std::endl;
+    std::cout << sm[4].segments()[2] << std::endl;
+    
     return 0;
     
 }
