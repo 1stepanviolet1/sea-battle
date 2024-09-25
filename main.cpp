@@ -12,7 +12,7 @@ int main()
         seagame::Ship::Len::THREE,
         seagame::Ship::Len::FOUR
     });
-
+    
     std::uint64_t i = sm.new_ship(
         seagame::Ship::Len::THREE,
         seagame::Ship::Orientation::VERTICAL
@@ -24,10 +24,9 @@ int main()
 
     field.shot(2, 3);
 
-
-    std::cout << sm[4].segments()[0] << std::endl;
-    std::cout << sm[4].segments()[1] << std::endl;
-    std::cout << sm[4].segments()[2] << std::endl;
+    std::cout << sm[i].segments()[0] << std::endl;
+    std::cout << sm[i].segments()[1] << std::endl;
+    std::cout << sm[i].segments()[2] << std::endl;
     
     return 0;
     
