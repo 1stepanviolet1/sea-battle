@@ -155,7 +155,7 @@ Field::add_ship(Ship &_ship, const Unit &_unit)
 
 
     this->_deployed_ships.emplace(_unit, _ship);
-    
+
 
     for (std::int8_t i = -1; i <= _ship.len(); ++i)
         this->__block_unit_for_add(Unit(
@@ -180,71 +180,17 @@ Field::shot(const Unit &_unit)
     if (!this->__is_valid_unit(_unit)
       || this->_hit_units.find(_unit) != this->_hit_units.end())
         throw std::invalid_argument("bad unit for shot");
-
-    Unit _u;
-    Ship::Orientation _orie;
+    
+    Unit _u0;
+    std::equal_to<Unit> eq;
     std::uint8_t i;
 
+    _u = this->__get_lu_seg_of_ship(_unit, Ship::Orientation::HORIZONTAL, i);
 
-_check_horizontal:
-    _orie = Ship::Orientation::HORIZONTAL;
-    for (i = 0; i < 4; ++i)
+    if (!eq(_u, _u0) && this->__is_same_ship(_u, _unit, i))
     {
-        _u = Unit(
-            _unit.x() - i,
-            _unit.y()
-        );
-
-        if (!this->__is_valid_unit(_u))
-            break;
-
-
-        if (this->_deployed_ships.find(_u) != this->_deployed_ships.end())
-            goto _segment_found;
-    
+        
     }
-    
-
-_check_vertical:
-    _orie = Ship::Orientation::VERTICAL;
-    for (i = 0; i < 4; ++i)
-    {
-        _u = Unit(
-            _unit.x(),
-            _unit.y() - i
-        );
-    
-        if (!this->__is_valid_unit(_u))
-            break;
-
-        if (this->_deployed_ships.find(_u) != this->_deployed_ships.end())
-            goto _segment_found;
-    
-    }
-
-    _u = Unit();
-
-_segment_found:
-    if (std::equal_to<Unit>()(Unit(), _u)
-    {
-        this->_hit_units.insert(_u);
-        return;
-    }
-
-    Ship &_ship = this->_deployed_ships.at(_u).get();
-    
-    if (_ship.len() < i)
-        if (_orie == Ship::Orientation::HORIZONTAL)
-            goto _check_vertical;
-        else
-        {
-            this->_hit_units.insert(_u);
-            return;
-        }
-
-    _ship.hit(i);
-
-    _ship.segments()[i] == Ship::Integrity::DESTROYED;
 
     // TODO:
 }
@@ -285,15 +231,62 @@ Field::__block_unit_for_add(const Unit &_unit, const Ship::Orientation &_orie)
 }
 
 bool 
-Field::__is_valid_unit(const Unit &_u)
+Field::__is_valid_unit(const Unit &_u) const noexcept
 {
     return _u.x() > 0 && _u.x() <= this->_size.m() 
         && _u.y() > 0 && _u.y() <= this->_size.n(); 
 }
 
 bool 
-Field::__is_valid_unit(std::uint64_t _x, std::uint64_t _y)
+Field::__is_valid_unit(std::uint64_t _x, std::uint64_t _y) const noexcept
 { return this->__is_valid_unit(Unit(_x, _y)); }
+
+bool 
+Field::__is_same_ship(const Unit &_lu, const Unit &_unit, std::uint8_t _offset)
+{
+    Ship &_ship = this->_deployed_ships.at(_lu);
+    std::equal_to<Unit> eq;
+
+    Unit _u(
+        _ship.orientation() == Ship::Orientation::HORIZONTAL
+            ? _lu.x() + _offset
+            : _lu.x(),
+        _ship.orientation() == Ship::Orientation::VERTICAL
+            ? _lu.y() + _offset
+            : _lu.y()
+    );
+
+    return eq(_unit, _u);
+
+}
+
+Unit
+__get_lu_seg_of_ship(const Unit &_unit, const Ship::Orientation &_orie, std::uint8_t &i)
+{
+    Unit _u;
+
+    for (i = 0; i < 4; ++i)
+    {
+        _u = Unit(
+            _orie == Ship::Orientation::HORIZONTAL
+                ? _unit.x() - i
+                : _unit.x(),
+            _orie == Ship::Orientation::VERTICAL
+                ? _unit.y() - i
+                : _unit.y()
+        );
+
+        if (!this->__is_valid_unit(_u))
+            break;
+
+        if (this->_deployed_ships.find(_u) != this->_deployed_ships.end())
+            return _u;
+
+    }
+
+    return Unit();
+
+}
 
 } // namespace seagame
 
