@@ -14,11 +14,11 @@ namespace seagame
 class Unit
 {
 public:
-    enum State
+    enum class State : char
     {
-        UNDEFINED,
-        EMPTY,
-        SHIP
+        UNDEFINED = '?',
+        EMPTY = '-',
+        SHIP = '*'
     };
 
 private:
@@ -27,7 +27,7 @@ private:
     State _state;
 
 public:
-    explicit Unit(std::uint64_t x, std::uint64_t y, State state);
+    Unit(std::uint64_t x, std::uint64_t y, State state);
     Unit(std::uint64_t x, std::uint64_t y);
     Unit();
 

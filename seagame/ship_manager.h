@@ -6,12 +6,16 @@
 
 #include <vector>
 #include <cstdint>
+#include <type_traits>
 
 #include "ship.h"
 
 
 namespace seagame
 {
+
+
+
 
 class ShipManager
 {
@@ -23,7 +27,25 @@ private:
     // если кораблям понадобятся идентификаторы, то взять за таковые индексы в векторе
 
 public:
-    ShipManager(ArrayOfLens _lens);
+    template <class T,
+    typename std::void_t<
+        typename std::remove_reference<T>::type::value_type,
+        typename std::remove_reference<T>::type::iterator,
+        typename std::remove_reference<T>::type::const_iterator
+    >* = nullptr>
+    ShipManager(const T &_lens)
+    {
+        static_assert(std::is_same<
+            typename std::remove_reference<T>::type::value_type,
+            Ship::Len
+        >::value, "Container must contain seagame::Ship::Len");
+
+        this->__construct(_lens);
+
+    }
+
+    ShipManager(const ArrayOfLens &_lens);
+
     ShipManager();
 
     ShipManager(const ShipManager &other);
@@ -42,6 +64,14 @@ public:
 
     const std::vector<Ship>& container() const noexcept;
     std::size_t amt() const noexcept;
+
+private:
+    template <class T>
+    inline void __construct(const T &_lens)
+    {
+        for (const auto &_len : _lens)
+            this->new_ship(_len);
+    }
 
 };
 

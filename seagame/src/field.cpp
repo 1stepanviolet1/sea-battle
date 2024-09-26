@@ -6,13 +6,8 @@ namespace seagame
 
 Field::Size::Size(std::uint64_t _m, std::uint64_t _n)
 {
-    { // validation args
-        std::int64_t __m = static_cast<std::int64_t>(_m);
-        std::int64_t __n = static_cast<std::int64_t>(_n);
-
-        if (__m < 0 || __n < 0)
-            throw std::invalid_argument("invalid size component");
-    } // validation args
+    if (_m < 1 || _n < 1)
+        throw std::invalid_argument("component of size must be greater than 0");
 
     this->_m = _m;
     this->_n = _n;

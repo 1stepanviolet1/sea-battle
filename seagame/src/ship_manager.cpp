@@ -4,10 +4,9 @@
 namespace seagame
 {
 
-ShipManager::ShipManager(ArrayOfLens _lens)
+ShipManager::ShipManager(const ArrayOfLens &_lens)
 {
-    for (const auto &_len : _lens)
-        this->new_ship(_len);
+    this->__construct(_lens);
 
 }
 

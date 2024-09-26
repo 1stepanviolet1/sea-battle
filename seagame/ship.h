@@ -44,7 +44,7 @@ private:
     Orientation _orientation;
     std::vector<Integrity> _segments;
 
-    explicit Ship(Len _len, Orientation _orie);
+    Ship(Len _len, Orientation _orie);
     explicit Ship(Len _len);
     Ship();
 
