@@ -7,7 +7,7 @@ namespace seagame
 {
 
 Ship::Ship(Len _len, Orientation _orie)
-    : _len(_len), _orientation(_orie)
+    : _len(_len), _orientation(_orie), _id(0)
 {
     for (std::uint8_t i = 0; i < _len; ++i)
         this->_segments.push_back(Integrity::WHOLE);
@@ -23,11 +23,11 @@ Ship::Ship()
 {    }
 
 Ship::Ship(const Ship &other)
-    : _len(other.len()), _orientation(other.orientation()), _segments(other.segments())
+    : _id(other.id()), _len(other.len()), _orientation(other.orientation()), _segments(other.segments())
 {    }
 
 Ship::Ship(Ship &&other) noexcept 
-    : _len(other._len), _orientation(other._orientation), _segments(std::move(other._segments))
+    : _id(other._id), _len(other._len), _orientation(other._orientation), _segments(std::move(other._segments))
 {    }
 
 Ship& 
@@ -35,6 +35,7 @@ Ship::operator=(const Ship &other)
 {
     if (this != &other)
     {
+        this->_id = other.id();
         this->_len = other.len();
         this->_orientation = other.orientation();
         this->_segments = other.segments();
@@ -47,6 +48,7 @@ Ship::operator=(Ship &&other) noexcept
 {
     if (this != &other)
     {
+        this->_id = other._id;
         this->_len = other._len;
         this->_orientation = other._orientation;
         this->_segments = std::move(other._segments);
@@ -90,6 +92,10 @@ Ship::is_destroyed() const noexcept
 }
 
 
+std::uint64_t 
+Ship::id() const noexcept
+{ return this->_id; }
+
 const Ship::Len&
 Ship::len() const noexcept
 { return this->_len; }
@@ -111,7 +117,7 @@ namespace std
 std::size_t 
 hash<seagame::Ship>::operator()(const seagame::Ship& u) const
 {
-    return hash<string>()(to_string(u.len()) + to_string(u.orientation()));
+    return hash<string>()(to_string(u.id()) + to_string(u.len()) + to_string(u.orientation()));
 }
 
 bool 

@@ -40,6 +40,7 @@ public:
     };
 
 private:
+    std::uint64_t _id;
     Len _len;
     Orientation _orientation;
     std::vector<Integrity> _segments;
@@ -60,6 +61,7 @@ public:
     void hit(std::uint8_t _i);
     bool is_destroyed() const noexcept;
     
+    std::uint64_t id() const noexcept;
     const Len& len() const noexcept;
     const Orientation& orientation() const noexcept;
     const std::vector<Integrity>& segments() const noexcept;
