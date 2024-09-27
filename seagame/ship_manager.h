@@ -14,9 +14,6 @@
 namespace seagame
 {
 
-
-
-
 class ShipManager
 {
 public:
