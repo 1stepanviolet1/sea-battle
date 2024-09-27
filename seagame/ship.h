@@ -1,8 +1,8 @@
 #pragma once
 
 
-#ifndef _SHIP_HPP
-#define _SHIP_HPP
+#ifndef _SHIP_H
+#define _SHIP_H
 
 #include <cstdint>
 #include <vector>
@@ -101,4 +101,4 @@ struct equal_to<std::reference_wrapper<seagame::Ship>>
 } // std
 
 
-#endif // _SHIP_HPP
+#endif // _SHIP_H
