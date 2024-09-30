@@ -15,7 +15,7 @@ class Field;
 class iSkill : public Visitor 
 {
 public:
-    void use(Field &_fd) 
+    inline void use(Field &_fd)
     { return (*this)(&_fd); }
 };
 

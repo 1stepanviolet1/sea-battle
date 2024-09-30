@@ -198,6 +198,13 @@ Field::shot(std::uint64_t _x, std::uint64_t _y)
 { return this->shot(Unit(_x, _y)); }
 
 
+void 
+Field::accept_skill(iSkill *_skill)
+{
+    _skill->use(*this);
+}
+
+
 const Field::Size& 
 Field::size() const noexcept
 { return this->_size; }
