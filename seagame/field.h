@@ -11,6 +11,7 @@
 
 #include "unit.h"
 #include "ship.h"
+#include "iSkill.h"
 
 namespace seagame
 {
@@ -63,6 +64,11 @@ public:
 
     void shot(const Unit &_unit);
     void shot(std::uint64_t _x, std::uint64_t _y);
+
+    void accept_skill(iSkill *_skill)
+    {
+        _skill->use(*this);
+    }
 
     const Size& size() const noexcept;
 
