@@ -1,5 +1,6 @@
 #include "seagame/ship_manager.h"
 #include "seagame/field.h"
+#include "seagame/double_hit.h"
 
 #include <iostream>
 
@@ -21,7 +22,9 @@ int main()
 
     field.add_ship(sm[i], seagame::Unit(2, 1));
 
-    field.shot(2, 3);
+    //seagame::DoubleHit _dh(2, 3);
+
+    field.accept<seagame::DoubleHit>(2, 3);
 
     std::cout << sm[i].segments()[0] << std::endl;
     std::cout << sm[i].segments()[1] << std::endl;

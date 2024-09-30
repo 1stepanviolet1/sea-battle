@@ -8,11 +8,13 @@ DoubleHit::DoubleHit(const Unit &_unit)
     : _unit(_unit)
 {    }
 
-DoubleHit::DoubleHit() 
-    : DoubleHit(Unit(0, 0))
+DoubleHit::DoubleHit(std::uint64_t _x, std::uint64_t _y)
+    : DoubleHit(Unit(_x, _y))
 {    }
 
-void DoubleHit::operator()(void *_obj) 
+
+void 
+DoubleHit::operator()(void *_obj) 
 {
     Field &_fd = *static_cast<Field*>(_obj);
     

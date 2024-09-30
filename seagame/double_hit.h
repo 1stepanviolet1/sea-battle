@@ -14,7 +14,7 @@ class DoubleHit : public iSkill
 {
 public:
     DoubleHit(const Unit &_unit);
-    DoubleHit();
+    DoubleHit(std::uint64_t _x, std::uint64_t _y);
 
     void operator()(void *_obj) override;
     

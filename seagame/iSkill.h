@@ -6,6 +6,7 @@
 
 #include "visitor.h"
 #include "field.h"
+#include "ship_manager.h"
 
 namespace seagame
 {
@@ -16,7 +17,14 @@ class iSkill : public Visitor
 {
 public:
     inline void use(Field &_fd)
-    { return (*this)(&_fd); }
+    { return this->__use(&_fd); }
+
+    inline void use(ShipManager &_sm)
+    { return this->__use(&_sm); }
+
+private:
+    inline void __use(void *_obj)
+    { return (*this)(_obj); }
 };
 
 } // seagame
