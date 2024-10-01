@@ -5,7 +5,6 @@
 #define _iSKILL_H
 
 #include "visitor.h"
-#include "field.h"
 #include "ship_manager.h"
 
 namespace seagame

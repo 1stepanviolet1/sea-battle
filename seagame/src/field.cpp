@@ -1,5 +1,5 @@
 #include "../field.h"
-
+#include <string>
 
 namespace seagame
 {
@@ -189,7 +189,7 @@ Field::shot(const Unit &_unit)
         _ship.hit(i);
     } catch (const std::logic_error &err)
     {
-        if (err.what() != "bad hit")
+        if (std::string(err.what()) != std::string("bad hit"))
             throw err;
     }
 

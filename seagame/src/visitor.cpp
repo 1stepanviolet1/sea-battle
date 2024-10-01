@@ -4,7 +4,7 @@
 namespace seagame
 {
 
-Visitor::~Visitor() {}
+Visitor::~Visitor() {    }
 
 } // seagame
 

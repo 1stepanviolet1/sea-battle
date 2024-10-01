@@ -6,6 +6,7 @@
 
 #include <random>
 
+#include "iSkill.h"
 #include "ship_manager.h"
 
 namespace seagame
@@ -14,19 +15,18 @@ namespace seagame
 class RocketAttack : public iSkill
 {
 private:
-    ShipManager &_sm;
     std::random_device rd;
 
 public:
-    RocketAttack(ShipManager &_sm);
+    RocketAttack();
 
     void operator()(void *_obj) override;
 
     ~RocketAttack() override = default;
 
 private:
-    std::size_t __get_random_index_of_ship() const noexcept;
-    std::uint8_t __get_random_index_of_segments(const Ship &_ship) const noexcept;
+    std::uint64_t __get_random_index_of_ship(const ShipManager &_sm) noexcept;
+    std::uint8_t __get_random_index_of_segments(const Ship &_ship) noexcept;
 
 };
 

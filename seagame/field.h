@@ -11,13 +11,13 @@
 
 #include "unit.h"
 #include "ship.h"
-#include "visitor.h"
+#include "owner.h"
 #include "iSkill.h"
 
 namespace seagame
 {
 
-class Field
+class Field : public Owner
 {
 public:
     class Size
@@ -55,7 +55,7 @@ public:
     Field(const Field &other);
     Field(Field &&other) noexcept;
 
-    ~Field() = default;
+    ~Field() override = default;
 
     Field& operator=(const Field &other);
     Field& operator=(Field &&other) noexcept;
@@ -65,14 +65,6 @@ public:
 
     void shot(const Unit &_unit);
     void shot(std::uint64_t _x, std::uint64_t _y);
-    
-    template <class T, class ...Args_T>
-    void accept(Args_T ..._args)
-    {
-        T _tmp(_args...);
-        Visitor *_v = &_tmp;
-        (*_v)(this);
-    }
 
     void accept_skill(iSkill *_skill);
 
