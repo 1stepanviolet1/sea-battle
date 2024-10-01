@@ -1,5 +1,7 @@
 #include "../rocket_attack.h"
 
+#include <iostream>
+
 
 namespace seagame
 {
@@ -12,8 +14,8 @@ void
 RocketAttack::operator()(void *_obj)
 {
     ShipManager &_sm = *static_cast<ShipManager*>(_obj);
-    
-    Ship _ship = _sm[
+
+    Ship &_ship = _sm[
         this->__get_random_index_of_ship(_sm)
     ];
 
@@ -44,10 +46,10 @@ RocketAttack::__get_random_index_of_segments(const Ship &_ship) noexcept
 {
     std::vector<std::uint8_t> _valid_ship_segments;
 
-    for (const auto &_seg : _ship.segments())
+    for (std::uint8_t i = 0; i < _ship.segments().size(); ++i)
     {
-        if (_seg != Ship::Integrity::DESTROYED)
-            _valid_ship_segments.push_back(_seg);
+        if (_ship.segments()[i] != Ship::Integrity::DESTROYED)
+            _valid_ship_segments.push_back(i);
     }
 
     return _valid_ship_segments[this->rd() % _valid_ship_segments.size()];

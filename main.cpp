@@ -9,9 +9,7 @@
 int main()
 {
     seagame::ShipManager sm({
-        seagame::Ship::Len::ONE,
         seagame::Ship::Len::TWO,
-        seagame::Ship::Len::THREE,
         seagame::Ship::Len::FOUR
     });
 
@@ -23,30 +21,25 @@ int main()
     seagame::Field field(5, 5);
 
     field.add_ship(sm[i], seagame::Unit(2, 1));
-    field.add_ship(sm[1], seagame::Unit(4, 2));
-    field.add_ship(sm[3], seagame::Unit(2, 5));
+    field.add_ship(sm[0], seagame::Unit(4, 2));
+    field.add_ship(sm[1], seagame::Unit(2, 5));
     
-    std::cout << "--------------------" << std::endl;
     seagame::DoubleHit _dh(2, 3);
-    std::cout << "--------------------" << std::endl;
-    //seagame::RocketAttack _ra;
 
     field.accept_skill(&_dh);
-    std::cout << "--------------------" << std::endl;
     sm.accept<seagame::RocketAttack>();
-    std::cout << "--------------------" << std::endl;
 
     std::cout << sm[i].segments()[0] << ' ';
     std::cout << sm[i].segments()[1] << ' ';
     std::cout << sm[i].segments()[2] << std::endl;
 
-    std::cout << sm[1].segments()[0] << ' ';
-    std::cout << sm[1].segments()[1] << std::endl;
+    std::cout << sm[0].segments()[0] << ' ';
+    std::cout << sm[0].segments()[1] << std::endl;
 
-    std::cout << sm[3].segments()[0] << ' ';
-    std::cout << sm[3].segments()[1] << ' ';
-    std::cout << sm[3].segments()[2] << ' ';
-    std::cout << sm[3].segments()[3] << std::endl;
+    std::cout << sm[1].segments()[0] << ' ';
+    std::cout << sm[1].segments()[1] << ' ';
+    std::cout << sm[1].segments()[2] << ' ';
+    std::cout << sm[1].segments()[3] << std::endl;
 
     return 0;
 
