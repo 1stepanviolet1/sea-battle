@@ -58,6 +58,8 @@ public:
 
     Ship& operator[](std::uint64_t _id);
     const Ship& operator[](std::uint64_t _id) const;
+    
+    bool all_destroyed() const noexcept;
 
     const std::vector<Ship>& container() const noexcept;
     std::size_t amt() const noexcept;

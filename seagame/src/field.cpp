@@ -183,7 +183,15 @@ Field::shot(const Unit &_unit)
     }
 
     Ship &_ship = this->_deployed_ships.at(_u);
-    _ship.hit(i);
+    
+    try
+    {
+        _ship.hit(i);
+    } catch (const std::logic_error &err)
+    {
+        if (err.what() != "bad hit")
+            throw err;
+    }
 
     if (_ship.segments()[i] == Ship::Integrity::DESTROYED)
         this->_hit_units.insert(_unit);

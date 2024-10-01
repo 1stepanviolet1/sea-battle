@@ -66,6 +66,20 @@ ShipManager::operator[](std::uint64_t _id) const
 { return this->_container.at(_id); }
 
 
+bool 
+ShipManager::all_destroyed() const noexcept
+{
+    for (const auto &_ship : this->container())
+    {
+        if (!_ship.is_destroyed())
+            return false;
+    }
+
+    return true;
+
+}
+
+
 const std::vector<Ship>&
 ShipManager::container() const noexcept
 { return this->_container; }
