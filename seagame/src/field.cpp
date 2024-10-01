@@ -1,6 +1,7 @@
 #include "../field.h"
 #include <string>
 
+
 namespace seagame
 {
 

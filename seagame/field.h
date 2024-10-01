@@ -17,8 +17,13 @@
 namespace seagame
 {
 
+class RocketAttack;
+
 class Field : public Owner
 {
+
+    friend RocketAttack;
+
 public:
     class Size
     {

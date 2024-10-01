@@ -1,7 +1,5 @@
 #include "../rocket_attack.h"
 
-#include <iostream>
-
 
 namespace seagame
 {
@@ -13,11 +11,11 @@ RocketAttack::RocketAttack()
 void
 RocketAttack::operator()(void *_obj)
 {
-    ShipManager &_sm = *static_cast<ShipManager*>(_obj);
+    Field &_fd = *static_cast<Field*>(_obj);
 
-    Ship &_ship = _sm[
-        this->__get_random_index_of_ship(_sm)
-    ];
+    Ship &_ship = _fd._deployed_ships.at(
+        this->__get_random_unit_of_ship(_fd)
+    );
 
     _ship.hit(
         this->__get_random_index_of_segments(_ship)
@@ -26,18 +24,18 @@ RocketAttack::operator()(void *_obj)
 }
 
 
-std::uint64_t
-RocketAttack::__get_random_index_of_ship(const ShipManager &_sm) noexcept
+Unit
+RocketAttack::__get_random_unit_of_ship(const Field &_fd) noexcept
 {
-    std::vector<std::uint64_t> _valid_ships_indices;
+    std::vector<Unit> _valid_ships_units;
 
-    for (const auto &_ship : _sm.container())
+    for (const auto &_unit_ship : _fd._deployed_ships)
     {
-        if (!_ship.is_destroyed())
-            _valid_ships_indices.push_back(_ship.id());
+        if (!_unit_ship.second.get().is_destroyed())
+            _valid_ships_units.push_back(_unit_ship.first);
     }
 
-    return _valid_ships_indices[this->rd() % _valid_ships_indices.size()];
+    return _valid_ships_units[this->rd() % _valid_ships_units.size()];
 
 }
 

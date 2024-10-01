@@ -6,8 +6,9 @@
 
 #include <random>
 
+#include "unit.h"
 #include "iSkill.h"
-#include "ship_manager.h"
+#include "field.h"
 
 namespace seagame
 {
@@ -25,7 +26,7 @@ public:
     ~RocketAttack() override = default;
 
 private:
-    std::uint64_t __get_random_index_of_ship(const ShipManager &_sm) noexcept;
+    Unit __get_random_unit_of_ship(const Field &_sm) noexcept;
     std::uint8_t __get_random_index_of_segments(const Ship &_ship) noexcept;
 
 };

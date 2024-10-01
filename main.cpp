@@ -25,9 +25,10 @@ int main()
     field.add_ship(sm[1], seagame::Unit(2, 5));
     
     seagame::DoubleHit _dh(2, 3);
+    seagame::RocketAttack _ra;
 
     field.accept_skill(&_dh);
-    sm.accept<seagame::RocketAttack>();
+    field.accept_skill(&_ra);
 
     std::cout << sm[i].segments()[0] << ' ';
     std::cout << sm[i].segments()[1] << ' ';
