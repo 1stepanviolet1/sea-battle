@@ -17,8 +17,10 @@ public:
     {
         T _t(_args...);
         Visitor *_v = &_t;
-        (*_v)(this);
+        this->accept(_v);
     }
+
+    void accept(Visitor *_v);
 
     virtual ~Owner() = 0;
 
