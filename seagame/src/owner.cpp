@@ -5,7 +5,7 @@ namespace seagame
 {
 
 void
-accept(Visitor *_v)
+Owner::accept(Visitor *_v)
 {
     (*_v)(this);
 }
