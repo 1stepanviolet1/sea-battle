@@ -38,10 +38,10 @@ Scanner::operator()(void *_obj)
         Unit(this->_unit.x() + 1, this->_unit.y() + 1)
     }))
     {
-        _u = _fd.__get_unit_of_valid_ship(this->_unit, _i);
+        _u = _fd.__get_unit_of_valid_ship(_unit, _i);
 
         if (!eq(_u, _u0))
-            this->_result.push_back(this->_unit);
+            this->_result.push_back(_unit);
     }
 
 }

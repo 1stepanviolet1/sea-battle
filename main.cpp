@@ -2,6 +2,7 @@
 #include "seagame/field.h"
 #include "seagame/double_hit.h"
 #include "seagame/rocket_attack.h"
+#include "seagame//scanner.h"
 
 #include <iostream>
 
@@ -43,6 +44,15 @@ int main()
     std::cout << sm[1].segments()[1] << ' ';
     std::cout << sm[1].segments()[2] << ' ';
     std::cout << sm[1].segments()[3] << std::endl;
+
+    std::cout << "-----" << std::endl;
+
+    seagame::Scanner _s(3, 4);
+
+    field.accept_skill(&_s);
+
+    for (const auto &_unit : _s.result())
+        std::cout << '(' << _unit.x() << ", " << _unit.y() << ')' << std::endl;
 
     return 0;
 
