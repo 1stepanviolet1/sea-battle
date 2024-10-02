@@ -23,7 +23,9 @@ int main()
     field.add_ship(sm[i], seagame::Unit(2, 1));
     field.add_ship(sm[0], seagame::Unit(4, 2));
     field.add_ship(sm[1], seagame::Unit(2, 5));
-    
+   
+    field.shot(seagame::Unit(1, 1));
+
     seagame::DoubleHit _dh(2, 3);
     seagame::RocketAttack _ra;
 

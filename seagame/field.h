@@ -86,9 +86,10 @@ private:
     bool __is_valid_unit(const Unit &_u) const noexcept;
     bool __is_valid_unit(std::uint64_t _x, std::uint64_t _y) const noexcept;
     
-    bool __is_same_ship(const Unit &_lu, const Unit &_unit, std::uint8_t _offset);
+    bool __is_same_ship(const Unit &_lu, const Unit &_unit, std::uint8_t _offset) const noexcept;
     
-    Unit __get_lu_seg_of_ship(const Unit &_unit, const Ship::Orientation &_orie, std::uint8_t &i);
+    Unit __get_lu_seg_of_ship(const Unit &_unit, const Ship::Orientation &_orie, std::uint8_t &i) const noexcept;
+    Unit __get_unit_of_valid_ship(const Unit &_unit, std::uint8_t &_i) const noexcept;
 };
 
 } // seagame

@@ -16,16 +16,18 @@ namespace seagame
 class Scanner : public iSkill
 {
 public:
-    Scanner(Unit _unit); // left up
+    Scanner(const Unit &_unit); // left up
     Scanner(std::uint64_t _x, std::uint64_t _y);
 
     void operator()(void *_obj) override;
     
+    const std::vector<Unit>& result() const noexcept;
+
     ~Scanner() override = default;
 
 private:
     Unit _unit;
-    std::vector<Unit> result;
+    std::vector<Unit> _result;
 };
 
 } // seagame

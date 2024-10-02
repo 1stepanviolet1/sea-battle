@@ -172,19 +172,16 @@ Field::shot(const Unit &_unit)
     std::equal_to<Unit> eq;
     std::uint8_t i;
 
-    _u = this->__get_lu_seg_of_ship(_unit, Ship::Orientation::HORIZONTAL, i);
+    _u = this->__get_unit_of_valid_ship(_unit, i);
 
-    if (eq(_u, _u0) || !this->__is_same_ship(_u, _unit, i))
-        _u = this->__get_lu_seg_of_ship(_unit, Ship::Orientation::VERTICAL, i);
-
-    if (eq(_u, _u0) || !this->__is_same_ship(_u, _unit, i))
+    if (eq(_u, _u0))
     {
         this->_hit_units.insert(_unit);
         return;
     }
 
     Ship &_ship = this->_deployed_ships.at(_u);
-    
+
     try
     {
         _ship.hit(i);
@@ -280,7 +277,7 @@ Field::__is_valid_unit(std::uint64_t _x, std::uint64_t _y) const noexcept
 { return this->__is_valid_unit(Unit(_x, _y)); }
 
 bool 
-Field::__is_same_ship(const Unit &_lu, const Unit &_unit, std::uint8_t _offset)
+Field::__is_same_ship(const Unit &_lu, const Unit &_unit, std::uint8_t _offset) const noexcept
 {
     Ship &_ship = this->_deployed_ships.at(_lu);
     
@@ -302,7 +299,7 @@ Field::__is_same_ship(const Unit &_lu, const Unit &_unit, std::uint8_t _offset)
 }
 
 Unit
-Field::__get_lu_seg_of_ship(const Unit &_unit, const Ship::Orientation &_orie, std::uint8_t &i)
+Field::__get_lu_seg_of_ship(const Unit &_unit, const Ship::Orientation &_orie, std::uint8_t &i) const noexcept
 {
     Unit _u;
 
@@ -326,6 +323,23 @@ Field::__get_lu_seg_of_ship(const Unit &_unit, const Ship::Orientation &_orie, s
     }
 
     return Unit();
+
+}
+
+Unit
+Field::__get_unit_of_valid_ship(const Unit &_unit, std::uint8_t &i) const noexcept
+{
+    std::equal_to<Unit> eq;
+    Unit _u0;
+    Unit _u = this->__get_lu_seg_of_ship(_unit, Ship::Orientation::HORIZONTAL, i);
+
+    if (eq(_u, _u0) || !this->__is_same_ship(_u, _unit, i))
+        _u = this->__get_lu_seg_of_ship(_unit, Ship::Orientation::VERTICAL, i);
+    
+    if (eq(_u, _u0) || !this->__is_same_ship(_u, _unit, i))
+        return _u0;
+
+    return _u;
 
 }
 
