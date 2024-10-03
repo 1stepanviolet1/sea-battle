@@ -26,6 +26,8 @@ Scanner::operator()(void *_obj)
      || this->_unit.y() >= _fd.size().n())
         throw std::invalid_argument("bad unit");
 
+    this->_result.clear();
+
     std::equal_to<Unit> eq;
     std::uint8_t _i;
     Unit _u;
