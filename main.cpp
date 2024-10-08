@@ -27,10 +27,12 @@ int main()
    
     field.shot(seagame::Unit(1, 1));
 
-    seagame::DoubleHit _dh(2, 3);
+    seagame::DoubleHit _dh;
     seagame::RocketAttack _ra;
 
+    _dh.install_input_data(seagame::Unit(2, 3));
     field.accept_skill(&_dh);
+
     field.accept_skill(&_ra);
 
     std::cout << sm[i].segments()[0] << ' ';

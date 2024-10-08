@@ -4,22 +4,25 @@
 #ifndef _iSKILL_H
 #define _iSKILL_H
 
+#include <stdexcept>
+
 #include "visitor.h"
-#include "ship_manager.h"
 
 namespace seagame
 {
 
 class Field;
+class ShipManager;
 
 class iSkill : public Visitor 
 {
 public:
     inline void use(Field &_fd)
     { return this->__use(&_fd); }
-
-    inline void use(ShipManager &_sm)
-    { return this->__use(&_sm); }
+ 
+    template <class ...Args_T>
+    virtual void install_input_data(Args_T ..._args)
+    { throw std::runtime_error("Override install_input_data for implement classes"); }
 
 private:
     inline void __use(void *_obj)
