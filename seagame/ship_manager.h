@@ -9,12 +9,11 @@
 #include <type_traits>
 
 #include "ship.h"
-#include "owner.h"
 
 namespace seagame
 {
 
-class ShipManager : public Owner
+class ShipManager
 {
 public:
     using ArrayOfLens = std::initializer_list<Ship::Len>;

@@ -5,6 +5,13 @@ namespace seagame
 {
 
 RocketAttack::RocketAttack()
+{
+    this->install_data();
+
+}
+
+void 
+RocketAttack::install_data()
 {    }
 
 
@@ -52,6 +59,11 @@ RocketAttack::__get_random_index_of_segments(const Ship &_ship) noexcept
 
     return _valid_ship_segments[this->rd() % _valid_ship_segments.size()];
 }
+
+
+const std::string&
+RocketAttack::__classname__() const noexcept
+{ return "ROCKET_ATTACK"; }
 
 } // seagame
 

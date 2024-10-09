@@ -7,6 +7,7 @@
 #include <iostream>
 
 
+
 int main()
 {
     seagame::ShipManager sm({
@@ -30,7 +31,7 @@ int main()
     seagame::DoubleHit _dh;
     seagame::RocketAttack _ra;
 
-    _dh.install_input_data(seagame::Unit(2, 3));
+    _dh.install_data(seagame::Unit(2, 3));
     field.accept_skill(&_dh);
 
     field.accept_skill(&_ra);

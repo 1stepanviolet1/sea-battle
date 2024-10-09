@@ -7,7 +7,6 @@
 #include <random>
 
 #include "unit.h"
-#include "iSkill.h"
 #include "field.h"
 
 namespace seagame
@@ -21,7 +20,11 @@ private:
 public:
     RocketAttack();
 
+    void install_data() override;
+
     void operator()(void *_obj) override;
+
+    const std::string& __classname__() const noexcept override;
 
     ~RocketAttack() override = default;
 

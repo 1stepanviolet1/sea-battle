@@ -5,10 +5,8 @@ namespace seagame
 {
 
 Scanner::Scanner(const Unit &_unit)
-    : _unit(_unit)
 {
-    if (_unit.x() < 1 || _unit.y() < 1)
-        throw std::invalid_argument("bad unit");
+    this->install_data(_unit);
 
 }
 
@@ -16,10 +14,26 @@ Scanner::Scanner(std::uint64_t _x, std::uint64_t _y)
     : Scanner(Unit(_x, _y))
 {    }
 
+Scanner::Scanner()
+    : Scanner(Unit())
+{    }
+
+void 
+Scanner::install_data(const Unit &_unit)
+{
+    this->_unit = _unit;
+
+}
+
 
 void 
 Scanner::operator()(void *_obj)
 {
+    std::equal_to<Unit> eq;
+
+    if (eq(this->_unit, Unit()))
+        throw std::invalid_argument("uninstall data");
+
     Field &_fd = *static_cast<Field*>(_obj);
     
     if (this->_unit.x() >= _fd.size().m()
@@ -28,7 +42,6 @@ Scanner::operator()(void *_obj)
 
     this->_result.clear();
 
-    std::equal_to<Unit> eq;
     std::uint8_t _i;
     Unit _u;
     Unit _u0;
@@ -47,6 +60,11 @@ Scanner::operator()(void *_obj)
     }
 
 }
+
+
+const std::string&
+Scanner::__classname__() const noexcept
+{ return "SCANNER"; }
 
 
 const std::vector<Unit>&

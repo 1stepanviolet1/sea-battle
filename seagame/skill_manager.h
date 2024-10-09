@@ -1,51 +1,56 @@
-#pragma once
+// #pragma once
 
 
-#ifndef _SKILL_MANAGER_H
-#define _SKILL_MANAGER_H
+// #ifndef _SKILL_MANAGER_H
+// #define _SKILL_MANAGER_H
 
-#include <queue>
-#include <memory>
-#include <type_traits>
+// #include <queue>
+// #include <memory>
+// #include <type_traits>
 
-#include "iSkill.h"
-#include "double_hit.h"
-#include "rocket_attack.h"
-#include "scanner.h"
+// #include "iSkill.h"
+// #include "double_hit.h"
+// #include "rocket_attack.h"
+// #include "scanner.h"
 
-class SkillManager
-{
-public:
-    SkillManager();
+// namespace seagame
+// {
 
-    SkillManager(const SkillManager &other);
-    SkillManager(SkillManager &&other) noexcept;
+// class SkillManager
+// {
+// public:
+//     SkillManager();
 
-    ~SkillManager() = default;
+//     SkillManager(const SkillManager &other);
+//     SkillManager(SkillManager &&other) noexcept;
 
-    SkillManager& operator=(const SkillManager &other);
-    SkillManager& operator=(SkillManager &&other) noexcept;
+//     ~SkillManager() = default;
 
-    template <class T, class ...Args_T>
-    typename std::enable_if<
-        std::is_same_v<T, DoubleHit>
-     && std::is_same_v<T, RocketAttak>
-     && std::is_same_v<T, Scanner>
-    >::type
-    add_skill(Args_T ..._args)
-    {
-        this->_queue_of_skills.push(
-            std::make_shared<T>(_args...);
-        );
-    }
+//     SkillManager& operator=(const SkillManager &other);
+//     SkillManager& operator=(SkillManager &&other) noexcept;
+
+//     template <class T, class ...Args_T>
+//     typename std::enable_if<
+//         std::is_same_v<T, DoubleHit>
+//      && std::is_same_v<T, RocketAttak>
+//      && std::is_same_v<T, Scanner>
+//     >::type
+//     add_skill(Args_T ..._args)
+//     {
+//         this->_queue_of_skills.push(
+//             std::make_shared<T>(_args...);
+//         );
+//     }
 
     
 
-private:
-    std::queue<std::shared_ptr<iSkill>> _queue_of_skills;
+// private:
+//     std::queue<std::shared_ptr<iSkill>> _queue_of_skills;
 
-};
+// };
+
+// } // seagame
 
 
-#endif // _SKILL_MANAGER_H
+// #endif // _SKILL_MANAGER_H
 
