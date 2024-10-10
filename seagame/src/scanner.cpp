@@ -1,5 +1,6 @@
 #include "../scanner.h"
 
+#include <iostream>
 
 namespace seagame
 {
@@ -65,8 +66,11 @@ Scanner::operator()(void *_obj)
         _u = _fd.__get_unit_of_valid_ship(_i_unit, _i);
 
         if (!eq(_u, _u0))
+        {
             this->_reaction();
             return;
+        }
+        
     }
 
 }
