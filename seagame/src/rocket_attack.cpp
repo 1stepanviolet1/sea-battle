@@ -15,6 +15,11 @@ RocketAttack::install_data()
 {    }
 
 
+void 
+RocketAttack::install_reaction(std::function<void()> _reaction)
+{    }
+
+
 void
 RocketAttack::operator()(void *_obj)
 {
@@ -62,7 +67,7 @@ RocketAttack::__get_random_index_of_segments(const Ship &_ship) noexcept
 
 
 const std::string&
-RocketAttack::__classname__() const noexcept
+RocketAttack::classname() const noexcept
 { return "ROCKET_ATTACK"; }
 
 } // seagame

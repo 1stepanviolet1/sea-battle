@@ -8,11 +8,12 @@
 
 #include "unit.h"
 #include "field.h"
+#include "skill.h"
 
 namespace seagame
 {
 
-class DoubleHit : public iSkill
+class DoubleHit : public Skill
 {
 public:
     explicit DoubleHit(const Unit &_unit);
@@ -21,9 +22,11 @@ public:
 
     void install_data(const Unit &_unit) override;
 
+    void install_reaction(std::function<void()> _reaction) override;
+
     void operator()(void *_obj) override;
 
-    const std::string& __classname__() const noexcept override;
+    const std::string& classname() const noexcept override;
 
     ~DoubleHit() override = default;
 

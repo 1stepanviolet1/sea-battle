@@ -8,11 +8,12 @@
 
 #include "unit.h"
 #include "field.h"
+#include "skill.h"
 
 namespace seagame
 {
 
-class Scanner : public iSkill
+class Scanner : public Skill
 {
 public:
     explicit Scanner(const Unit &_unit); // left up
@@ -21,17 +22,18 @@ public:
     
     void install_data(const Unit &_unit) override;
 
+    void install_reaction(std::function<void()> _reaction) override;
+
     void operator()(void *_obj) override;
 
-    const std::string& __classname__() const noexcept override;
+    const std::string& classname() const noexcept override;
     
-    const std::vector<Unit>& result() const noexcept; // TODO: will be delete
-
     ~Scanner() override = default;
 
 private:
     Unit _unit;
-    std::vector<Unit> _result;
+    std::function<void()> _reaction;
+
 };
 
 } // seagame

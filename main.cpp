@@ -50,12 +50,19 @@ int main()
 
     std::cout << "-----" << std::endl;
 
-    seagame::Scanner _s(3, 4);
+    seagame::Scanner _sc(1, 3);
 
-    field.accept_skill(&_s);
+    bool flag = false;
+    _sc.install_reaction([&flag](){
+        flag = true;
+    });
 
-    for (const auto &_unit : _s.result())
-        std::cout << '(' << _unit.x() << ", " << _unit.y() << ')' << std::endl;
+    field.accept_skill(&_sc);
+
+    if (flag)
+        std::cout << "Scanner found ships" << std::endl;
+    else
+        std::cout << "Scanner doesn't found ships" << std::endl;
 
     return 0;
 

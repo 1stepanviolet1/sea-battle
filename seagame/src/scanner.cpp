@@ -27,12 +27,23 @@ Scanner::install_data(const Unit &_unit)
 
 
 void 
+Scanner::install_reaction(std::function<void()> _reaction)
+{
+    this->_reaction = _reaction;
+
+}
+
+
+void 
 Scanner::operator()(void *_obj)
 {
     std::equal_to<Unit> eq;
 
     if (eq(this->_unit, Unit()))
         throw std::invalid_argument("uninstall data");
+    
+    if (!static_cast<bool>(this->_reaction))
+        throw std::invalid_argument("uninstall reaction");
 
     Field &_fd = *static_cast<Field*>(_obj);
     
@@ -40,36 +51,30 @@ Scanner::operator()(void *_obj)
      || this->_unit.y() >= _fd.size().n())
         throw std::invalid_argument("bad unit");
 
-    this->_result.clear();
-
     std::uint8_t _i;
     Unit _u;
     Unit _u0;
     
-    for (const auto &_unit : std::vector<Unit>({
+    for (const auto &_i_unit : std::vector<Unit>({
         Unit(this->_unit.x(), this->_unit.y()),
         Unit(this->_unit.x() + 1, this->_unit.y()),
         Unit(this->_unit.x(), this->_unit.y() + 1),
         Unit(this->_unit.x() + 1, this->_unit.y() + 1)
     }))
     {
-        _u = _fd.__get_unit_of_valid_ship(_unit, _i);
+        _u = _fd.__get_unit_of_valid_ship(_i_unit, _i);
 
         if (!eq(_u, _u0))
-            this->_result.push_back(_unit);
+            this->_reaction();
+            return;
     }
 
 }
 
 
 const std::string&
-Scanner::__classname__() const noexcept
+Scanner::classname() const noexcept
 { return "SCANNER"; }
-
-
-const std::vector<Unit>&
-Scanner::result() const noexcept
-{ return this->_result; }
 
 } // seagame
 

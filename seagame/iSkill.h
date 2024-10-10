@@ -6,6 +6,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <functional>
 
 #include "visitor.h"
 #include "unit.h"
@@ -19,21 +20,14 @@ class ShipManager;
 class iSkill : public Visitor 
 {
 public:
-    inline void use(Field &_fd)
-    { return this->__use(&_fd); }
+    virtual inline void use(Field &_fd) = 0;
 
-    // TODO: install_data must accept function-reaction
-    virtual void install_data();
-    virtual void install_data(const Unit &_unit);
-    void install_data(std::uint64_t _x, std::uint64_t _y);
+    virtual void install_data() = 0;
+    virtual void install_data(const Unit &_unit) = 0;
 
-    virtual const std::string& __classname__() const noexcept = 0;
+    virtual void install_reaction(std::function<void()> _reaction) = 0;
 
-private:
-    inline void __use(void *_obj)
-    { return (*this)(_obj); }
-
-    void __throw_err_for_no_override_install_data(const Unit &_unit = Unit());
+    virtual const std::string& classname() const noexcept = 0;
 
 };
 

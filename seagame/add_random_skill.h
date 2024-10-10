@@ -10,7 +10,7 @@
 // class AddRandomCommand : public Command
 // {
 // public:
-//     AddRandomCommand(const SkillManager &_sm);
+//     AddRandomCommand(SkillManager &_sm);
 
 //     void exec() override;
     

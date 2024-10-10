@@ -27,6 +27,11 @@ DoubleHit::install_data(const Unit &_unit)
 
 
 void 
+DoubleHit::install_reaction(std::function<void()> _reaction)
+{    }
+
+
+void 
 DoubleHit::operator()(void *_obj) 
 {
     std::equal_to<Unit> eq;
@@ -45,7 +50,7 @@ DoubleHit::operator()(void *_obj)
 
 
 const std::string&
-DoubleHit::__classname__() const noexcept
+DoubleHit::classname() const noexcept
 { return "DOUBLE_HIT"; }
 
 } // seagame

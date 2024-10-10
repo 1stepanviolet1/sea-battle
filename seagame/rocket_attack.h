@@ -8,11 +8,12 @@
 
 #include "unit.h"
 #include "field.h"
+#include "skill.h"
 
 namespace seagame
 {
 
-class RocketAttack : public iSkill
+class RocketAttack : public Skill
 {
 private:
     std::random_device rd;
@@ -22,9 +23,11 @@ public:
 
     void install_data() override;
 
+    void install_reaction(std::function<void()> _reaction) override;
+
     void operator()(void *_obj) override;
 
-    const std::string& __classname__() const noexcept override;
+    const std::string& classname() const noexcept override;
 
     ~RocketAttack() override = default;
 
