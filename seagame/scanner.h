@@ -16,23 +16,19 @@ namespace seagame
 class Scanner : public Skill
 {
 public:
-    explicit Scanner(const Unit &_unit); // left up
-    Scanner(std::uint64_t _x, std::uint64_t _y);
+    explicit Scanner(const Unit &_unit, const std::function<void(const Unit&)> _funct); // left up
+    Scanner(std::uint64_t _x, std::uint64_t _y, const std::function<void(const Unit&)> _funct);
     Scanner();
-    
-    void install_data(const Unit &_unit) override;
-
-    void install_reaction(std::function<void()> _reaction) override;
 
     void operator()(void *_obj) override;
 
-    const std::string& classname() const noexcept override;
+    const SkillName& classname() const noexcept override;
     
     ~Scanner() override = default;
 
 private:
     Unit _unit;
-    std::function<void()> _reaction;
+    std::function<void(const Unit&)> _reaction;
 
 };
 

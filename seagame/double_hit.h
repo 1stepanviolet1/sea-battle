@@ -20,13 +20,9 @@ public:
     DoubleHit(std::uint64_t _x, std::uint64_t _y);
     DoubleHit();
 
-    void install_data(const Unit &_unit) override;
-
-    void install_reaction(std::function<void()> _reaction) override;
-
     void operator()(void *_obj) override;
 
-    const std::string& classname() const noexcept override;
+    const SkillName& classname() const noexcept override;
 
     ~DoubleHit() override = default;
 

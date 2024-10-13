@@ -5,18 +5,6 @@ namespace seagame
 {
 
 RocketAttack::RocketAttack()
-{
-    this->install_data();
-
-}
-
-void 
-RocketAttack::install_data()
-{    }
-
-
-void 
-RocketAttack::install_reaction(std::function<void()> _reaction)
 {    }
 
 
@@ -66,9 +54,9 @@ RocketAttack::__get_random_index_of_segments(const Ship &_ship) noexcept
 }
 
 
-const std::string&
+const SkillName&
 RocketAttack::classname() const noexcept
-{ return "ROCKET_ATTACK"; }
+{ return SkillName::ROCKETATTACK; }
 
 } // seagame
 

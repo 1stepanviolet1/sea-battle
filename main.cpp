@@ -28,10 +28,9 @@ int main()
    
     field.shot(seagame::Unit(1, 1));
 
-    seagame::DoubleHit _dh;
+    seagame::DoubleHit _dh(2, 3);
     seagame::RocketAttack _ra;
 
-    _dh.install_data(seagame::Unit(2, 3));
     field.accept_skill(&_dh);
 
     field.accept_skill(&_ra);
@@ -50,10 +49,9 @@ int main()
 
     std::cout << "-----" << std::endl;
 
-    seagame::Scanner _sc(1, 3);
-
     bool flag = false;
-    _sc.install_reaction([&flag](){
+
+    seagame::Scanner _sc(1, 3, [&flag](auto){
         flag = true;
     });
 

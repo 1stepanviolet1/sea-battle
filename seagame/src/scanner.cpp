@@ -5,34 +5,17 @@
 namespace seagame
 {
 
-Scanner::Scanner(const Unit &_unit)
-{
-    this->install_data(_unit);
+Scanner::Scanner(const Unit &_unit, const std::function<void(const Unit&)> _funct)
+    : _unit(_unit), _reaction(_funct)
+{    }
 
-}
-
-Scanner::Scanner(std::uint64_t _x, std::uint64_t _y)
-    : Scanner(Unit(_x, _y))
+Scanner::Scanner(std::uint64_t _x, std::uint64_t _y, const std::function<void(const Unit&)> _funct)
+    : Scanner(Unit(_x, _y), _funct)
 {    }
 
 Scanner::Scanner()
-    : Scanner(Unit())
+    : Scanner(Unit(), [](auto){})
 {    }
-
-void 
-Scanner::install_data(const Unit &_unit)
-{
-    this->_unit = _unit;
-
-}
-
-
-void 
-Scanner::install_reaction(std::function<void()> _reaction)
-{
-    this->_reaction = _reaction;
-
-}
 
 
 void 
@@ -66,19 +49,16 @@ Scanner::operator()(void *_obj)
         _u = _fd.__get_unit_of_valid_ship(_i_unit, _i);
 
         if (!eq(_u, _u0))
-        {
-            this->_reaction();
-            return;
-        }
+            this->_reaction(_i_unit);
         
     }
 
 }
 
 
-const std::string&
+const SkillName&
 Scanner::classname() const noexcept
-{ return "SCANNER"; }
+{ return SkillName::SCANNER; }
 
 } // seagame
 

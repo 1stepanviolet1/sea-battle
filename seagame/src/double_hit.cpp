@@ -5,10 +5,8 @@ namespace seagame
 {
 
 DoubleHit::DoubleHit(const Unit &_unit)
-{
-    this->install_data(_unit);
-
-}
+    : _unit(_unit)
+{    }
 
 DoubleHit::DoubleHit(std::uint64_t _x, std::uint64_t _y)
     : DoubleHit(Unit(_x, _y))
@@ -16,18 +14,6 @@ DoubleHit::DoubleHit(std::uint64_t _x, std::uint64_t _y)
 
 DoubleHit::DoubleHit()
     : DoubleHit(Unit())
-{    }
-
-void 
-DoubleHit::install_data(const Unit &_unit)
-{
-    this->_unit = _unit;
-
-}
-
-
-void 
-DoubleHit::install_reaction(std::function<void()> _reaction)
 {    }
 
 
@@ -49,9 +35,9 @@ DoubleHit::operator()(void *_obj)
 }
 
 
-const std::string&
+const SkillName&
 DoubleHit::classname() const noexcept
-{ return "DOUBLE_HIT"; }
+{ return SkillName::DOUBLEHIT; }
 
 } // seagame
 

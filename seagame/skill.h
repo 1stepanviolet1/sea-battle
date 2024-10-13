@@ -10,6 +10,7 @@
 
 #include "iSkill.h"
 #include "unit.h"
+#include "skill_name.h"
 
 namespace seagame
 {
@@ -23,15 +24,9 @@ public:
     inline void use(Field &_fd) override
     { return this->__use(&_fd); }
 
-    void install_data() override;
-    void install_data(const Unit &_unit) override;
-    void install_data(std::uint64_t _x, std::uint64_t _y);
-
 private:
     inline void __use(void *_obj)
     { return (*this)(_obj); }
-
-    void __throw_err_for_no_override_install_data(const Unit &_unit = Unit());
 
 };
 

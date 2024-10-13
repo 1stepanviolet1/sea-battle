@@ -10,6 +10,7 @@
 
 #include "visitor.h"
 #include "unit.h"
+#include "skill_name.h"
 
 namespace seagame
 {
@@ -20,14 +21,12 @@ class ShipManager;
 class iSkill : public Visitor 
 {
 public:
+    enum class Name : char;
+
+public:
     virtual inline void use(Field &_fd) = 0;
 
-    virtual void install_data() = 0;
-    virtual void install_data(const Unit &_unit) = 0;
-
-    virtual void install_reaction(std::function<void()> _reaction) = 0;
-
-    virtual const std::string& classname() const noexcept = 0;
+    virtual const SkillName& classname() const noexcept = 0;
 
 };
 

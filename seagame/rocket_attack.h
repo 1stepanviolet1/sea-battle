@@ -21,13 +21,9 @@ private:
 public:
     RocketAttack();
 
-    void install_data() override;
-
-    void install_reaction(std::function<void()> _reaction) override;
-
     void operator()(void *_obj) override;
 
-    const std::string& classname() const noexcept override;
+    const SkillName& classname() const noexcept override;
 
     ~RocketAttack() override = default;
 
