@@ -4,6 +4,8 @@
 #ifndef _OWNER_H
 #define _OWNER_H
 
+#include <memory>
+
 #include "visitor.h"
 
 namespace seagame
@@ -13,14 +15,14 @@ class Owner
 {
 public:
     template <class T, class ...Args_T>
-    void accept(Args_T ..._args)
+    const std::shared_ptr<Visitor>& 
+    accept(Args_T&& ..._args)
     {
-        T _t(_args...);
-        Visitor *_v = &_t;
-        this->accept(_v);
+        auto ptr_t = std::make_shared<T>(_args...);
+        Visitor *_v = ptr_t.get();
+        (*_v)(this);
+        return ptr_t;
     }
-
-    void accept(Visitor *_v);
 
     virtual ~Owner() = 0;
 

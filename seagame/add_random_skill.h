@@ -7,7 +7,7 @@
 // #include "command.h"
 // #include "skill_manager.h"
 
-// class AddRandomCommand : public Command
+// class AddRandomSkill : public Command
 // {
 // public:
 //     AddRandomCommand(SkillManager &_sm);

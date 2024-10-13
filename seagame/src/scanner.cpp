@@ -56,7 +56,7 @@ Scanner::operator()(void *_obj)
 }
 
 
-const SkillName&
+SkillName
 Scanner::classname() const noexcept
 { return SkillName::SCANNER; }
 

@@ -23,7 +23,7 @@ public:
 
     void operator()(void *_obj) override;
 
-    const SkillName& classname() const noexcept override;
+    SkillName classname() const noexcept override;
 
     ~RocketAttack() override = default;
 

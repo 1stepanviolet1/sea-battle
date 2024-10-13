@@ -54,7 +54,7 @@ RocketAttack::__get_random_index_of_segments(const Ship &_ship) noexcept
 }
 
 
-const SkillName&
+SkillName
 RocketAttack::classname() const noexcept
 { return SkillName::ROCKETATTACK; }
 

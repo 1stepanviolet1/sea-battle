@@ -26,7 +26,7 @@ public:
 public:
     virtual inline void use(Field &_fd) = 0;
 
-    virtual const SkillName& classname() const noexcept = 0;
+    virtual SkillName classname() const noexcept = 0;
 
 };
 

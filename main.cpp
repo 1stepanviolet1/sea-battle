@@ -1,12 +1,12 @@
 #include "seagame/ship_manager.h"
 #include "seagame/field.h"
-#include "seagame/double_hit.h"
-#include "seagame/rocket_attack.h"
-#include "seagame//scanner.h"
+#include "seagame/double_hit_factory.h"
+#include "seagame/rocket_attack_factory.h"
+#include "seagame//scanner_factory.h"
 
 #include <iostream>
 
-
+using Unit = seagame::Unit;
 
 int main()
 {
@@ -22,18 +22,18 @@ int main()
 
     seagame::Field field(5, 5);
 
-    field.add_ship(sm[i], seagame::Unit(2, 1));
-    field.add_ship(sm[0], seagame::Unit(4, 2));
-    field.add_ship(sm[1], seagame::Unit(2, 5));
+    field.add_ship(sm[i], Unit(2, 1));
+    field.add_ship(sm[0], Unit(4, 2));
+    field.add_ship(sm[1], Unit(2, 5));
    
-    field.shot(seagame::Unit(1, 1));
+    field.shot(Unit(1, 1));
 
-    seagame::DoubleHit _dh(2, 3);
-    seagame::RocketAttack _ra;
+    seagame::DoubleHitFactory _dh;
+    seagame::RocketAttackFactory _ra;
 
-    field.accept_skill(&_dh);
+    field.accept_skill(_dh(Unit(2, 3)).get());
 
-    field.accept_skill(&_ra);
+    field.accept_skill(_ra().get());
 
     std::cout << sm[i].segments()[0] << ' ';
     std::cout << sm[i].segments()[1] << ' ';
@@ -51,11 +51,10 @@ int main()
 
     bool flag = false;
 
-    seagame::Scanner _sc(1, 3, [&flag](auto){
-        flag = true;
-    });
+    seagame::ScannerFactory _sc;
 
-    field.accept_skill(&_sc);
+    field.accept_skill(_sc(Unit(1, 3), 
+                       [&flag](auto){ flag = true; }).get());
 
     if (flag)
         std::cout << "Scanner found ships" << std::endl;

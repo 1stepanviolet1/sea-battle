@@ -35,7 +35,7 @@ DoubleHit::operator()(void *_obj)
 }
 
 
-const SkillName&
+SkillName
 DoubleHit::classname() const noexcept
 { return SkillName::DOUBLEHIT; }
 
