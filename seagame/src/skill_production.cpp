@@ -4,7 +4,13 @@
 namespace seagame
 {
 
-SkillProduction::SkillProduction() {    }
+SkillProduction::SkillProduction()
+{
+    this->_dh = std::make_shared<DoubleHitFactory>();
+    this->_ra = std::make_shared<RocketAttackFactory>();
+    this->_sc = std::make_shared<ScannerFactory>();
+    
+}
 
 
 SkillProduction::SkillProduction(const SkillProduction &other)
@@ -38,6 +44,28 @@ SkillProduction::operator=(SkillProduction &&other) noexcept
         this->_sc = std::move(other._sc);
     }
     return *this;
+}
+
+
+std::shared_ptr<iSkillFactory> 
+SkillProduction::get_factory(SkillName _sn) const noexcept
+{
+    switch (_sn)
+    {
+        case SkillName::DOUBLEHIT:
+            return this->_dh;
+
+        case SkillName::ROCKETATTACK:
+            return this->_ra;
+
+        case SkillName::SCANNER:
+            return this->_sc;
+        
+        default:
+            throw std::logic_error("bad skill name");
+
+    }
+
 }
 
 } // seagame

@@ -26,12 +26,12 @@ public:
     SkillProduction& operator=(const SkillProduction &other);
     SkillProduction& operator=(SkillProduction &&other) noexcept;
 
-    
+    std::shared_ptr<iSkillFactory> get_factory(SkillName _sn) const noexcept;
 
 private:
-    DoubleHitFactory _dh;
-    RocketAttackFactory _ra;
-    ScannerFactory _sc;
+    std::shared_ptr<DoubleHitFactory> _dh;
+    std::shared_ptr<RocketAttackFactory> _ra;
+    std::shared_ptr<ScannerFactory> _sc;
 
 };
 

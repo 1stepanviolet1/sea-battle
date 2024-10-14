@@ -5,11 +5,11 @@
 namespace seagame
 {
 
-Scanner::Scanner(const Unit &_unit, const std::function<void(const Unit&)> _funct)
+Scanner::Scanner(const Unit &_unit, const std::function<void(const Unit&)> &_funct)
     : _unit(_unit), _reaction(_funct)
 {    }
 
-Scanner::Scanner(std::uint64_t _x, std::uint64_t _y, const std::function<void(const Unit&)> _funct)
+Scanner::Scanner(std::uint64_t _x, std::uint64_t _y, const std::function<void(const Unit&)> &_funct)
     : Scanner(Unit(_x, _y), _funct)
 {    }
 

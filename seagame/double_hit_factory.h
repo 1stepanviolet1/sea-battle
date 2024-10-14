@@ -16,7 +16,7 @@ class DoubleHitFactory : public iSkillFactory
 {
 public:
     std::shared_ptr<iSkill> create(const Unit &_unit, 
-                                   const std::function<void(const Unit&)> _funct = [](auto){}) override;
+                                   const std::function<void(const Unit&)> &_funct = __plug_for_react()) override;
 
     ~DoubleHitFactory() override = default;
 

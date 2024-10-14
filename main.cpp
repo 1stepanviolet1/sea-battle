@@ -1,8 +1,6 @@
 #include "seagame/ship_manager.h"
 #include "seagame/field.h"
-#include "seagame/double_hit_factory.h"
-#include "seagame/rocket_attack_factory.h"
-#include "seagame//scanner_factory.h"
+#include "seagame/skill_production.h"
 
 #include <iostream>
 
@@ -28,12 +26,14 @@ int main()
    
     field.shot(Unit(1, 1));
 
-    seagame::DoubleHitFactory _dh;
-    seagame::RocketAttackFactory _ra;
+    seagame::SkillProduction sp;
 
-    field.accept_skill(_dh(Unit(2, 3)));
+    auto _dh = sp.get_factory(seagame::SkillName::DOUBLEHIT);
+    auto _ra = sp.get_factory(seagame::SkillName::ROCKETATTACK);;
 
-    field.accept_skill(_ra());
+    field.accept_skill(_dh->create(Unit(2, 3)));
+
+    field.accept_skill(_ra->create());
 
     std::cout << sm[i].segments()[0] << ' ';
     std::cout << sm[i].segments()[1] << ' ';
@@ -53,7 +53,7 @@ int main()
 
     seagame::ScannerFactory _sc;
 
-    field.accept_skill(_sc(Unit(1, 3), 
+    field.accept_skill(_sc.create(Unit(1, 3), 
                            [&flag](auto){
                         flag = true; 
                     }));
