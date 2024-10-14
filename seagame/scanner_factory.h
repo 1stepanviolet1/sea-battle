@@ -15,8 +15,8 @@ namespace seagame
 class ScannerFactory : public iSkillFactory
 {
 public:
-    std::shared_ptr<iSkill> operator()(const Unit &_unit, 
-                                       const std::function<void(const Unit&)> _funct) override;
+    std::shared_ptr<iSkill> create(const Unit &_unit, 
+                                   const std::function<void(const Unit&)> _funct) override;
 
     ~ScannerFactory() override = default;
 

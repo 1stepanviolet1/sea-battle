@@ -15,8 +15,8 @@ namespace seagame
 class iSkillFactory
 {
 public:
-    virtual std::shared_ptr<iSkill> operator()(const Unit &_unit, 
-                                               const std::function<void(const Unit&)> _funct) = 0;
+    virtual std::shared_ptr<iSkill> create(const Unit &_unit, 
+                                           const std::function<void(const Unit&)> _funct) = 0;
 
     virtual ~iSkillFactory() = 0;
 
