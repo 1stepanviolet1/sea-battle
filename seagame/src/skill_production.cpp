@@ -6,19 +6,23 @@ namespace seagame
 
 SkillProduction::SkillProduction()
 {
-    this->_dh = std::make_shared<DoubleHitFactory>();
-    this->_ra = std::make_shared<RocketAttackFactory>();
-    this->_sc = std::make_shared<ScannerFactory>();
+    this->_double_hit_factory = std::make_shared<DoubleHitFactory>();
+    this->_rocket_attack_factory = std::make_shared<RocketAttackFactory>();
+    this->_scanner_factory = std::make_shared<ScannerFactory>();
     
 }
 
 
 SkillProduction::SkillProduction(const SkillProduction &other)
-    : _dh(other._dh), _ra(other._ra), _sc(other._sc)
+    : _double_hit_factory(other._double_hit_factory), 
+      _rocket_attack_factory(other._rocket_attack_factory), 
+      _scanner_factory(other._scanner_factory)
 {    }
 
 SkillProduction::SkillProduction(SkillProduction &&other) noexcept
-    : _dh(std::move(other._dh)), _ra(std::move(other._ra)), _sc(std::move(other._sc))
+    : _double_hit_factory(std::move(other._double_hit_factory)), 
+      _rocket_attack_factory(std::move(other._rocket_attack_factory)), 
+      _scanner_factory(std::move(other._scanner_factory))
 {    }
 
 
@@ -27,9 +31,9 @@ SkillProduction::operator=(const SkillProduction &other)
 {
     if (this == &other)
     {
-        this->_dh = other._dh;
-        this->_ra = other._ra;
-        this->_sc = other._sc;
+        this->_double_hit_factory = other._double_hit_factory;
+        this->_rocket_attack_factory = other._rocket_attack_factory;
+        this->_scanner_factory = other._scanner_factory;
     }
     return *this;
 }
@@ -39,9 +43,9 @@ SkillProduction::operator=(SkillProduction &&other) noexcept
 {
     if (this == &other)
     {
-        this->_dh = std::move(other._dh);
-        this->_ra = std::move(other._ra);
-        this->_sc = std::move(other._sc);
+        this->_double_hit_factory = std::move(other._double_hit_factory);
+        this->_rocket_attack_factory = std::move(other._rocket_attack_factory);
+        this->_scanner_factory = std::move(other._scanner_factory);
     }
     return *this;
 }
@@ -53,13 +57,13 @@ SkillProduction::get_factory(SkillName _sn) const noexcept
     switch (_sn)
     {
         case SkillName::DOUBLEHIT:
-            return this->_dh;
+            return this->_double_hit_factory;
 
         case SkillName::ROCKETATTACK:
-            return this->_ra;
+            return this->_rocket_attack_factory;
 
         case SkillName::SCANNER:
-            return this->_sc;
+            return this->_scanner_factory;
         
         default:
             throw std::logic_error("bad skill name");

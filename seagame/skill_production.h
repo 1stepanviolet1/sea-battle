@@ -29,9 +29,9 @@ public:
     std::shared_ptr<iSkillFactory> get_factory(SkillName _sn) const noexcept;
 
 private:
-    std::shared_ptr<DoubleHitFactory> _dh;
-    std::shared_ptr<RocketAttackFactory> _ra;
-    std::shared_ptr<ScannerFactory> _sc;
+    std::shared_ptr<DoubleHitFactory> _double_hit_factory;
+    std::shared_ptr<RocketAttackFactory> _rocket_attack_factory;
+    std::shared_ptr<ScannerFactory> _scanner_factory;
 
 };
 

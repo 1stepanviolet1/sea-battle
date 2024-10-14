@@ -1,48 +1,46 @@
-// #pragma once
+#pragma once
 
 
-// #ifndef _SKILL_MANAGER_H
-// #define _SKILL_MANAGER_H
+#ifndef _SKILL_MANAGER_H
+#define _SKILL_MANAGER_H
 
-// #include <queue>
-// #include <memory>
+#include <queue>
+#include <memory>
 
-// #include "double_hit.h"
-// #include "rocket_attack.h"
-// #include "scanner.h"
+#include "skill_production.h"
 
-// namespace seagame
-// {
+namespace seagame
+{
 
-// class SkillManager
-// {
-// public:
-//     SkillManager();
+class SkillManager
+{
+public:
+    SkillManager();
 
-//     SkillManager(const SkillManager &other);
-//     SkillManager(SkillManager &&other) noexcept;
+    SkillManager(const SkillManager &other);
+    SkillManager(SkillManager &&other) noexcept;
 
-//     ~SkillManager() = default;
+    ~SkillManager() = default;
 
-//     SkillManager& operator=(const SkillManager &other);
-//     SkillManager& operator=(SkillManager &&other) noexcept;
+    SkillManager& operator=(const SkillManager &other);
+    SkillManager& operator=(SkillManager &&other) noexcept;
 
-//     template <class T, class ...Args_T>
-//     void
-//     add_skill(Args_T ..._args)
-//     {
-//         this->_queue_of_skills.push(
-//             std::make_shared<T>(_args...);
-//         );
-//     }
+    void produce_skill(SkillName _sname);
 
-// private:
-//     std::queue<std::shared_ptr<iSkill>> _queue_of_skills;
+    SkillName front_skill() const noexcept;
 
-// };
+    std::shared_ptr<iSkillFactory> extract_skill();
 
-// } // seagame
+    bool empty() const noexcept;
+
+private:
+    SkillProduction _skill_production;
+    std::queue<std::shared_ptr<iSkillFactory>> _queue_of_skills;
+
+};
+
+} // seagame
 
 
-// #endif // _SKILL_MANAGER_H
+#endif // _SKILL_MANAGER_H
 
