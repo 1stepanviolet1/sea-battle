@@ -1,11 +1,18 @@
 #include "../skill_manager.h"
 
+#include <random>
+#include <vector>
+
 
 namespace seagame 
 {
 
 SkillManager::SkillManager()
-{    } // TODO: 
+{
+    for (const auto &skillname : this->__get_random_skills())
+        this->produce_skill(skillname);
+
+}
 
 
 SkillManager::SkillManager(const SkillManager &other)
@@ -50,6 +57,14 @@ SkillManager::produce_skill(SkillName _sname)
     );
 }
 
+void 
+SkillManager::produce_skill()
+{
+    return this->produce_skill(
+        this->__get_random_skills()[0]
+    );
+}
+
 SkillName 
 SkillManager::front_skill() const noexcept
 { return this->_queue_of_skills.front()->skillname(); }
@@ -65,6 +80,24 @@ SkillManager::extract_skill()
 bool 
 SkillManager::empty() const noexcept
 { return this->_queue_of_skills.empty(); }
+
+
+std::vector<SkillName> 
+SkillManager::__get_random_skills() const noexcept
+{
+    std::vector<SkillName> _set_skills = {
+        SkillName::DOUBLEHIT,
+        SkillName::ROCKETATTACK,
+        SkillName::SCANNER
+    };
+
+    std::random_device rd;
+    std::default_random_engine rng(rd());
+    std::shuffle(_set_skills.begin(), _set_skills.end(), rng);
+
+    return _set_skills;
+
+}
 
 } // seagame 
 

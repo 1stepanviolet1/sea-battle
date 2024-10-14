@@ -26,6 +26,7 @@ public:
     SkillManager& operator=(SkillManager &&other) noexcept;
 
     void produce_skill(SkillName _sname);
+    void produce_skill();
 
     SkillName front_skill() const noexcept;
 
@@ -36,6 +37,9 @@ public:
 private:
     SkillProduction _skill_production;
     std::queue<std::shared_ptr<iSkillFactory>> _queue_of_skills;
+
+private:
+    std::vector<SkillName> __get_random_skills() const noexcept;
 
 };
 
