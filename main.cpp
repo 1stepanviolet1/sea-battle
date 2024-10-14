@@ -31,9 +31,9 @@ int main()
     seagame::DoubleHitFactory _dh;
     seagame::RocketAttackFactory _ra;
 
-    field.accept_skill(_dh(Unit(2, 3)).get());
+    field.accept_skill(_dh(Unit(2, 3)));
 
-    field.accept_skill(_ra().get());
+    field.accept_skill(_ra());
 
     std::cout << sm[i].segments()[0] << ' ';
     std::cout << sm[i].segments()[1] << ' ';
@@ -54,7 +54,9 @@ int main()
     seagame::ScannerFactory _sc;
 
     field.accept_skill(_sc(Unit(1, 3), 
-                       [&flag](auto){ flag = true; }).get());
+                           [&flag](auto){
+                        flag = true; 
+                    }));
 
     if (flag)
         std::cout << "Scanner found ships" << std::endl;

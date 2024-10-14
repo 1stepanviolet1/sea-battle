@@ -205,7 +205,7 @@ Field::shot(std::uint64_t _x, std::uint64_t _y)
 
 
 void 
-Field::accept_skill(iSkill *_skill)
+Field::accept_skill(std::shared_ptr<iSkill> _skill)
 {
     _skill->use(*this);
 }

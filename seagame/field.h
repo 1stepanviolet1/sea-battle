@@ -8,6 +8,7 @@
 #include <unordered_set>
 #include <functional>
 #include <stdexcept>
+#include <memory>
 
 #include "unit.h"
 #include "ship.h"
@@ -73,7 +74,7 @@ public:
     void shot(const Unit &_unit);
     void shot(std::uint64_t _x, std::uint64_t _y);
 
-    void accept_skill(iSkill *_skill);
+    void accept_skill(std::shared_ptr<iSkill> _skill);
 
     const Size& size() const noexcept;
 
