@@ -9,6 +9,7 @@
 #include "iSkill.h"
 #include "unit.h"
 #include "__plug_for_react.h"
+#include "skill_name.h"
 
 namespace seagame
 {
@@ -18,6 +19,8 @@ class iSkillFactory
 public:
     virtual std::shared_ptr<iSkill> create(const Unit &_unit = Unit(), 
                                            const std::function<void(const Unit&)> &_funct = __plug_for_react()) = 0;
+
+    virtual SkillName skillname() const noexcept = 0;
 
     virtual ~iSkillFactory() = 0;
 

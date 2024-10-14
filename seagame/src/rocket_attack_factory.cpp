@@ -9,5 +9,10 @@ RocketAttackFactory::create(const Unit &_unit,
                             const std::function<void(const Unit&)> &_funct)
 { return std::make_shared<RocketAttack>(); }
 
+
+SkillName 
+RocketAttackFactory::skillname() const noexcept
+{ return SkillName::ROCKETATTACK; }
+
 } // seagame
 

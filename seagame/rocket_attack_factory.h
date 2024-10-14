@@ -18,6 +18,8 @@ public:
     std::shared_ptr<iSkill> create(const Unit &_unit = Unit(), 
                                    const std::function<void(const Unit&)> &_funct = __plug_for_react()) override;
 
+    SkillName skillname() const noexcept override;
+
     ~RocketAttackFactory() override = default;
 
 };

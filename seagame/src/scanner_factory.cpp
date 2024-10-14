@@ -22,5 +22,10 @@ ScannerFactory::create(const Unit &_unit,
 
 }
 
+
+SkillName 
+ScannerFactory::skillname() const noexcept
+{ return SkillName::SCANNER; }
+
 } // seagame
 

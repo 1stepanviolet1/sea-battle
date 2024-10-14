@@ -18,6 +18,8 @@ public:
     std::shared_ptr<iSkill> create(const Unit &_unit, 
                                    const std::function<void(const Unit&)> &_funct) override;
 
+    SkillName skillname() const noexcept override;
+
     ~ScannerFactory() override = default;
 
 };

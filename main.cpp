@@ -29,7 +29,7 @@ int main()
     seagame::SkillProduction sp;
 
     auto _dh = sp.get_factory(seagame::SkillName::DOUBLEHIT);
-    auto _ra = sp.get_factory(seagame::SkillName::ROCKETATTACK);;
+    auto _ra = sp.get_factory(seagame::SkillName::ROCKETATTACK);
 
     field.accept_skill(_dh->create(Unit(2, 3)));
 
@@ -51,9 +51,9 @@ int main()
 
     bool flag = false;
 
-    seagame::ScannerFactory _sc;
+    auto _sc = sp.get_factory(seagame::SkillName::SCANNER);
 
-    field.accept_skill(_sc.create(Unit(1, 3), 
+    field.accept_skill(_sc->create(Unit(1, 3), 
                            [&flag](auto){
                         flag = true; 
                     }));
