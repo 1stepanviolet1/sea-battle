@@ -20,7 +20,7 @@ SkillManager::SkillManager(const SkillManager &other)
       _queue_of_skills(other._queue_of_skills)
 {    }
 
-SkillManager::SkillManager(SkillManager &&other)
+SkillManager::SkillManager(SkillManager &&other) noexcept
     : _skill_production(std::move(other._skill_production)), 
       _queue_of_skills(std::move(other._queue_of_skills))
 {    }

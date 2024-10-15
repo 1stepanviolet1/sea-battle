@@ -1,10 +1,14 @@
 #include "seagame/ship_manager.h"
 #include "seagame/field.h"
-#include "seagame/skill_production.h"
+#include "seagame/skill_manager.h"
+#include "setup_react_of_destroyed_ship.h"
+#include "add_random_skill.h"
 
 #include <iostream>
 
 using Unit = seagame::Unit;
+using SkillName = seagame::SkillName;
+
 
 int main()
 {
@@ -25,16 +29,35 @@ int main()
     field.add_ship(sm[1], Unit(2, 5));
    
     field.shot(Unit(1, 1));
+    
+    seagame::SkillManager skill_manager;
+    
+    field.accept<seagame::SetupReactOfDestroyedShip>(
+        std::make_shared<seagame::AddRandomSkill>(skill_manager)
+    );
 
-    seagame::SkillProduction sp;
+    bool flag = false;
+    for (std::size_t i = 0; i < 3; ++i)
+    {
+        field.accept_skill(skill_manager.extract_skill()->create(Unit(2, 3), [&flag](auto){ flag = true; }));    
+        skill_manager.produce_skill(SkillName::DOUBLEHIT);
 
-    auto _dh = sp.get_factory(seagame::SkillName::DOUBLEHIT);
-    auto _ra = sp.get_factory(seagame::SkillName::ROCKETATTACK);
+    }
 
-    field.accept_skill(_dh->create(Unit(2, 3)));
+    if (flag)
+        std::cout << "Scanner found ships" << std::endl;
+    else
+        std::cout << "Scanner doesn't found ships" << std::endl;
 
-    field.accept_skill(_ra->create());
+    
+    field.accept_skill(skill_manager.extract_skill()->create(Unit(4, 2)));
+    field.accept_skill(skill_manager.extract_skill()->create(Unit(5, 2)));
+    
+    std::cout << "-----" << std::endl;
 
+    field.accept_skill(skill_manager.extract_skill()->create(Unit(2, 5)));
+    field.accept_skill(skill_manager.extract_skill()->create(Unit(3, 5)));
+    
     std::cout << sm[i].segments()[0] << ' ';
     std::cout << sm[i].segments()[1] << ' ';
     std::cout << sm[i].segments()[2] << std::endl;
@@ -48,20 +71,6 @@ int main()
     std::cout << sm[1].segments()[3] << std::endl;
 
     std::cout << "-----" << std::endl;
-
-    bool flag = false;
-
-    auto _sc = sp.get_factory(seagame::SkillName::SCANNER);
-
-    field.accept_skill(_sc->create(Unit(1, 3), 
-                           [&flag](auto){
-                        flag = true; 
-                    }));
-
-    if (flag)
-        std::cout << "Scanner found ships" << std::endl;
-    else
-        std::cout << "Scanner doesn't found ships" << std::endl;
 
     return 0;
 

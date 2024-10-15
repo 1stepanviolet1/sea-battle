@@ -195,7 +195,10 @@ Field::shot(const Unit &_unit)
         this->_hit_units.insert(_unit);
 
     if (_ship.is_destroyed())
+    {
         this->__block_units_for_hit(_u, _ship);
+        this->_react_of_destroyd_ship->exec();
+    }
 
 }
 

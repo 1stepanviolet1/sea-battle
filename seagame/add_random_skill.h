@@ -1,23 +1,30 @@
-// #pragma once
+#pragma once
 
 
-// #ifndef _ADD_RANDOM_SKILL_H
-// #define _ADD_RANDOM_SKILL_H
+#ifndef _ADD_RANDOM_SKILL_H
+#define _ADD_RANDOM_SKILL_H
 
-// #include "command.h"
-// #include "skill_manager.h"
+#include "command.h"
+#include "skill_manager.h"
 
-// class AddRandomSkill : public Command
-// {
-// public:
-//     AddRandomCommand(SkillManager &_sm);
+namespace seagame
+{
 
-//     void exec() override;
+class AddRandomSkill : public Command
+{
+public:
+    explicit AddRandomSkill(SkillManager &_sm);
+
+    void exec() override;
     
-//     ~AddRandomCommand() override;
+    ~AddRandomSkill() override = default;
 
-// };
+private:
+    SkillManager &_skill_manager;
+};
+
+} // seagame
 
 
-// #endif // _ADD_RANDOM_SKILL_H
+#endif // _ADD_RANDOM_SKILL_H
 

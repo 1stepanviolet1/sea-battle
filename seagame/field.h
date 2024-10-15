@@ -14,6 +14,7 @@
 #include "ship.h"
 #include "owner.h"
 #include "iSkill.h"
+#include "command.h"
 
 namespace seagame
 {
@@ -21,12 +22,15 @@ namespace seagame
 class RocketAttack;
 class Scanner;
 
+class SetupReactOfDestroyedShip;
+
 class Field : public Owner
 {
 
     friend RocketAttack;
     friend Scanner;
-    
+    friend SetupReactOfDestroyedShip;
+
 public:
     class Size
     {
@@ -55,6 +59,8 @@ private:
     std::unordered_set<Unit> _unusable_units;
 
     Size _size;
+
+    std::shared_ptr<Command> _react_of_destroyd_ship;
 
 public:
     Field(std::uint64_t _m, std::uint64_t _n);

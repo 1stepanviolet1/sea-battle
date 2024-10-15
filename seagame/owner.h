@@ -15,7 +15,7 @@ class Owner
 {
 public:
     template <class T, class ...Args_T>
-    const std::shared_ptr<Visitor>& 
+    std::shared_ptr<Visitor> 
     accept(Args_T&& ..._args)
     {
         auto ptr_t = std::make_shared<T>(_args...);
