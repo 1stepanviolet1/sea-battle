@@ -1,4 +1,7 @@
 #include "../field.h"
+#include "../out_of_field.h"
+#include "../placement_error.h"
+
 #include <string>
 
 
@@ -114,7 +117,7 @@ void
 Field::add_ship(Ship &_ship, const Unit &_unit)
 {
     if (this->_unusable_units.find(_unit) != this->_unusable_units.end())
-        throw std::invalid_argument("bad unit for add ship");
+        throw PlacementError("bad unit for add ship");
 
     Ship::Len i = Ship::Len::ONE;
     while (i != _ship.len())
@@ -127,7 +130,7 @@ Field::add_ship(Ship &_ship, const Unit &_unit)
                 ? _unit.y() + i
                 : _unit.y()
         )) != this->_unusable_units.end())
-            throw std::invalid_argument("bad unit for add ship");
+            throw PlacementError("bad unit for add ship");
         
         i = Ship::Len(i + 1);
     }
@@ -137,12 +140,12 @@ Field::add_ship(Ship &_ship, const Unit &_unit)
     {
     case Ship::Orientation::HORIZONTAL:
         if (!this->__is_valid_unit(_unit.x() + _ship.len() - 1, _unit.y()))
-            throw std::invalid_argument("bad unit for add ship");
+            throw PlacementError("bad unit for add ship");
         break;
 
     case Ship::Orientation::VERTICAL:
         if (!this->__is_valid_unit(_unit.x(), _unit.y() + _ship.len() - 1))
-            throw std::invalid_argument("bad unit for add ship");
+            throw PlacementError("bad unit for add ship");
         break;
     
     default:
@@ -163,8 +166,10 @@ Field::add_ship(Ship &_ship, std::uint64_t _x, std::uint64_t _y)
 void 
 Field::shot(const Unit &_unit)
 {
-    if (!this->__is_valid_unit(_unit)
-      || this->_hit_units.find(_unit) != this->_hit_units.end())
+    if (!this->__is_valid_unit(_unit))
+        throw OutOfFieldError("unit out of field");
+
+    if (this->_hit_units.find(_unit) != this->_hit_units.end())
         throw std::invalid_argument("bad unit for shot");
     
     Unit _u0;
@@ -197,7 +202,7 @@ Field::shot(const Unit &_unit)
     if (_ship.is_destroyed())
     {
         this->__block_units_for_hit(_u, _ship);
-        this->_react_of_destroyd_ship->exec();
+        this->_react_of_destroyed_ship->exec();
     }
 
 }

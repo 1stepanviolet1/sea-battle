@@ -60,7 +60,7 @@ private:
 
     Size _size;
 
-    std::shared_ptr<Command> _react_of_destroyd_ship;
+    std::shared_ptr<Command> _react_of_destroyed_ship;
 
 public:
     Field(std::uint64_t _m, std::uint64_t _n);

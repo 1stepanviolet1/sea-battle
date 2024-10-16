@@ -38,25 +38,21 @@ int main()
 
     bool flag = false;
     for (std::size_t i = 0; i < 3; ++i)
-    {
         field.accept_skill(skill_manager.extract_skill()->create(Unit(2, 3), [&flag](auto){ flag = true; }));    
-        skill_manager.produce_skill(SkillName::DOUBLEHIT);
 
-    }
 
     if (flag)
         std::cout << "Scanner found ships" << std::endl;
     else
         std::cout << "Scanner doesn't found ships" << std::endl;
 
-    
+    skill_manager.produce_skill(SkillName::DOUBLEHIT);
+    skill_manager.produce_skill(SkillName::DOUBLEHIT);
+
     field.accept_skill(skill_manager.extract_skill()->create(Unit(4, 2)));
     field.accept_skill(skill_manager.extract_skill()->create(Unit(5, 2)));
     
     std::cout << "-----" << std::endl;
-
-    field.accept_skill(skill_manager.extract_skill()->create(Unit(2, 5)));
-    field.accept_skill(skill_manager.extract_skill()->create(Unit(3, 5)));
     
     std::cout << sm[i].segments()[0] << ' ';
     std::cout << sm[i].segments()[1] << ' ';
@@ -71,6 +67,8 @@ int main()
     std::cout << sm[1].segments()[3] << std::endl;
 
     std::cout << "-----" << std::endl;
+
+    std::cout << skill_manager.empty() << std::endl;
 
     return 0;
 

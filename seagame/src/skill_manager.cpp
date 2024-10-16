@@ -1,4 +1,5 @@
 #include "../skill_manager.h"
+#include "../extrct_error.h"
 
 #include <random>
 #include <vector>
@@ -72,6 +73,9 @@ SkillManager::front_skill() const noexcept
 std::shared_ptr<iSkillFactory> 
 SkillManager::extract_skill()
 {
+    if (this->empty())
+        throw ExtractError("Skills not found");
+
     std::shared_ptr<iSkillFactory> _front_skill = this->_queue_of_skills.front();
     this->_queue_of_skills.pop();
     return _front_skill;

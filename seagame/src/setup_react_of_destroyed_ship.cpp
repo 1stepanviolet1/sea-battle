@@ -13,7 +13,7 @@ void
 SetupReactOfDestroyedShip::operator()(void *_obj)
 {
     Field &_fd = *static_cast<Field*>(_obj);
-    _fd._react_of_destroyd_ship = this->_cmd;
+    _fd._react_of_destroyed_ship = this->_cmd;
 
 }
 
