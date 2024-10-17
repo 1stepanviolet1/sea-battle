@@ -5,8 +5,6 @@
 #define _iSKILL_H
 
 #include <stdexcept>
-#include <string>
-#include <functional>
 
 #include "visitor.h"
 #include "unit.h"
@@ -20,9 +18,6 @@ class ShipManager;
 
 class iSkill : public Visitor 
 {
-public:
-    enum class Name : char;
-
 public:
     virtual inline void use(Field &_fd) = 0;
 

@@ -1,11 +1,8 @@
 #include "../skill_name.h"
 
 
-namespace std
-{
-
-ostream&
-operator<<(ostream& os, seagame::SkillName &sn)
+std::ostream&
+operator<<(std::ostream& os, seagame::SkillName &sn)
 {
     switch (sn)
     {
@@ -29,6 +26,4 @@ operator<<(ostream& os, seagame::SkillName &sn)
     return os;
 
 }
-
-} // std
 

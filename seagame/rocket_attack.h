@@ -28,7 +28,7 @@ public:
     ~RocketAttack() override = default;
 
 private:
-    Unit __get_random_unit_of_ship(const Field &_sm) noexcept;
+    Unit __get_random_unit_of_ship(const Field &_fd) noexcept;
     std::uint8_t __get_random_index_of_segments(const Ship &_ship) noexcept;
 
 };

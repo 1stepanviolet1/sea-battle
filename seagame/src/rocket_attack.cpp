@@ -21,6 +21,9 @@ RocketAttack::operator()(void *_obj)
         this->__get_random_index_of_segments(_ship)
     );
 
+    if (_ship.is_destroyed())
+        _fd._react_of_destroyed_ship->exec();
+
 }
 
 

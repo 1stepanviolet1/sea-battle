@@ -21,6 +21,7 @@ public:
 
 private:
     SkillManager &_skill_manager;
+    
 };
 
 } // seagame

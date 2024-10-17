@@ -1,5 +1,5 @@
 #include "../field.h"
-#include "../out_of_field.h"
+#include "../out_of_field_error.h"
 #include "../placement_error.h"
 
 #include <string>

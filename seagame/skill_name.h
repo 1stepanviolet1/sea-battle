@@ -19,13 +19,7 @@ enum class SkillName : char
 } // seagame
 
 
-namespace std
-{
-
-ostream&
-operator<<(ostream& os, seagame::SkillName &sn);
-
-} // std
+std::ostream& operator<<(std::ostream& os, seagame::SkillName &sn);
 
 
 #endif // _SKILL_NAME_H

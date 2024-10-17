@@ -1,5 +1,5 @@
 #include "../skill_manager.h"
-#include "../extrct_error.h"
+#include "../extract_error.h"
 
 #include <random>
 #include <vector>
