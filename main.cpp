@@ -36,10 +36,15 @@ int main()
         std::make_shared<seagame::AddRandomSkill>(skill_manager)
     );
 
-    bool flag = false;
+    bool flag;
+    std::equal_to<Unit> eq;
     for (std::size_t i = 0; i < 3; ++i)
-        field.accept_skill(skill_manager.extract_skill()->create(Unit(2, 3), [&flag](auto){ flag = true; }));    
-
+        field.accept_skill(skill_manager.extract_skill()->create(Unit(2, 3), 
+                           [&flag, &eq](const Unit &_u){ 
+            !eq(Unit(), _u) 
+                ? flag = true
+                : flag = false;
+    }));    
 
     if (flag)
         std::cout << "Scanner found ships" << std::endl;
