@@ -12,7 +12,7 @@ namespace seagame
 class PlacementError : public std::invalid_argument
 {
 public:
-    PlacementError(std::string &&msg)
+    PlacementError(const std::string &msg)
         : std::invalid_argument(msg)
     {    }
 

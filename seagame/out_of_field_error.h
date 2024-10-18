@@ -12,7 +12,7 @@ namespace seagame
 class OutOfFieldError : public std::invalid_argument
 {
 public:
-    OutOfFieldError(std::string &&msg)
+    OutOfFieldError(const std::string &msg)
         : std::invalid_argument(msg)
     {    }
 

@@ -12,7 +12,7 @@ namespace seagame
 class ExtractError : public std::runtime_error
 {
 public:
-    ExtractError(std::string &&msg)
+    ExtractError(const std::string &msg)
         : std::runtime_error(msg)
     {    }
 
