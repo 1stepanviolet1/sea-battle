@@ -3,6 +3,9 @@
 #include "seagame/skill_manager.h"
 #include "setup_react_of_destroyed_ship.h"
 #include "add_random_skill.h"
+#include "extract_error.h"
+#include "out_of_field_error.h"
+#include "placement_error.h"
 
 #include <iostream>
 
@@ -24,11 +27,23 @@ int main()
 
     seagame::Field field(5, 5);
 
-    field.add_ship(sm[i], Unit(2, 1));
-    field.add_ship(sm[0], Unit(4, 2));
-    field.add_ship(sm[1], Unit(2, 5));
-   
-    field.shot(Unit(1, 1));
+    try
+    {
+        field.add_ship(sm[i], Unit(2, 1));
+        field.add_ship(sm[0], Unit(4, 2));
+        field.add_ship(sm[1], Unit(2, 5));
+    } catch (const seagame::PlacementError &err)
+    {
+        std::cerr << "Error: " << err.what() << std::endl;
+    }
+    
+    try
+    {
+        field.shot(Unit(1, 1));
+    } catch (const std::invalid_argument &err)
+    {
+        std::cerr << "Error: " << err.what() << std::endl;
+    }
     
     seagame::SkillManager skill_manager;
     
@@ -36,26 +51,61 @@ int main()
         std::make_shared<seagame::AddRandomSkill>(skill_manager)
     );
 
+    bool scanner_is_worked = false;
     bool flag;
     std::equal_to<Unit> eq;
     for (std::size_t i = 0; i < 3; ++i)
-        field.accept_skill(skill_manager.extract_skill()->create(Unit(2, 3), 
-                           [&flag, &eq](const Unit &_u){ 
-            !eq(Unit(), _u) 
-                ? flag = true
-                : flag = false;
-    }));    
+    {
+        std::shared_ptr<seagame::iSkillFactory> _f_skill;
+        try
+        {
+            _f_skill = skill_manager.extract_skill();
+        } catch (const seagame::ExtractError &err)
+        {
+            std::cerr << "Error: " << err.what() << std::endl;
+            continue;
+        }
+        
+        try
+        {
+            field.accept_skill(_f_skill->create(Unit(2, 3), 
+                               [&flag, &eq, &scanner_is_worked](const Unit &_u){ 
+                scanner_is_worked = true;
 
-    if (flag)
-        std::cout << "Scanner found ships" << std::endl;
-    else
-        std::cout << "Scanner doesn't found ships" << std::endl;
+                !eq(Unit(), _u) 
+                    ? flag = true
+                    : flag = false;
+            }));   
+        } catch (const std::invalid_argument &err)
+        {
+            std::cerr << "Error: " << err.what() << std::endl;
+        }
+        
+    }
+
+    if (scanner_is_worked)
+    {
+        if (flag)
+            std::cout << "Scanner found ships" << std::endl;
+        else
+            std::cout << "Scanner doesn't found ships" << std::endl;
+    }
 
     skill_manager.produce_skill(SkillName::DOUBLEHIT);
     skill_manager.produce_skill(SkillName::DOUBLEHIT);
 
-    field.accept_skill(skill_manager.extract_skill()->create(Unit(4, 2)));
-    field.accept_skill(skill_manager.extract_skill()->create(Unit(5, 2)));
+    try
+    {
+        field.accept_skill(skill_manager.extract_skill()->create(Unit(4, 2)));
+        field.accept_skill(skill_manager.extract_skill()->create(Unit(5, 2)));
+    
+    } catch (const std::invalid_argument &err)
+    {
+        std::cerr << "Error: " << err.what() << std::endl;
+    } catch (const seagame::ExtractError &err)
+    {
+        std::cerr << "Error: " << err.what() << std::endl;
+    }
     
     std::cout << "-----" << std::endl;
     
