@@ -34,14 +34,19 @@
 # vscode
 .vscode/
 
+# visual studio
+.vs/
+
 # tmp
 tmp*
 
 # vim
 *.swp
 
-# cmake dir
+# cmake 
 build/
+out/
+CMakeSettings.json
 
 # word
 ~$*.docx
