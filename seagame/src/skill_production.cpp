@@ -6,9 +6,9 @@ namespace seagame
 
 SkillProduction::SkillProduction()
 {
-    this->_double_hit_factory = std::make_shared<DoubleHitFactory>();
-    this->_rocket_attack_factory = std::make_shared<RocketAttackFactory>();
-    this->_scanner_factory = std::make_shared<ScannerFactory>();
+    this->_double_hit_factory = std::make_shared<DoubleHitFactory>(this->_last_res);
+    this->_rocket_attack_factory = std::make_shared<RocketAttackFactory>(this->_last_res);
+    this->_scanner_factory = std::make_shared<ScannerFactory>(this->_last_res);
     
 }
 
@@ -16,13 +16,15 @@ SkillProduction::SkillProduction()
 SkillProduction::SkillProduction(const SkillProduction &other)
     : _double_hit_factory(other._double_hit_factory), 
       _rocket_attack_factory(other._rocket_attack_factory), 
-      _scanner_factory(other._scanner_factory)
+      _scanner_factory(other._scanner_factory),
+      _last_res(other._last_res)
 {    }
 
 SkillProduction::SkillProduction(SkillProduction &&other) noexcept
     : _double_hit_factory(std::move(other._double_hit_factory)), 
       _rocket_attack_factory(std::move(other._rocket_attack_factory)), 
-      _scanner_factory(std::move(other._scanner_factory))
+      _scanner_factory(std::move(other._scanner_factory)),
+      _last_res(std::move(other._last_res))
 {    }
 
 
@@ -34,6 +36,7 @@ SkillProduction::operator=(const SkillProduction &other)
         this->_double_hit_factory = other._double_hit_factory;
         this->_rocket_attack_factory = other._rocket_attack_factory;
         this->_scanner_factory = other._scanner_factory;
+        this->_last_res = other._last_res;
     }
     return *this;
 }
@@ -46,13 +49,14 @@ SkillProduction::operator=(SkillProduction &&other) noexcept
         this->_double_hit_factory = std::move(other._double_hit_factory);
         this->_rocket_attack_factory = std::move(other._rocket_attack_factory);
         this->_scanner_factory = std::move(other._scanner_factory);
+        this->_last_res = std::move(other._last_res);
     }
     return *this;
 }
 
 
 std::shared_ptr<iSkillFactory> 
-SkillProduction::get_factory(SkillName _sn) const noexcept
+SkillProduction::get_factory(SkillName _sn) const
 {
     switch (_sn)
     {
@@ -71,6 +75,10 @@ SkillProduction::get_factory(SkillName _sn) const noexcept
     }
 
 }
+
+const _last_skill_result& 
+SkillProduction::last_result() const noexcept
+{ return this->_last_res; }
 
 } // seagame
 

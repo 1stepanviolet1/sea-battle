@@ -8,6 +8,10 @@
 namespace seagame
 {
 
+ScannerFactory::ScannerFactory(_last_skill_result& _last_res)
+    : SkillFactory(_last_res)
+{    }
+
 std::shared_ptr<iSkill>
 ScannerFactory::create(const Unit &_unit, 
                        const std::function<void(const Unit&)> &_funct)

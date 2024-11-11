@@ -14,7 +14,11 @@ namespace seagame
 
 class SkillManager
 {
+private:
+    SkillProduction _skill_production;
+    std::queue<std::shared_ptr<iSkillFactory>> _queue_of_skills;
 public:
+
     SkillManager();
 
     SkillManager(const SkillManager &other);
@@ -33,10 +37,6 @@ public:
     std::shared_ptr<iSkillFactory> extract_skill();
 
     bool empty() const noexcept;
-
-private:
-    SkillProduction _skill_production;
-    std::queue<std::shared_ptr<iSkillFactory>> _queue_of_skills;
 
 private:
     std::vector<SkillName> __get_random_skills() const noexcept;

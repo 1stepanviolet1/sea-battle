@@ -4,6 +4,10 @@
 namespace seagame
 {
 
+RocketAttackFactory::RocketAttackFactory(_last_skill_result& _last_res)
+    : SkillFactory(_last_res)
+{    }
+
 std::shared_ptr<iSkill>
 RocketAttackFactory::create(const Unit &_unit, 
                             const std::function<void(const Unit&)> &_funct)

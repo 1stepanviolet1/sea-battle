@@ -6,15 +6,17 @@
 
 #include <memory>
 
-#include "iSkill_factory.h"
+#include "skill_factory.h"
 #include "double_hit.h"
 
 namespace seagame
 {
 
-class DoubleHitFactory : public iSkillFactory
+class DoubleHitFactory : public SkillFactory
 {
 public:
+    DoubleHitFactory(_last_skill_result& _last_res);
+
     std::shared_ptr<iSkill> create(const Unit &_unit, 
                                    const std::function<void(const Unit&)> &_funct = __plug_for_react()) override;
 
