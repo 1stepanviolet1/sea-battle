@@ -10,6 +10,10 @@
 
 #include <iostream>
 
+#include "nlohmann/json.hpp"
+
+using json = nlohmann::json;
+
 using Unit = seagame::Unit;
 using SkillName = seagame::SkillName;
 
