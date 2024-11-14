@@ -4,16 +4,16 @@
 namespace seagame
 {
 
-DoubleHit::DoubleHit(const Unit &_unit)
-    : _unit(_unit)
+DoubleHit::DoubleHit(std::shared_ptr<_last_skill_result> _last_res, const Unit &_unit)
+    : Skill(_last_res), _unit(_unit)
 {    }
 
-DoubleHit::DoubleHit(std::uint64_t _x, std::uint64_t _y)
-    : DoubleHit(Unit(_x, _y))
+DoubleHit::DoubleHit(std::shared_ptr<_last_skill_result> _last_res, std::uint64_t _x, std::uint64_t _y)
+    : DoubleHit(_last_res, Unit(_x, _y))
 {    }
 
 DoubleHit::DoubleHit()
-    : DoubleHit(Unit())
+    : DoubleHit(std::make_shared<_last_skill_result>(), Unit())
 {    }
 
 
@@ -30,13 +30,15 @@ DoubleHit::operator()(void *_obj)
     _fd.shot(this->_unit);
 
     try { _fd.shot(this->_unit); }
-    catch (...) {    }
+    catch (std::invalid_argument) {    }
+
+    this->_last_res->set(SkillResultStatus::SUCCESS);
 
 }
 
 
 SkillName
-DoubleHit::classname() const noexcept
+DoubleHit::skillname() const noexcept
 { return SkillName::DOUBLEHIT; }
 
 } // seagame

@@ -13,10 +13,11 @@ namespace seagame
 class SkillFactory : public iSkillFactory
 {
 public:
-	SkillFactory(_last_skill_result &_last_res);
+	SkillFactory(std::shared_ptr<_last_skill_result> _last_res);
 
 protected:
-	_last_skill_result& _last_res;
+	std::shared_ptr<_last_skill_result> _last_res;
+
 };
 
 }

@@ -4,7 +4,7 @@
 namespace seagame
 {
 
-SkillFactory::SkillFactory(_last_skill_result& _last_res)
+SkillFactory::SkillFactory(std::shared_ptr<_last_skill_result> _last_res)
 	: _last_res(_last_res)
 {    }
 

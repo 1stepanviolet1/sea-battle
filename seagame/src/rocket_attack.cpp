@@ -4,7 +4,12 @@
 namespace seagame
 {
 
+RocketAttack::RocketAttack(std::shared_ptr<_last_skill_result> _last_res)
+    : Skill(_last_res)
+{    }
+
 RocketAttack::RocketAttack()
+    : RocketAttack(std::make_shared<_last_skill_result>())
 {    }
 
 
@@ -23,6 +28,8 @@ RocketAttack::operator()(void *_obj)
 
     if (_ship.is_destroyed())
         _fd._react_of_destroyed_ship->exec();
+
+    this->_last_res->set(SkillResultStatus::SUCCESS);
 
 }
 
@@ -58,7 +65,7 @@ RocketAttack::__get_random_index_of_segments(const Ship &_ship) noexcept
 
 
 SkillName
-RocketAttack::classname() const noexcept
+RocketAttack::skillname() const noexcept
 { return SkillName::ROCKETATTACK; }
 
 } // seagame

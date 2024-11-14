@@ -19,11 +19,12 @@ private:
     std::random_device rd;
 
 public:
+    RocketAttack(std::shared_ptr<_last_skill_result> _last_res);
     RocketAttack();
 
     void operator()(void *_obj) override;
 
-    SkillName classname() const noexcept override;
+    SkillName skillname() const noexcept override;
 
     ~RocketAttack() override = default;
 

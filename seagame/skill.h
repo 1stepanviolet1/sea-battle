@@ -16,17 +16,23 @@ namespace seagame
 {
 
 class Field;
-class ShipManager;
 
 class Skill : public iSkill 
 {
 public:
+    Skill(std::shared_ptr<_last_skill_result> _last_res);
+
     inline void use(Field &_fd) override
     { return this->__use(&_fd); }
+
+    std::shared_ptr<_last_skill_result> result() const noexcept override;
 
 private:
     inline void __use(void *_obj)
     { return (*this)(_obj); }
+
+protected:
+    std::shared_ptr<_last_skill_result> _last_res;
 
 };
 

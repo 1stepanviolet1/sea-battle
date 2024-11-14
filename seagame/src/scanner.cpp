@@ -1,20 +1,19 @@
 #include "../scanner.h"
 
-#include <iostream>
 
 namespace seagame
 {
 
-Scanner::Scanner(const Unit &_unit, const std::function<void(const Unit&)> &_funct)
-    : _unit(_unit), _reaction(_funct)
+Scanner::Scanner(std::shared_ptr<_last_skill_result> _last_res, const Unit &_unit)
+    : Skill(_last_res), _unit(_unit)
 {    }
 
-Scanner::Scanner(std::uint64_t _x, std::uint64_t _y, const std::function<void(const Unit&)> &_funct)
-    : Scanner(Unit(_x, _y), _funct)
+Scanner::Scanner(std::shared_ptr<_last_skill_result> _last_res, std::uint64_t _x, std::uint64_t _y)
+    : Scanner(_last_res, Unit(_x, _y))
 {    }
 
 Scanner::Scanner()
-    : Scanner(Unit(), [](auto){})
+    : Scanner(std::make_shared<_last_skill_result>(), Unit())
 {    }
 
 
@@ -25,9 +24,6 @@ Scanner::operator()(void *_obj)
 
     if (eq(this->_unit, Unit()))
         throw std::invalid_argument("uninstall data");
-    
-    if (!static_cast<bool>(this->_reaction))
-        throw std::invalid_argument("uninstall reaction");
 
     Field &_fd = *static_cast<Field*>(_obj);
     
@@ -50,19 +46,19 @@ Scanner::operator()(void *_obj)
 
         if (!eq(_u, _u0))
         {
-            this->_reaction(_i_unit);
+            this->_last_res->set(SkillResultStatus::FOUND_SHIP);
             return;
         }
 
     }
 
-    this->_reaction(Unit());
+    this->_last_res->set(SkillResultStatus::NOT_FOUND_SHIP);
 
 }
 
 
 SkillName
-Scanner::classname() const noexcept
+Scanner::skillname() const noexcept
 { return SkillName::SCANNER; }
 
 } // seagame

@@ -17,6 +17,7 @@ namespace seagame
 class SkillProduction
 {
 public:
+    explicit SkillProduction(std::shared_ptr<_last_skill_result> _last_res);
     SkillProduction();
 
     SkillProduction(const SkillProduction &other);
@@ -29,14 +30,14 @@ public:
 
     std::shared_ptr<iSkillFactory> get_factory(SkillName _sn) const;
 
-    const _last_skill_result& last_result() const noexcept;
+    std::shared_ptr<_last_skill_result> last_result() const noexcept;
 
 private:
     std::shared_ptr<DoubleHitFactory> _double_hit_factory;
     std::shared_ptr<RocketAttackFactory> _rocket_attack_factory;
     std::shared_ptr<ScannerFactory> _scanner_factory;
     
-    _last_skill_result _last_res;
+    std::shared_ptr<_last_skill_result> _last_res;
 
 };
 

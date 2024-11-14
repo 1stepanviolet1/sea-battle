@@ -8,6 +8,7 @@
 #include <memory>
 
 #include "skill_production.h"
+#include "_last_skill_result.h"
 
 namespace seagame
 {
@@ -15,8 +16,10 @@ namespace seagame
 class SkillManager
 {
 private:
+    std::shared_ptr<_last_skill_result> _last_res;
     SkillProduction _skill_production;
     std::queue<std::shared_ptr<iSkillFactory>> _queue_of_skills;
+
 public:
 
     SkillManager();
@@ -37,6 +40,8 @@ public:
     std::shared_ptr<iSkillFactory> extract_skill();
 
     bool empty() const noexcept;
+
+    std::shared_ptr<_last_skill_result> last_result() const noexcept;
 
 private:
     std::vector<SkillName> __get_random_skills() const noexcept;

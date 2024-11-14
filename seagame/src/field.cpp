@@ -104,7 +104,7 @@ Field::operator=(Field &&other) noexcept
 {
     if (this != &other)
     {
-        this->_size = other._size;
+        this->_size = std::move(other._size);
         this->_deployed_ships = std::move(other._deployed_ships);
         this->_hit_units = std::move(other._hit_units);
         this->_unusable_units = std::move(other._unusable_units);

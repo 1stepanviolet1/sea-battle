@@ -5,6 +5,7 @@
 #define _LAST_SKILL_RESULT_H
 
 #include <cstdint>
+#include <iostream>
 
 namespace seagame
 {
@@ -33,7 +34,10 @@ private:
 
 };
 
-}
+} // seagame
+
+
+std::ostream& operator<<(std::ostream& os, seagame::SkillResultStatus _s);
 
 
 #endif // _LAST_SKILL_RESULT_H

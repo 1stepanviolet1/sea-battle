@@ -4,13 +4,18 @@
 namespace seagame
 {
 
-SkillProduction::SkillProduction()
+SkillProduction::SkillProduction(std::shared_ptr<_last_skill_result> _last_res)
+    : _last_res(_last_res)
 {
     this->_double_hit_factory = std::make_shared<DoubleHitFactory>(this->_last_res);
     this->_rocket_attack_factory = std::make_shared<RocketAttackFactory>(this->_last_res);
     this->_scanner_factory = std::make_shared<ScannerFactory>(this->_last_res);
     
 }
+
+SkillProduction::SkillProduction()
+    : SkillProduction(std::make_shared<_last_skill_result>())
+{    }
 
 
 SkillProduction::SkillProduction(const SkillProduction &other)
@@ -76,7 +81,7 @@ SkillProduction::get_factory(SkillName _sn) const
 
 }
 
-const _last_skill_result& 
+std::shared_ptr<_last_skill_result>
 SkillProduction::last_result() const noexcept
 { return this->_last_res; }
 
