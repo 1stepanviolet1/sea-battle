@@ -18,6 +18,8 @@ public:
 
 };
 
+Command::~Command() {    }
+
 } // seagame
 
 

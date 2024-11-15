@@ -26,7 +26,7 @@ DoubleHit::DoubleHit()
 
 
 void 
-DoubleHit::operator()(void *_obj) 
+DoubleHit::operator()(Void *_obj) 
 {
     std::equal_to<Unit> eq;
 

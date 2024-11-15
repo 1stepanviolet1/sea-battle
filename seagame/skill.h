@@ -23,7 +23,7 @@ public:
     explicit Skill(std::shared_ptr<_last_skill_result> _last_res);
 
     inline void use(Field &_fd) override
-    { return this->__use(&_fd); }
+    { return this->__use((Void*)(&_fd)); }
 
     std::shared_ptr<_last_skill_result> result() const noexcept override;
 

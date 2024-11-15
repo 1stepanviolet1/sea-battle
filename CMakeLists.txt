@@ -1,19 +1,11 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.10)
 
-project(seagame)
+project(seagame VERSION 3.1 LANGUAGES CXX)
 
-set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-include_directories("./seagame")
-include_directories("./seagame/serialization")
-
-aux_source_directory("./seagame/src" SRC)
-
-add_executable(seagame
-  main.cpp
-  ${SRC}
-)
+add_subdirectory(seagame)
 
 add_subdirectory(serialization)
+

@@ -22,13 +22,9 @@ protected:
 public:
     Serializer();
 
-    void load(Owner *_ow)
-    { return (*this)(_ow); }
+    void load(Owner *_ow);
 
-    const json& get() { return __json; }
-
-protected:
-    json& _json() { return __json; }
+    const json& get() const noexcept;
 
 };
 
