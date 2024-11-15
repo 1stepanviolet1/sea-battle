@@ -16,8 +16,10 @@ namespace seagame
 class Scanner : public Skill
 {
 public:
-    Scanner(std::shared_ptr<_last_skill_result> _last_res, const Unit &_unit); // left up
-    Scanner(std::shared_ptr<_last_skill_result> _last_res, std::uint64_t _x, std::uint64_t _y);
+    explicit Scanner(std::shared_ptr<_last_skill_result> _last_res, const Unit &_unit); // left up
+    explicit Scanner(std::shared_ptr<_last_skill_result> _last_res, std::uint64_t _x, std::uint64_t _y);
+    explicit Scanner(const Unit& _unit);
+    explicit Scanner(std::uint64_t _x, std::uint64_t _y);
     Scanner();
 
     void operator()(void *_obj) override;

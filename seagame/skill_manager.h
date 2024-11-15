@@ -16,12 +16,10 @@ namespace seagame
 class SkillManager
 {
 private:
-    std::shared_ptr<_last_skill_result> _last_res;
     SkillProduction _skill_production;
     std::queue<std::shared_ptr<iSkillFactory>> _queue_of_skills;
 
 public:
-
     SkillManager();
 
     SkillManager(const SkillManager &other);

@@ -15,7 +15,9 @@ class DoubleHit : public Skill
 {
 public:
     explicit DoubleHit(std::shared_ptr<_last_skill_result> _last_res, const Unit &_unit);
-    DoubleHit(std::shared_ptr<_last_skill_result> _last_res, std::uint64_t _x, std::uint64_t _y);
+    explicit DoubleHit(std::shared_ptr<_last_skill_result> _last_res, std::uint64_t _x, std::uint64_t _y);
+    explicit DoubleHit(const Unit& _unit);
+    explicit DoubleHit(std::uint64_t _x, std::uint64_t _y);
     DoubleHit();
 
     void operator()(void *_obj) override;

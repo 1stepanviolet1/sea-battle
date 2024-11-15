@@ -1,18 +1,6 @@
-#include "ship_manager.h"
-#include "field.h"
-#include "skill_manager.h"
-#include "setup_react_of_destroyed_ship.h"
-#include "add_random_skill.h"
-#include "extract_error.h"
-#include "out_of_field_error.h"
-#include "placement_error.h"
-#include "_last_skill_result.h"
+#include "game.h"
 
 #include <iostream>
-
-#include "nlohmann/json.hpp"
-
-using json = nlohmann::json;
 
 using Unit = seagame::Unit;
 using SkillName = seagame::SkillName;

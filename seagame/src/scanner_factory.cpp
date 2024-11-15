@@ -12,6 +12,10 @@ ScannerFactory::ScannerFactory(std::shared_ptr<_last_skill_result> _last_res)
     : SkillFactory(_last_res)
 {    }
 
+ScannerFactory::ScannerFactory()
+    : ScannerFactory(std::make_shared<_last_skill_result>())
+{    }
+
 std::shared_ptr<iSkill>
 ScannerFactory::create(const Unit &_unit)
 { return std::make_shared<Scanner>(_last_res, _unit); }

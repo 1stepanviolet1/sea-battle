@@ -35,7 +35,7 @@ public:
     class Size
     {
     public:
-        Size(std::uint64_t m, std::uint64_t n);
+        explicit Size(std::uint64_t m, std::uint64_t n);
 
         Size(const Size &other);
         Size(Size &&other) noexcept;
@@ -63,7 +63,7 @@ private:
     std::shared_ptr<Command> _react_of_destroyed_ship;
 
 public:
-    Field(std::uint64_t _m, std::uint64_t _n);
+    explicit Field(std::uint64_t _m, std::uint64_t _n);
     explicit Field(Size _size);
 
     Field(const Field &other);

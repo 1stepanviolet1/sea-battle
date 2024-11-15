@@ -18,14 +18,12 @@ SkillManager::SkillManager()
 
 
 SkillManager::SkillManager(const SkillManager &other)
-    : _last_res(other._last_res),
-      _skill_production(other._skill_production), 
+    : _skill_production(other._skill_production), 
       _queue_of_skills(other._queue_of_skills)
 {    }
 
 SkillManager::SkillManager(SkillManager &&other) noexcept
-    : _last_res(std::move(other._last_res)),
-      _skill_production(std::move(other._skill_production)), 
+    : _skill_production(std::move(other._skill_production)), 
       _queue_of_skills(std::move(other._queue_of_skills))
 {    }
 
@@ -35,7 +33,6 @@ SkillManager::operator=(const SkillManager &other)
 {
     if (this != &other)
     {
-        this->_last_res = other._last_res;
         this->_skill_production = other._skill_production;
         this->_queue_of_skills = other._queue_of_skills;
     }
@@ -47,7 +44,6 @@ SkillManager::operator=(SkillManager &&other) noexcept
 {
     if (this != &other)
     {
-        this->_last_res = std::move(other._last_res);
         this->_skill_production = std::move(other._skill_production);
         this->_queue_of_skills = std::move(other._queue_of_skills);
     }
@@ -93,7 +89,7 @@ SkillManager::empty() const noexcept
 
 std::shared_ptr<_last_skill_result>
 SkillManager::last_result() const noexcept
-{ return this->_last_res; }
+{ return this->_skill_production.last_result(); }
 
 
 std::vector<SkillName> 

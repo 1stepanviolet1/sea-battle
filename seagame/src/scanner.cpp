@@ -12,8 +12,16 @@ Scanner::Scanner(std::shared_ptr<_last_skill_result> _last_res, std::uint64_t _x
     : Scanner(_last_res, Unit(_x, _y))
 {    }
 
+Scanner::Scanner(const Unit& _unit)
+    : Scanner(std::make_shared<_last_skill_result>(), _unit)
+{    }
+
+Scanner::Scanner(std::uint64_t _x, std::uint64_t _y)
+    : Scanner(Unit(_x, _y))
+{    }
+
 Scanner::Scanner()
-    : Scanner(std::make_shared<_last_skill_result>(), Unit())
+    : Scanner(Unit())
 {    }
 
 

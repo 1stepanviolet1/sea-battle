@@ -20,7 +20,7 @@ class Field;
 class Skill : public iSkill 
 {
 public:
-    Skill(std::shared_ptr<_last_skill_result> _last_res);
+    explicit Skill(std::shared_ptr<_last_skill_result> _last_res);
 
     inline void use(Field &_fd) override
     { return this->__use(&_fd); }

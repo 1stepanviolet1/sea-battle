@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories("./seagame")
-include_directories("./nlohmann-json/include")
+include_directories("./seagame/serialization")
 
 aux_source_directory("./seagame/src" SRC)
 

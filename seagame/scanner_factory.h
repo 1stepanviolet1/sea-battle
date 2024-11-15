@@ -15,7 +15,8 @@ namespace seagame
 class ScannerFactory : public SkillFactory
 {
 public:
-    ScannerFactory(std::shared_ptr<_last_skill_result> _last_res);
+    explicit ScannerFactory(std::shared_ptr<_last_skill_result> _last_res);
+    ScannerFactory();
 
     std::shared_ptr<iSkill> create(const Unit& _unit) override;
 

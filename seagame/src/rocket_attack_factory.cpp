@@ -8,6 +8,10 @@ RocketAttackFactory::RocketAttackFactory(std::shared_ptr<_last_skill_result> _la
     : SkillFactory(_last_res)
 {    }
 
+RocketAttackFactory::RocketAttackFactory()
+    : RocketAttackFactory(std::make_shared<_last_skill_result>())
+{    }
+
 std::shared_ptr<iSkill>
 RocketAttackFactory::create(const Unit &_unit)
 { return std::make_shared<RocketAttack>(_last_res); }

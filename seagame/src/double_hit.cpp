@@ -12,8 +12,16 @@ DoubleHit::DoubleHit(std::shared_ptr<_last_skill_result> _last_res, std::uint64_
     : DoubleHit(_last_res, Unit(_x, _y))
 {    }
 
+DoubleHit::DoubleHit(const Unit& _unit)
+    : DoubleHit(std::make_shared<_last_skill_result>(), _unit)
+{    }
+
+DoubleHit::DoubleHit(std::uint64_t _x, std::uint64_t _y)
+    : DoubleHit(Unit(_x, _y))
+{    }
+
 DoubleHit::DoubleHit()
-    : DoubleHit(std::make_shared<_last_skill_result>(), Unit())
+    : DoubleHit(Unit())
 {    }
 
 

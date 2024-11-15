@@ -29,7 +29,7 @@ public:
         typename std::remove_reference<T>::type::iterator,
         typename std::remove_reference<T>::type::const_iterator
     >* = nullptr>
-    ShipManager(const T &_lens)
+    explicit ShipManager(const T &_lens)
     {
         static_assert(std::is_same<
             typename std::remove_reference<T>::type::value_type,
@@ -40,7 +40,7 @@ public:
 
     }
 
-    ShipManager(const ArrayOfLens &_lens);
+    explicit ShipManager(const ArrayOfLens &_lens);
 
     ShipManager();
 

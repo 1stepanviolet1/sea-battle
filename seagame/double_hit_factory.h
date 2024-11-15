@@ -15,7 +15,8 @@ namespace seagame
 class DoubleHitFactory : public SkillFactory
 {
 public:
-    DoubleHitFactory(std::shared_ptr<_last_skill_result> _last_res);
+    explicit DoubleHitFactory(std::shared_ptr<_last_skill_result> _last_res);
+    DoubleHitFactory();
 
     std::shared_ptr<iSkill> create(const Unit& _unit) override;
 

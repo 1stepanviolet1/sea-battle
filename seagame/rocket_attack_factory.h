@@ -15,7 +15,8 @@ namespace seagame
 class RocketAttackFactory : public SkillFactory
 {
 public:
-    RocketAttackFactory(std::shared_ptr<_last_skill_result> _last_res);
+    explicit RocketAttackFactory(std::shared_ptr<_last_skill_result> _last_res);
+    RocketAttackFactory();
 
     std::shared_ptr<iSkill> create(const Unit& _unit = Unit()) override;
 

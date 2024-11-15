@@ -27,8 +27,8 @@ private:
     State _state;
 
 public:
-    Unit(std::uint64_t x, std::uint64_t y, State state);
-    Unit(std::uint64_t x, std::uint64_t y);
+    explicit Unit(std::uint64_t x, std::uint64_t y, State state);
+    explicit Unit(std::uint64_t x, std::uint64_t y);
     Unit();
 
     Unit(const Unit &other);
