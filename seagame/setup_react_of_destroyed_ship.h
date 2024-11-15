@@ -18,7 +18,7 @@ class SetupReactOfDestroyedShip : public Visitor
 public:
     explicit SetupReactOfDestroyedShip(std::shared_ptr<Command> _cmd);
     
-    void operator()(void *_obj) override;
+    void operator()(Void *_obj) override;
 
     ~SetupReactOfDestroyedShip() override = default;
 

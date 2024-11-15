@@ -22,7 +22,7 @@ public:
     explicit RocketAttack(std::shared_ptr<_last_skill_result> _last_res);
     RocketAttack();
 
-    void operator()(void *_obj) override;
+    void operator()(Void *_obj) override;
 
     SkillName skillname() const noexcept override;
 

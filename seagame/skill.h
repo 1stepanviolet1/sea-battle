@@ -28,7 +28,7 @@ public:
     std::shared_ptr<_last_skill_result> result() const noexcept override;
 
 private:
-    inline void __use(void *_obj)
+    inline void __use(Void *_obj)
     { return (*this)(_obj); }
 
 protected:

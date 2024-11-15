@@ -14,7 +14,7 @@ RocketAttack::RocketAttack()
 
 
 void
-RocketAttack::operator()(void *_obj)
+RocketAttack::operator()(Void *_obj)
 {
     Field &_fd = *static_cast<Field*>(_obj);
 

@@ -7,6 +7,8 @@
 #include <cstdint>
 #include <iostream>
 
+#include "void.h"
+
 namespace seagame
 {
 
@@ -18,7 +20,7 @@ enum class SkillResultStatus : std::uint16_t
     SUCCESS
 };
 
-class _last_skill_result
+class _last_skill_result : public Void
 {
 public:
 	_last_skill_result();

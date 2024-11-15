@@ -26,7 +26,7 @@ Scanner::Scanner()
 
 
 void 
-Scanner::operator()(void *_obj)
+Scanner::operator()(Void *_obj)
 {
     std::equal_to<Unit> eq;
 

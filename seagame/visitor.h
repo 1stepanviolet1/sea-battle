@@ -12,7 +12,7 @@ namespace seagame
 class Visitor : public Void
 {
 public:
-    virtual void operator()(void *_obj) = 0;
+    virtual void operator()(Void *_obj) = 0;
 
     virtual ~Visitor() = 0;
 };

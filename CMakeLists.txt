@@ -16,3 +16,4 @@ add_executable(seagame
   ${SRC}
 )
 
+add_subdirectory(serialization)

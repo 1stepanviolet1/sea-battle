@@ -22,7 +22,7 @@ public:
     explicit Scanner(std::uint64_t _x, std::uint64_t _y);
     Scanner();
 
-    void operator()(void *_obj) override;
+    void operator()(Void *_obj) override;
 
     SkillName skillname() const noexcept override;
     
