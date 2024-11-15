@@ -4,10 +4,12 @@
 #ifndef _VISITOR_H
 #define _VISITOR_H
 
+#include "void.h"
+
 namespace seagame
 {
 
-class Visitor
+class Visitor : public Void
 {
 public:
     virtual void operator()(void *_obj) = 0;

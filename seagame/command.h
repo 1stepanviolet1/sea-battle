@@ -4,10 +4,12 @@
 #ifndef _COMMAND_H
 #define _COMMAND_H
 
+#include "void.h"
+
 namespace seagame
 {
 
-class Command
+class Command : public Void
 {
 public:
     virtual void exec() = 0;

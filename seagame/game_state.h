@@ -22,8 +22,8 @@ public:
 
 	GameState();
 
-	GameState(const GameState& other);
-	GameState(GameState&& other) noexcept;
+	GameState(const GameState &other);
+	GameState(GameState &&other) noexcept;
 
 	~GameState() = default;
 
@@ -39,11 +39,11 @@ public:
 	const SkillManager& get_player_skill_manager() const noexcept;
 
 
-	void set_player_field(Field && _player_field) noexcept;
-	void set_enemy_field(Field && _enemy_field) noexcept;
+	void set_player_field(Field &&_player_field) noexcept;
+	void set_enemy_field(Field &&_enemy_field) noexcept;
 
 	void set_player_ship_manager(ShipManager &&_player_ship_manager) noexcept;
-	void set_enemy_ship_manager(ShipManager && _enemy_ship_manager) noexcept;
+	void set_enemy_ship_manager(ShipManager &&_enemy_ship_manager) noexcept;
 
 	void set_player_skill_manager(SkillManager &&_player_skill_manager) noexcept;
 

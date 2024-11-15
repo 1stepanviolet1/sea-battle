@@ -7,11 +7,12 @@
 #include <memory>
 
 #include "visitor.h"
+#include "void.h"
 
 namespace seagame
 {
 
-class Owner
+class Owner : public Void
 {
 public:
     template <class T, class ...Args_T>
