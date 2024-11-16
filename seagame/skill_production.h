@@ -10,11 +10,12 @@
 #include "scanner_factory.h"
 #include "skill_name.h"
 #include "_last_skill_result.h"
+#include "owner.h"
 
 namespace seagame
 {
 
-class SkillProduction
+class SkillProduction : public Owner
 {
 public:
     explicit SkillProduction(std::shared_ptr<_last_skill_result> _last_res);

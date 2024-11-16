@@ -8,10 +8,12 @@
 #include <functional>
 #include <string>
 
+#include "owner.h"
+
 namespace seagame
 {
 
-class Unit
+class Unit : public Owner
 {
 public:
     enum class State : char

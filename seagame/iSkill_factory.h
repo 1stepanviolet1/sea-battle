@@ -9,11 +9,12 @@
 #include "iSkill.h"
 #include "unit.h"
 #include "skill_name.h"
+#include "owner.h"
 
 namespace seagame
 {
 
-class iSkillFactory
+class iSkillFactory : public Owner
 {
 public:
     virtual std::shared_ptr<iSkill> create(const Unit& _unit = Unit()) = 0;

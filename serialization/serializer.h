@@ -4,6 +4,8 @@
 #ifndef _SERIALIZER_H
 #define _SERIALIZER_H
 
+#include "dll_def.h"
+
 #include "nlohmann/json.hpp"
 
 #include "visitor.h"
@@ -14,10 +16,10 @@ using json = nlohmann::json;
 namespace seagame
 {
 
-class Serializer : public Visitor
+class SERIALIZATION_API Serializer : public Visitor
 {
 protected:
-    json __json;
+    json _json;
 
 public:
     Serializer();

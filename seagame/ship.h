@@ -8,12 +8,14 @@
 #include <vector>
 #include <string>
 
+#include "owner.h"
+
 namespace seagame
 {
 
 class ShipManager;
 
-class Ship
+class Ship : public Owner
 {
     friend ShipManager;
 

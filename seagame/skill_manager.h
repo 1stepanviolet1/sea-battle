@@ -9,11 +9,12 @@
 
 #include "skill_production.h"
 #include "_last_skill_result.h"
+#include "owner.h"
 
 namespace seagame
 {
 
-class SkillManager
+class SkillManager : public Owner
 {
 private:
     SkillProduction _skill_production;

@@ -1,12 +1,19 @@
 cmake_minimum_required(VERSION 3.10)
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../serialization")
+project(seagame_lib)
 
-file(GLOB SRC_SEAGAME "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+include_directories("${CMAKE_SOURCE_DIR}/seagame")
 
-add_executable(seagame
-  main.cpp
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src SRC_SEAGAME)
+
+add_library(seagame_lib STATIC 
   ${SRC_SEAGAME}
 )
+
+set_target_properties(seagame_lib PROPERTIES
+  PREFIX ""
+  SUFFIX ".lib"
+)
+
+target_include_directories(seagame_lib PUBLIC ${CMAKE_SOURCE_DIR}/seagame)
 

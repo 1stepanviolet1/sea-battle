@@ -17,8 +17,6 @@ public:
     virtual ~Visitor() = 0;
 };
 
-Visitor::~Visitor() {    }
-
 } // seagame
 
 

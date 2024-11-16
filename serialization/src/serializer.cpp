@@ -5,7 +5,7 @@ namespace seagame
 {
 
 Serializer::Serializer()
-    : __json()
+    : _json()
 {    }
 
 void 
@@ -14,7 +14,7 @@ Serializer::load(Owner *_ow)
 
 const json& 
 Serializer::get() const noexcept
-{ return __json; }
+{ return _json; }
 
 } //  seagame
 

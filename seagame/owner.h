@@ -29,8 +29,6 @@ public:
 
 };
 
-Owner::~Owner() {    }
-
 } // seagame
 
 
