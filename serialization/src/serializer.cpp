@@ -1,18 +1,14 @@
-#include "../serializer.h"
+#include "serializer.h"
 
 
 namespace seagame
 {
 
-Serializer::Serializer()
-    : _json()
-{    }
-
 void 
 Serializer::load(Owner *_ow)
 { return (*this)(_ow); }
 
-const json& 
+const nlohmann::json& 
 Serializer::get() const noexcept
 { return _json; }
 

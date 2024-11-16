@@ -11,22 +11,18 @@
 #include "visitor.h"
 #include "owner.h"
 
-using json = nlohmann::json;
-
 namespace seagame
 {
 
 class SERIALIZATION_API Serializer : public Visitor
 {
 protected:
-    json _json;
+    nlohmann::json _json;
 
 public:
-    Serializer();
-
     void load(Owner *_ow);
 
-    const json& get() const noexcept;
+    const nlohmann::json& get() const noexcept;
 
 };
 

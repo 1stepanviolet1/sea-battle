@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_subdirectory(seagame)
 add_subdirectory(serialization)
 
+include_directories("${CMAKE_SOURCE_DIR}/nlohmann-json/include")
+
 add_executable(seagame main.cpp)
 
 target_link_libraries(seagame PRIVATE seagame_lib)
