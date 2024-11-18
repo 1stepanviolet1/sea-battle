@@ -20,9 +20,11 @@ protected:
     nlohmann::json _json;
 
 public:
-    void load(Owner *_ow);
+    void save(Owner *_ow);
 
     const nlohmann::json& get() const noexcept;
+
+    ~Serializer() override = default;
 
 };
 
