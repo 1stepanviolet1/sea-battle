@@ -8,14 +8,19 @@
 
 #include "dll.h"
 
-typedef void(*JsonSaver)(const nlohmann::json&, const std::string&);
-typedef nlohmann::json(*JsonLoader)(const std::string&);
-
 namespace seagame
 {
 
+typedef void (*JsonSaver)(const nlohmann::json&, const std::string&);
+typedef nlohmann::json (*JsonLoader)(const std::string&);
+
 class SerializationDll : public DLL
 {
+public:
+    SerializationDll();
+
+    JsonSaver get_json_saver() const;
+    JsonLoader get_json_loader() const;
 
 };
 

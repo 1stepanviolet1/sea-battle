@@ -53,7 +53,7 @@ DLL::operator=(const DLL &other)
 DLL& 
 DLL::operator=(DLL &&other) noexcept
 {
-    if (this != &other) 
+    if (this != &other)
     {
         this->~DLL();
         this->m_module = other.m_module;
