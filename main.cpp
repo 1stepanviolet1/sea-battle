@@ -173,6 +173,10 @@ int main()
 
     std::cout << "-----" << std::endl;
 
+    FreeLibrary(serialization);
+    
+    std::cout << "-----" << std::endl;
+
     return 0;
 
 }
