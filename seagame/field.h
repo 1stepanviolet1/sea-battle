@@ -35,7 +35,7 @@ class Field : public Owner
     friend FieldSerializer;
 
 public:
-    class Size : public Void
+    class Size : public Owner
     {
     public:
         explicit Size(std::uint64_t m, std::uint64_t n);
