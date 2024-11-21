@@ -49,5 +49,9 @@ SkillName
 DoubleHit::skillname() const noexcept
 { return SkillName::DOUBLEHIT; }
 
+Unit
+DoubleHit::unit() const noexcept
+{ return this->_unit; }
+
 } // seagame
 

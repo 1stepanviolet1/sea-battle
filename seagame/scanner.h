@@ -25,6 +25,8 @@ public:
     void operator()(Void *_obj) override;
 
     SkillName skillname() const noexcept override;
+
+    Unit unit() const noexcept;
     
     ~Scanner() override = default;
 

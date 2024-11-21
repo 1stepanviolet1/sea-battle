@@ -69,5 +69,9 @@ SkillName
 Scanner::skillname() const noexcept
 { return SkillName::SCANNER; }
 
+Unit
+Scanner::unit() const noexcept
+{ return this->_unit; }
+
 } // seagame
 

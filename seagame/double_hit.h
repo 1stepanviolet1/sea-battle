@@ -24,6 +24,8 @@ public:
 
     SkillName skillname() const noexcept override;
 
+    Unit unit() const noexcept;
+
     ~DoubleHit() override = default;
 
 private:

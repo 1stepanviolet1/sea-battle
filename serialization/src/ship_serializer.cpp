@@ -8,6 +8,7 @@ void
 ShipSerializer::operator()(Void *_obj)
 {
     Ship &ship = static_cast<Ship&>(*_obj);
+    
     this->_json["_id"] = ship.id();
     this->_json["_len"] = ship.len();
     this->_json["_orientation"] = ship.orientation();

@@ -137,26 +137,6 @@ int main()
 
     std::cout << "JSON TEST" << std::endl;
 
-    // HMODULE serialization = LoadLibrary(TEXT("serialization/serialization.dll"));
-    // if (serialization == NULL) {
-    //     std::cerr << "Failed to load serialization.dll" << std::endl;
-    //     return 1;
-    // }
-
-    // JsonSaver json_saver = (JsonSaver)GetProcAddress(serialization, "json_save");
-    // if (json_saver == NULL) {
-    //     std::cerr << "Could not find function json_save" << std::endl;
-    //     FreeLibrary(serialization);
-    //     return 1;
-    // }
-
-    // JsonLoader json_loader = (JsonLoader)GetProcAddress(serialization, "json_load");
-    // if (json_loader == NULL) {
-    //     std::cerr << "Could not find function json_load." << std::endl;
-    //     FreeLibrary(serialization);
-    //     return 1;
-    // }
-
     seagame::SerializationDll serialization;
 
     seagame::JsonSaver json_saver = serialization.get_json_saver();
@@ -176,10 +156,6 @@ int main()
     
     nlohmann::json loaded_json = json_loader("settings.json");
     std::cout << loaded_json.dump(2) << std::endl;
-
-    // std::cout << "-----" << std::endl;
-
-    // FreeLibrary(serialization);
     
     std::cout << "-----" << std::endl;
 

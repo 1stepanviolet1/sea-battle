@@ -1,8 +1,8 @@
 #pragma once
 
 
-#ifndef _UNIT_SERIALIZER_H
-#define _UNIT_SERIALIZER_H
+#ifndef _SHIP_SERIALIZER_H
+#define _SHIP_SERIALIZER_H
 
 #include "serializer.h"
 #include "ship.h"
@@ -20,5 +20,5 @@ public:
 } // seagame
 
 
-#endif // _UNIT_SERIALIZER_H
+#endif // _SHIP_SERIALIZER_H
 

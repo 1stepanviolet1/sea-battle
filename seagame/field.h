@@ -24,15 +24,18 @@ class Scanner;
 
 class SetupReactOfDestroyedShip;
 
+class FieldSerializer;
+
 class Field : public Owner
 {
-
     friend RocketAttack;
     friend Scanner;
     friend SetupReactOfDestroyedShip;
 
+    friend FieldSerializer;
+
 public:
-    class Size
+    class Size : public Void
     {
     public:
         explicit Size(std::uint64_t m, std::uint64_t n);
@@ -103,3 +106,4 @@ private:
 
 
 #endif // _FIELD_H
+
