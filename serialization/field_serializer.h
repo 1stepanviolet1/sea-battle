@@ -15,6 +15,10 @@ class SERIALIZATION_API FieldSerializer : public Serializer
 public:
     void operator()(Void *_obj) override;
 
+private:
+    FieldSizeSerializer field_size_serializer;
+    UnitSerializer unit_serializer;
+
 };
 
 } // seagame

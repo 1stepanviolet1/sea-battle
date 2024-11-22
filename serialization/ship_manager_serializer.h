@@ -15,6 +15,9 @@ class SERIALIZATION_API ShipManagerSerializer : public Serializer
 public:
     void operator()(Void *_obj) override;
 
+private:
+    ShipSerializer ship_serializer;
+
 };
 
 } // seagame

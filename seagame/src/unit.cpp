@@ -57,7 +57,7 @@ std::uint64_t Unit::x() const noexcept
 std::uint64_t Unit::y() const noexcept
 { return this->_y; }
 
-const Unit::State& Unit::state() const noexcept
+Unit::State Unit::state() const noexcept
 { return this->_state; }
 
 } // seagame

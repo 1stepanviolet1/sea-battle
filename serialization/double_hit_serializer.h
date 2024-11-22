@@ -15,6 +15,9 @@ class SERIALIZATION_API DoubleHitSerializer : public Serializer
 public:
     void operator()(Void *_obj) override;
 
+private:
+    UnitSerializer unit_serializer;
+
 };
 
 } // seagame

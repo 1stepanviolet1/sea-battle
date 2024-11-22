@@ -11,12 +11,10 @@ ShipManagerSerializer::operator()(Void *_obj)
 
     this->_json["_container"] = nlohmann::json::array();
 
-    ShipSerializer ship_serializer;
-
     for (std::size_t i = 0; i < ship_manager.amt(); ++i)
     {
-        ship_serializer.save(&ship_manager[i]);
-        this->_json["_container"].push_back(ship_serializer.get());
+        this->ship_serializer.save(&ship_manager[i]);
+        this->_json["_container"].push_back(this->ship_serializer.get());
     }
     
 }

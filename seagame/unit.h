@@ -16,7 +16,7 @@ namespace seagame
 class Unit : public Owner
 {
 public:
-    enum class State : char
+    enum State
     {
         UNDEFINED = '?',
         EMPTY = '-',
@@ -43,7 +43,7 @@ public:
 
     std::uint64_t x() const noexcept;
     std::uint64_t y() const noexcept;
-    const State& state() const noexcept;
+    State state() const noexcept;
 
 };
 

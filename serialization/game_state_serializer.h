@@ -15,6 +15,11 @@ namespace seagame
 
 class SERIALIZATION_API GameStateSerializer : public Serializer
 {
+private:
+    FieldSerializer field_serializer;
+    ShipManagerSerializer ship_manager_serializer;
+    SkillManagerSerializer skill_manager_serializer;
+
 public:
     void operator()(Void *_obj) override;
 
