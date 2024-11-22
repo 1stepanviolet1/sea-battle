@@ -10,7 +10,8 @@ ScannerSerializer::operator()(Void *_obj)
     Scanner &scanner = static_cast<Scanner&>(*_obj);
     
     UnitSerializer unit_serializer;
-    unit_serializer.save(&scanner.unit());
+    Unit unit = scanner.unit();
+    unit_serializer.save(&unit);
     this->_json["_unit"] = unit_serializer.get();
 
 }
