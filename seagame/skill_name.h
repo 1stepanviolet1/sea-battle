@@ -9,7 +9,7 @@
 namespace seagame
 {
 
-enum class SkillName : char
+enum SkillName
 {
     DOUBLEHIT = 'D',
     ROCKETATTACK = 'R',
