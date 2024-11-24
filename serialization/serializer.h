@@ -14,7 +14,8 @@
 namespace seagame
 {
 
-class SERIALIZATION_API Serializer : public Visitor
+class SERIALIZATION_API _GET_SERIALIZER_NAME() 
+    : public Visitor
 {
 protected:
     nlohmann::json _json;
@@ -24,7 +25,7 @@ public:
 
     const nlohmann::json& get() const noexcept;
 
-    ~Serializer() override = default;
+    ~_GET_SERIALIZER_NAME()() override = default;
 
 };
 

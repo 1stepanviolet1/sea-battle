@@ -4,17 +4,54 @@
 namespace seagame
 {
 
-SerializationDll::SerializationDll()
+_GET_DLL_NAME(Serialization)::_GET_DLL_NAME(Serialization)()
     : DLL("serialization/serialization.dll")
 {    }
 
 JsonSaver 
-SerializationDll::get_json_saver() const
+_GET_DLL_NAME(Serialization)::_GETTER(json_saver)() const
 { return this->get_unit<JsonSaver>("json_save"); }
 
 JsonLoader 
-SerializationDll::get_json_loader() const
+_GET_DLL_NAME(Serialization)::_GETTER(json_loader)() const
 { return this->get_unit<JsonLoader>("json_load"); }
+
+
+_GET_SERIALIZER_NAME(Field)
+_GET_DLL_NAME(Serialization)::_GETTER(field_serializer)() const
+{ return this->get_unit<_GET_SERIALIZER_NAME(Field)>(
+    GET_NAME_OF_FUNCT_FROM_SERIALIZE(field)
+); }
+
+_GET_SERIALIZER_NAME(GameState)
+_GET_DLL_NAME(Serialization)::_GETTER(game_state_serializer)() const
+{ return this->get_unit<_GET_SERIALIZER_NAME(GameState)>(
+    GET_NAME_OF_FUNCT_FROM_SERIALIZE(game_state)
+); }
+
+_GET_SERIALIZER_NAME(ShipManager)
+_GET_DLL_NAME(Serialization)::_GETTER(ship_manager_serializer)() const
+{ return this->get_unit<_GET_SERIALIZER_NAME(ShipManager)>(
+    GET_NAME_OF_FUNCT_FROM_SERIALIZE(ship_manager)
+); }
+
+_GET_SERIALIZER_NAME(Ship)
+_GET_DLL_NAME(Serialization)::_GETTER(ship_serializer)() const
+{ return this->get_unit<_GET_SERIALIZER_NAME(Ship)>(
+    GET_NAME_OF_FUNCT_FROM_SERIALIZE(ship)
+); }
+
+_GET_SERIALIZER_NAME(SkillManager)
+_GET_DLL_NAME(Serialization)::_GETTER(skill_manager_serializer)() const
+{ return this->get_unit<_GET_SERIALIZER_NAME(SkillManager)>(
+    GET_NAME_OF_FUNCT_FROM_SERIALIZE(skill_manager)
+); }
+
+_GET_SERIALIZER_NAME(Unit)
+_GET_DLL_NAME(Serialization)::_GETTER(unit_serializer)() const
+{ return this->get_unit<_GET_SERIALIZER_NAME(Unit)>(
+    GET_NAME_OF_FUNCT_FROM_SERIALIZE(unit)
+); }
 
 } // seagame
 

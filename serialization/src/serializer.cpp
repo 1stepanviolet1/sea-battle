@@ -5,11 +5,11 @@ namespace seagame
 {
 
 void 
-Serializer::save(Owner *_ow)
+_GET_SERIALIZER_NAME()::save(Owner *_ow)
 { return (*this)(_ow); }
 
 const nlohmann::json& 
-Serializer::get() const noexcept
+_GET_SERIALIZER_NAME()::get() const noexcept
 { return _json; }
 
 } // seagame

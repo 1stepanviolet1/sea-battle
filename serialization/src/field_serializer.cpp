@@ -5,7 +5,7 @@ namespace seagame
 {
 
 void 
-FieldSerializer::operator()(Void *_obj)
+_GET_SERIALIZER_NAME(Field)::operator()(Void *_obj)
 {
     Field &field = static_cast<Field&>(*_obj);
 

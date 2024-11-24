@@ -13,12 +13,13 @@
 namespace seagame
 {
 
-class SERIALIZATION_API GameStateSerializer : public Serializer
+class SERIALIZATION_API _GET_SERIALIZER_NAME(GameState) 
+    : public _GET_SERIALIZER_NAME()
 {
 private:
-    FieldSerializer field_serializer;
-    ShipManagerSerializer ship_manager_serializer;
-    SkillManagerSerializer skill_manager_serializer;
+    _GET_SERIALIZER_NAME(Field) field_serializer;
+    _GET_SERIALIZER_NAME(ShipManager) ship_manager_serializer;
+    _GET_SERIALIZER_NAME(SkillManager) skill_manager_serializer;
 
 public:
     void operator()(Void *_obj) override;

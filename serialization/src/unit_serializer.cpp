@@ -5,7 +5,7 @@ namespace seagame
 {
 
 void 
-UnitSerializer::operator()(Void *_obj)
+_GET_SERIALIZER_NAME(Unit)::operator()(Void *_obj)
 {
     Unit &unit = static_cast<Unit&>(*_obj);
     

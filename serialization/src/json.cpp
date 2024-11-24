@@ -77,6 +77,11 @@ Json::load(void)
 void
 Json::__init_file()
 {
+    if (!fs::exists(this->_filename))
+        std::system(
+            (std::string("touch ") + this->_filename).c_str()
+        );
+
     this->_file.open(this->_filename, std::ios::in | std::ios::out);
 
     if (!this->_file.is_open())

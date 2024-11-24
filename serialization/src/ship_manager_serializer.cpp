@@ -5,7 +5,7 @@ namespace seagame
 {
 
 void 
-ShipManagerSerializer::operator()(Void *_obj)
+_GET_SERIALIZER_NAME(ShipManager)::operator()(Void *_obj)
 {
     ShipManager &ship_manager = static_cast<ShipManager&>(*_obj);
 

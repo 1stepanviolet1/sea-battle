@@ -5,7 +5,7 @@ namespace seagame
 {
 
 void 
-SkillManagerSerializer::operator()(Void *_obj)
+_GET_SERIALIZER_NAME(SkillManager)::operator()(Void *_obj)
 {
     SkillManager &skill_manager = static_cast<SkillManager&>(*_obj);
     

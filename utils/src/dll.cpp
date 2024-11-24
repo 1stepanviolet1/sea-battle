@@ -4,33 +4,33 @@
 namespace seagame
 {
 
-DLL::DLL(const std::string &_DLLPath)
+_GET_DLL_NAME()::_GET_DLL_NAME()(const std::string &_DLLPath)
 {
     this->m_module = LoadLibrary(
         _DLLPath.c_str()
     );
 
     if (this->m_module == NULL)
-        throw std::runtime_error("Failed to load serialization.DLL");
+        throw std::runtime_error("Failed to load serialization.dll");
         
 }
 
 
-DLL::DLL(const DLL &other)
+_GET_DLL_NAME()::_GET_DLL_NAME()(const _GET_DLL_NAME() &other)
 {
-    this->~DLL();
+    this->~_GET_DLL_NAME()();
     this->m_module = other.m_module;
 }
 
-DLL::DLL(DLL &&other) noexcept
+_GET_DLL_NAME()::_GET_DLL_NAME()(_GET_DLL_NAME() &&other) noexcept
 {
-    this->~DLL();
+    this->~_GET_DLL_NAME()();
     this->m_module = other.m_module;
     other.m_module = NULL;
 }
 
 
-DLL::~DLL()
+_GET_DLL_NAME()::~_GET_DLL_NAME()()
 {
     if (this->m_module != NULL) 
     {
@@ -39,23 +39,23 @@ DLL::~DLL()
 }
 
 
-DLL& 
-DLL::operator=(const DLL &other)
+_GET_DLL_NAME()& 
+_GET_DLL_NAME()::operator=(const _GET_DLL_NAME() &other)
 {
     if (this != &other) 
     {
-        this->~DLL();
+        this->~_GET_DLL_NAME()();
         this->m_module = other.m_module;
     }
     return *this;
 }
 
-DLL& 
-DLL::operator=(DLL &&other) noexcept
+_GET_DLL_NAME()& 
+_GET_DLL_NAME()::operator=(_GET_DLL_NAME() &&other) noexcept
 {
     if (this != &other)
     {
-        this->~DLL();
+        this->~_GET_DLL_NAME()();
         this->m_module = other.m_module;
         other.m_module = NULL;
     }
@@ -64,7 +64,7 @@ DLL::operator=(DLL &&other) noexcept
 
 
 HMODULE 
-DLL::get() const noexcept
+_GET_DLL_NAME()::get() const noexcept
 { return this->m_module; }
 
 } // seagame

@@ -6,6 +6,9 @@
 
 #include <fstream>
 #include <string>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 #include "nlohmann/json.hpp"
 

@@ -1,9 +1,7 @@
 #include "game.h"
-#include "nlohmann/json.hpp"
 #include "serialization_dll.h"
 
 #include <iostream>
-#include <Windows.h>
 
 using Unit = seagame::Unit;
 using SkillName = seagame::SkillName;
@@ -137,25 +135,36 @@ int main()
 
     std::cout << "JSON TEST" << std::endl;
 
-    seagame::SerializationDll serialization;
+    seagame::SerializationDLL serialization;
 
     seagame::JsonSaver json_saver = serialization.get_json_saver();
     seagame::JsonLoader json_loader = serialization.get_json_loader();
 
-    nlohmann::json json = nlohmann::json::array();
+    seagame::_GET_SERIALIZER_NAME(Field) field_serializer = serialization._GETTER(field_serializer)();
 
-    json.push_back(nlohmann::json({
-        {"test1", 123},
-        {"test2", "hello"},
-        {"test3", true}
-    }));
+    nlohmann::json json = field_serializer(field);
 
-    json_saver(json, "settings.json");
+    try
+    {
+        json_saver(json, "settings.json");
+    }
+    catch(const std::runtime_error& err)
+    {
+        std::cerr << "Error: " << err.what() << '\n';
+    }
 
-    std::cout << "-----" << std::endl;
+    // std::cout << "-----" << std::endl;
     
-    nlohmann::json loaded_json = json_loader("settings.json");
-    std::cout << loaded_json.dump(2) << std::endl;
+    // nlohmann::json loaded_json;
+    // try
+    // {
+    //     loaded_json = json_loader("settings.json");
+    // }
+    // catch(const std::runtime_error& err)
+    // {
+    //     std::cerr << "Error: " << err.what() << '\n';
+    // }
+    // std::cout << loaded_json.dump(2) << std::endl;
     
     std::cout << "-----" << std::endl;
 

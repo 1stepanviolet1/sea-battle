@@ -8,26 +8,29 @@
 #include <string>
 #include <stdexcept>
 
+#define _GET_DLL_NAME(_DLL) _DLL##DLL
+#define _GETTER(_NAME) get_##_NAME
+
 namespace seagame
 {
 
-class DLL
+class _GET_DLL_NAME()
 {
 public:
-    DLL(const std::string &_DLLPath);
+    _GET_DLL_NAME()(const std::string &_DLLPath);
 
-    DLL(const DLL &other);
-    DLL(DLL &&other) noexcept;
+    _GET_DLL_NAME()(const _GET_DLL_NAME() &other);
+    _GET_DLL_NAME()(_GET_DLL_NAME() &&other) noexcept;
 
-    virtual ~DLL();
+    virtual ~_GET_DLL_NAME()();
 
-    DLL& operator=(const DLL &other);
-    DLL& operator=(DLL &&other) noexcept;
+    _GET_DLL_NAME()& operator=(const _GET_DLL_NAME() &other);
+    _GET_DLL_NAME()& operator=(_GET_DLL_NAME() &&other) noexcept;
 
     HMODULE get() const noexcept;
 
     template <class _Func_T>
-    _Func_T get_unit(const std::string &_unitname) const
+    _Func_T _GETTER(unit)(const std::string &_unitname) const
     {
         _Func_T _unit = (_Func_T)GetProcAddress(this->m_module, _unitname.c_str());
 

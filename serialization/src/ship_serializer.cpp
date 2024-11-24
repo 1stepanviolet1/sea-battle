@@ -5,7 +5,7 @@ namespace seagame
 {
 
 void 
-ShipSerializer::operator()(Void *_obj)
+_GET_SERIALIZER_NAME(Ship)::operator()(Void *_obj)
 {
     Ship &ship = static_cast<Ship&>(*_obj);
     

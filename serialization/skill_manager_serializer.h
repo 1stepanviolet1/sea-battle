@@ -12,7 +12,8 @@
 namespace seagame
 {
 
-class SERIALIZATION_API SkillManagerSerializer : public Serializer
+class SERIALIZATION_API _GET_SERIALIZER_NAME(SkillManager) 
+    : public _GET_SERIALIZER_NAME()
 {
 public:
     void operator()(Void *_obj) override;

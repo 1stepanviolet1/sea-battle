@@ -5,7 +5,7 @@ namespace seagame
 {
 
 void 
-GameStateSerializer::operator()(Void *_obj)
+_GET_SERIALIZER_NAME(GameState)::operator()(Void *_obj)
 {
     GameState &game_state = static_cast<GameState&>(*_obj);
 

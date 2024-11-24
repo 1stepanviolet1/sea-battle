@@ -10,13 +10,14 @@
 namespace seagame
 {
 
-class SERIALIZATION_API ShipManagerSerializer : public Serializer
+class SERIALIZATION_API _GET_SERIALIZER_NAME(ShipManager) 
+    : public _GET_SERIALIZER_NAME()
 {
 public:
     void operator()(Void *_obj) override;
 
 private:
-    ShipSerializer ship_serializer;
+    _GET_SERIALIZER_NAME(Ship) ship_serializer;
 
 };
 

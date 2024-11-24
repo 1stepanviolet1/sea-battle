@@ -10,14 +10,15 @@
 namespace seagame
 {
 
-class SERIALIZATION_API FieldSerializer : public Serializer
+class SERIALIZATION_API _GET_SERIALIZER_NAME(Field) 
+    : public _GET_SERIALIZER_NAME()
 {
 public:
     void operator()(Void *_obj) override;
 
 private:
-    FieldSizeSerializer field_size_serializer;
-    UnitSerializer unit_serializer;
+    _GET_SERIALIZER_NAME(FieldSize) field_size_serializer;
+    _GET_SERIALIZER_NAME(Unit) unit_serializer;
 
 };
 

@@ -10,7 +10,8 @@
 namespace seagame
 {
 
-class SERIALIZATION_API UnitSerializer : public Serializer
+class SERIALIZATION_API _GET_SERIALIZER_NAME(Unit) 
+    : public _GET_SERIALIZER_NAME()
 {
 public:
     void operator()(Void *_obj) override;

@@ -13,5 +13,7 @@
 
 #endif
 
+#define _GET_SERIALIZER_NAME(CLASS) CLASS##Serializer
+
 #endif // _EXPORT_DEF_H
 
