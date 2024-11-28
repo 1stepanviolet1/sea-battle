@@ -6,9 +6,6 @@
 using Unit = seagame::Unit;
 using SkillName = seagame::SkillName;
 
-typedef void(*JsonSaver)(const nlohmann::json&, const std::string&);
-typedef nlohmann::json(*JsonLoader)(const std::string&);
-
 
 int main()
 {
