@@ -16,7 +16,7 @@ _GET_LOADER_NAME(Field)::load(const nlohmann::json &_json)
         !_json.contains("_hit_units") ||
         !_json.contains("_unusable_units"))
     {
-        std::invalid_argument("Invalid json for unit");
+        throw std::invalid_argument("Invalid json for field");
     }
 
     this->field_size_loader.load(_json["_size"]);

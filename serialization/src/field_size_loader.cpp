@@ -10,7 +10,7 @@ _GET_LOADER_NAME(FieldSize)::load(const nlohmann::json &_json)
     if (!_json.contains("_m") ||
         !_json.contains("_n"))
     {
-        std::invalid_argument("Invalid json for field size");
+        throw std::invalid_argument("Invalid json for field size");
     }
 
     this->_obj = std::make_shared<Field::Size>(

@@ -9,7 +9,7 @@ _GET_LOADER_NAME(ShipManager)::load(const nlohmann::json &_json)
 {
     if (!_json.contains("_container"))
     {
-        std::invalid_argument("Invalid json for ship manager");
+        throw std::invalid_argument("Invalid json for ship manager");
     }
 
     std::vector<Ship> ships;

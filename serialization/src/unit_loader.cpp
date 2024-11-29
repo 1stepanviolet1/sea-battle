@@ -11,7 +11,7 @@ _GET_LOADER_NAME(Unit)::load(const nlohmann::json &_json)
         !_json.contains("_y") ||
         !_json.contains("_state"))
     {
-        std::invalid_argument("Invalid json for unit");
+        throw std::invalid_argument("Invalid json for unit");
     }
 
     this->_obj = std::make_shared<Unit>(

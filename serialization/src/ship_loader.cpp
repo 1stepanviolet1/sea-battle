@@ -12,7 +12,7 @@ _GET_LOADER_NAME(Ship)::load(const nlohmann::json &_json)
         !_json.contains("_orientation") ||
         !_json.contains("_segments"))
     {
-        std::invalid_argument("Invalid json for ship");
+        throw std::invalid_argument("Invalid json for ship");
     }
 
     std::vector<Ship::Integrity> _segments = _json["_segments"];
