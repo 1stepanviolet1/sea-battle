@@ -10,13 +10,7 @@
 namespace seagame
 {
 
-class SERIALIZATION_API _GET_SERIALIZER_NAME(FieldSize) 
-    : public _GET_SERIALIZER_NAME()
-{
-public:
-    void operator()(Void *_obj) override;
-
-};
+REG_SIMPLE_SERIALIZER_FOR(FieldSize);
 
 } // seagame
 

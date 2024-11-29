@@ -31,6 +31,14 @@ public:
 
 } // seagame
 
+#define REG_SIMPLE_SERIALIZER_FOR(_NAME)                \
+    class SERIALIZATION_API _GET_SERIALIZER_NAME(_NAME) \
+        : public _GET_SERIALIZER_NAME()                 \
+    {                                                   \
+    public:                                             \
+        void operator()(Void *_obj) override;           \
+    }
+
 
 #endif // _SERIALIZER_H
 

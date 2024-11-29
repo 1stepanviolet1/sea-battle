@@ -10,13 +10,7 @@
 namespace seagame
 {
 
-class SERIALIZATION_API _GET_SERIALIZER_NAME(Ship)
-    : public _GET_SERIALIZER_NAME()
-{
-public:
-    void operator()(Void *_obj) override;
-
-};
+REG_SIMPLE_SERIALIZER_FOR(Ship);
 
 } // seagame
 
