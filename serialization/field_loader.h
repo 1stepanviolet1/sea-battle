@@ -14,19 +14,15 @@ namespace seagame
 class SERIALIZATION_API _GET_LOADER_NAME(Field) 
     : public _GET_LOADER_NAME()
 {
-private:
-    const ShipManager &_ship_manager;
-
-    FieldSizeLoader field_size_loader;
-    UnitLoader unit_loader;
-
 public:
     explicit _GET_LOADER_NAME(Field)(const ShipManager &_ship_manager);
     void load(const nlohmann::json &_json) override;
 
 private:
+    const ShipManager &_ship_manager;
+
     _GET_LOADER_NAME(FieldSize) field_size_loader;
-    _GET_LOADER_NAME(Unit) unit_loader;
+    _GET_LOADER_NAME(Unit) unit_loader;   
 
 };
 
