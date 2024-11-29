@@ -14,10 +14,12 @@ namespace seagame
 {
 
 class ShipManager;
+class ShipLoader;
 
 class Ship : public Owner
 {
     friend ShipManager;
+    friend ShipLoader;
 
 public:
     enum Orientation
