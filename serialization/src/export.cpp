@@ -75,5 +75,15 @@ serialize_unit(Unit &_unit)
 
 }
 
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_unit(const nlohmann::json &_json)
+{
+    _GET_LOADER_NAME(Unit) loader;
+    loader.load(_json);
+    return loader.get();
+
+}
+
+
 } // seagame
 

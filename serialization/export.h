@@ -17,6 +17,8 @@
 #include "skill_manager_serializer.h"
 #include "unit_serializer.h"
 
+#include "unit_loader.h"
+
 namespace seagame
 {
 
@@ -44,6 +46,10 @@ serialize_skill_manager(SkillManager &_skill_manager);
 
 extern "C" SERIALIZATION_API nlohmann::json
 serialize_unit(Unit &_unit);
+
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_unit(const nlohmann::json &_json);
 
 } // seagame
 

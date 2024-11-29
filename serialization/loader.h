@@ -4,6 +4,10 @@
 #ifndef _LOADER_H
 #define _LOADER_H
 
+#include <string>
+#include <stdexcept>
+#include <memory>
+
 #include "dll_def.h"
 
 #include "nlohmann/json.hpp"
@@ -17,12 +21,12 @@ class SERIALIZATION_API _GET_LOADER_NAME()
     : public Owner
 {
 protected:
-    Owner *_obj;
+    std::shared_ptr<Owner> _obj;
 
 public:
     virtual void load(const nlohmann::json &_json) = 0;
 
-    Owner* get() const noexcept;
+    std::shared_ptr<Owner> get() const noexcept;
 
     ~_GET_LOADER_NAME()() override = default;
 
@@ -36,7 +40,7 @@ public:
     {                                                   \
     public:                                             \
         void load(const nlohmann::json &_json) override;\
-    };
+    }
 
 
 #endif // _LOADER_H

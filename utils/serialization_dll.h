@@ -4,22 +4,34 @@
 #ifndef _SERIALIZATION_DLL_H
 #define _SERIALIZATION_DLL_H
 
+#include <memory>
+
 #include "nlohmann/json.hpp"
 
 #include "dll.h"
 
 #define _GET_SERIALIZER_NAME(CLASS) CLASS##Serializer_t
+#define _GET_LOADER_NAME(CLASS) CLASS##Loader_t
 
 #define REG_SERIALIZER_FUNCT_TYPE(CLASS) \
     typedef nlohmann::json (*_GET_SERIALIZER_NAME(CLASS))(CLASS&)
 
-#define REG_GETTER_FOR(CLASS, _NAME) \
+#define REG_LOADER_FUNCT_TYPE(CLASS) \
+    typedef std::shared_ptr<Owner> (*_GET_LOADER_NAME(CLASS))(const nlohmann::json&)
+
+#define REG_GETTER_FOR_SERIALIZERS(CLASS, _NAME) \
     _GET_SERIALIZER_NAME(CLASS) _GETTER(_NAME)() const
 
-#define GET_NAME_OF_FUNCT_FROM_SERIALIZE(_NAME) "serialize_"#_NAME
+#define REG_GETTER_FOR_LOADERS(CLASS, _NAME) \
+    _GET_LOADER_NAME(CLASS) _GETTER(_NAME)() const
+
+#define GET_NAME_OF_FUNCT_FROM_SERIALIZERS(_NAME) "serialize_"#_NAME
+#define GET_NAME_OF_FUNCT_FROM_LOADERS(_NAME) "load_"#_NAME
 
 namespace seagame
 {
+
+class Owner;
 
 class Field;
 class GameState;
@@ -38,6 +50,8 @@ REG_SERIALIZER_FUNCT_TYPE(Ship);
 REG_SERIALIZER_FUNCT_TYPE(SkillManager);
 REG_SERIALIZER_FUNCT_TYPE(Unit);
 
+REG_LOADER_FUNCT_TYPE(Unit);
+
 class _GET_DLL_NAME(Serialization) : public _GET_DLL_NAME()
 {
 public:
@@ -46,12 +60,14 @@ public:
     JsonSaver _GETTER(json_saver)() const;
     JsonLoader _GETTER(json_loader)() const;
 
-    REG_GETTER_FOR(Field, field_serializer);
-    REG_GETTER_FOR(GameState, game_state_serializer);
-    REG_GETTER_FOR(ShipManager, ship_manager_serializer);
-    REG_GETTER_FOR(Ship, ship_serializer);
-    REG_GETTER_FOR(SkillManager, skill_manager_serializer);
-    REG_GETTER_FOR(Unit, unit_serializer);
+    REG_GETTER_FOR_SERIALIZERS(Field, field_serializer);
+    REG_GETTER_FOR_SERIALIZERS(GameState, game_state_serializer);
+    REG_GETTER_FOR_SERIALIZERS(ShipManager, ship_manager_serializer);
+    REG_GETTER_FOR_SERIALIZERS(Ship, ship_serializer);
+    REG_GETTER_FOR_SERIALIZERS(SkillManager, skill_manager_serializer);
+    REG_GETTER_FOR_SERIALIZERS(Unit, unit_serializer);
+
+    REG_GETTER_FOR_LOADERS(Unit, unit_loader);
 
 };
 
