@@ -25,6 +25,7 @@ class Scanner;
 class SetupReactOfDestroyedShip;
 
 class FieldSerializer;
+class FieldLoader;
 
 class Field : public Owner
 {
@@ -33,6 +34,7 @@ class Field : public Owner
     friend SetupReactOfDestroyedShip;
 
     friend FieldSerializer;
+    friend FieldLoader;
 
 public:
     class Size : public Owner
