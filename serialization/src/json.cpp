@@ -59,6 +59,7 @@ Json::operator=(Json &&other) noexcept
 void 
 Json::save(const nlohmann::json &_json) 
 {
+    this->_file.clear();
     this->_file << _json.dump(2);
     this->_file.flush();
 
