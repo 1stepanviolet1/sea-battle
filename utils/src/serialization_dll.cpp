@@ -54,6 +54,36 @@ _GET_DLL_NAME(Serialization)::_GETTER(unit_serializer)() const
 ); }
 
 
+_GET_LOADER_NAME(Field)
+_GET_DLL_NAME(Serialization)::_GETTER(field_loader)() const
+{ return this->get_unit<_GET_LOADER_NAME(Field)>(
+    GET_NAME_OF_FUNCT_FROM_LOADERS(field)
+); }
+
+_GET_LOADER_NAME(GameState)
+_GET_DLL_NAME(Serialization)::_GETTER(game_state_loader)() const
+{ return this->get_unit<_GET_LOADER_NAME(GameState)>(
+    GET_NAME_OF_FUNCT_FROM_LOADERS(game_state)
+); }
+
+_GET_LOADER_NAME(ShipManager)
+_GET_DLL_NAME(Serialization)::_GETTER(ship_manager_loader)() const
+{ return this->get_unit<_GET_LOADER_NAME(ShipManager)>(
+    GET_NAME_OF_FUNCT_FROM_LOADERS(ship_manager)
+); }
+
+_GET_LOADER_NAME(Ship)
+_GET_DLL_NAME(Serialization)::_GETTER(ship_loader)() const
+{ return this->get_unit<_GET_LOADER_NAME(Ship)>(
+    GET_NAME_OF_FUNCT_FROM_LOADERS(ship)
+); }
+
+_GET_LOADER_NAME(SkillManager)
+_GET_DLL_NAME(Serialization)::_GETTER(skill_manager_loader)() const
+{ return this->get_unit<_GET_LOADER_NAME(SkillManager)>(
+    GET_NAME_OF_FUNCT_FROM_LOADERS(ship_manager)
+); }
+
 _GET_LOADER_NAME(Unit)
 _GET_DLL_NAME(Serialization)::_GETTER(unit_loader)() const
 { return this->get_unit<_GET_LOADER_NAME(Unit)>(

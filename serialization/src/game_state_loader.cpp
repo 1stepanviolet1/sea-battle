@@ -18,25 +18,32 @@ _GET_LOADER_NAME(GameState)::load(const nlohmann::json &_json)
 
     GameState game_state;
 
-    this->field_loader.load(_json["_player_field"]);
-    game_state.set_player_field(
-        Field(*static_cast<Field*>(this->field_loader.get().get()))
-    );
-
-    this->field_loader.load(_json["_enemy_field"]);
-    game_state.set_enemy_field(
-        Field(*static_cast<Field*>(this->field_loader.get().get()))
-    );
-
-
     this->ship_manager_loader.load(_json["_player_ship_manager"]);
     game_state.set_player_ship_manager(
         ShipManager(*static_cast<ShipManager*>(this->ship_manager_loader.get().get()))
+
     );
 
     this->ship_manager_loader.load(_json["_enemy_ship_manager"]);
     game_state.set_enemy_ship_manager(
         ShipManager(*static_cast<ShipManager*>(this->ship_manager_loader.get().get()))
+    );
+
+
+    this->field_loader.set_ship_manager(
+        &const_cast<ShipManager&>(game_state.get_player_ship_manager())
+    );
+    this->field_loader.load(_json["_player_field"]);
+    game_state.set_player_field(
+        Field(*static_cast<Field*>(this->field_loader.get().get()))
+    );
+
+    this->field_loader.set_ship_manager(
+        &const_cast<ShipManager&>(game_state.get_enemy_ship_manager())
+    );
+    this->field_loader.load(_json["_enemy_field"]);
+    game_state.set_enemy_field(
+        Field(*static_cast<Field*>(this->field_loader.get().get()))
     );
 
 

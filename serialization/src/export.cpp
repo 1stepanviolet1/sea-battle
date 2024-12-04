@@ -75,6 +75,52 @@ serialize_unit(Unit &_unit)
 
 }
 
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_field(const nlohmann::json &_json, ShipManager &_ship_manager)
+{
+    _GET_LOADER_NAME(Field) loader(_ship_manager);
+    loader.load(_json);
+    return loader.get();
+
+}
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_game_state(const nlohmann::json &_json)
+{
+    _GET_LOADER_NAME(GameState) loader;
+    loader.load(_json);
+    return loader.get();
+
+}
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_ship_manager(const nlohmann::json &_json)
+{
+    _GET_LOADER_NAME(ShipManager) loader;
+    loader.load(_json);
+    return loader.get();
+
+}
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_ship(const nlohmann::json &_json)
+{
+    _GET_LOADER_NAME(Ship) loader;
+    loader.load(_json);
+    return loader.get();
+
+}
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_skill_manager(const nlohmann::json &_json)
+{
+    _GET_LOADER_NAME(SkillManager) loader;
+    loader.load(_json);
+    return loader.get();
+
+}
+
 extern "C" SERIALIZATION_API std::shared_ptr<Owner>
 load_unit(const nlohmann::json &_json)
 {
@@ -83,7 +129,6 @@ load_unit(const nlohmann::json &_json)
     return loader.get();
 
 }
-
 
 } // seagame
 

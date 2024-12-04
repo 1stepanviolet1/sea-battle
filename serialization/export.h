@@ -17,6 +17,11 @@
 #include "skill_manager_serializer.h"
 #include "unit_serializer.h"
 
+#include "field_loader.h"
+#include "game_state_loader.h"
+#include "ship_manager_loader.h"
+#include "ship_loader.h"
+#include "skill_manager_loader.h"
 #include "unit_loader.h"
 
 namespace seagame
@@ -47,6 +52,21 @@ serialize_skill_manager(SkillManager &_skill_manager);
 extern "C" SERIALIZATION_API nlohmann::json
 serialize_unit(Unit &_unit);
 
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_field(const nlohmann::json &_json, ShipManager &_ship_manager);
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_game_state(const nlohmann::json &_json);
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_ship_manager(const nlohmann::json &_json);
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_ship(const nlohmann::json &_json);
+
+extern "C" SERIALIZATION_API std::shared_ptr<Owner>
+load_skill_manager(const nlohmann::json &_json);
 
 extern "C" SERIALIZATION_API std::shared_ptr<Owner>
 load_unit(const nlohmann::json &_json);

@@ -50,6 +50,11 @@ REG_SERIALIZER_FUNCT_TYPE(Ship);
 REG_SERIALIZER_FUNCT_TYPE(SkillManager);
 REG_SERIALIZER_FUNCT_TYPE(Unit);
 
+typedef std::shared_ptr<Owner> (*_GET_LOADER_NAME(Field))(const nlohmann::json&, ShipManager&);
+REG_LOADER_FUNCT_TYPE(GameState);
+REG_LOADER_FUNCT_TYPE(ShipManager);
+REG_LOADER_FUNCT_TYPE(Ship);
+REG_LOADER_FUNCT_TYPE(SkillManager);
 REG_LOADER_FUNCT_TYPE(Unit);
 
 class _GET_DLL_NAME(Serialization) : public _GET_DLL_NAME()
@@ -67,6 +72,11 @@ public:
     REG_GETTER_FOR_SERIALIZERS(SkillManager, skill_manager_serializer);
     REG_GETTER_FOR_SERIALIZERS(Unit, unit_serializer);
 
+    REG_GETTER_FOR_LOADERS(Field, field_loader);
+    REG_GETTER_FOR_LOADERS(GameState, game_state_loader);
+    REG_GETTER_FOR_LOADERS(ShipManager, ship_manager_loader);
+    REG_GETTER_FOR_LOADERS(Ship, ship_loader);
+    REG_GETTER_FOR_LOADERS(SkillManager, skill_manager_loader);
     REG_GETTER_FOR_LOADERS(Unit, unit_loader);
 
 };

@@ -137,10 +137,9 @@ int main()
     seagame::JsonSaver json_saver = serialization.get_json_saver();
     seagame::JsonLoader json_loader = serialization.get_json_loader();
 
-    seagame::_GET_SERIALIZER_NAME(Unit) unit_serializer = serialization._GETTER(unit_serializer)();
+    seagame::FieldSerializer_t field_serializer = serialization.get_field_serializer();
 
-    Unit unit = Unit(5, 6);
-    nlohmann::json json = unit_serializer(unit);
+    nlohmann::json json = field_serializer(field);
 
     try
     {
@@ -153,7 +152,7 @@ int main()
 
     std::cout << "-----" << std::endl;
 
-    seagame::_GET_LOADER_NAME(Unit) unit_loader = serialization._GETTER(unit_loader)();
+    seagame::FieldLoader_t field_loader = serialization._GETTER(field_loader)();
     
     nlohmann::json loaded_json;
     try
@@ -162,15 +161,15 @@ int main()
     }
     catch(const std::runtime_error& err)
     {
-        std::cerr << "Error: " << err.what() << '\n';
+        std::cerr << "Error: " << err.what() << std::endl;
     }
     std::cout << loaded_json.dump(2) << std::endl;
     
     std::cout << "-----" << std::endl;
     
-    Unit _unit = *static_cast<Unit*>(unit_loader(loaded_json).get());
+    seagame::Field _field = *static_cast<seagame::Field*>(field_loader(loaded_json, sm).get());
 
-    std::cout << "Unit(" << _unit.x() << ", " << _unit.y() << ")" << std::endl;
+    std::cout << "Field is read" << std::endl;
 
     std::cout << "-----" << std::endl;
 
