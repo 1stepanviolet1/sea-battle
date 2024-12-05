@@ -31,7 +31,7 @@ Scanner::operator()(Void *_obj)
     std::equal_to<Unit> eq;
 
     if (eq(this->_unit, Unit()))
-        throw std::invalid_argument("uninstall data");
+        throw std::invalid_argument("Don't setup unit for Scanner");
 
     Field &_fd = *static_cast<Field*>(_obj);
     
