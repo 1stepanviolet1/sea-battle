@@ -4,25 +4,51 @@
 #ifndef _GAME_H
 #define _GAME_H
 
-#include "setup_react_of_destroyed_ship.h"
-#include "add_random_skill.h"
 #include "extract_error.h"
-#include "out_of_field_error.h"
-#include "placement_error.h"
 #include "game_state.h"
 
 namespace seagame
 {
 
-class Game
+enum GAME_OVER_FLAG
 {
+	ENEMY,
+	PLAYER, 
+	NOBODY
+};
+
+class Game : public Owner
+{
+private:
+	GameState _state;
+
+	Unit _bot_attack_unit;
+	std::random_device _rd;
+
 public:
 	Game();
 
-	~Game();
+	void user_attack(const Unit & _unit);
+
+	SkillResultStatus user_skill(const Unit &_unit = Unit());
+
+	void load_game();
+
+	void save_game();
+
+	void new_game();
+
+	void bot_attack();
+	void setup_bot();
+
+	GAME_OVER_FLAG is_game_over() noexcept;
+
+	GameState& state() noexcept;
+
+	~Game() = default;
 
 private:
-	GameState _state;
+	void _update_bot_attack_unit();
 
 };
 

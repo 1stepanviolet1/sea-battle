@@ -7,6 +7,8 @@
 #include "field.h"
 #include "ship_manager.h"
 #include "skill_manager.h"
+#include "file.h"
+#include "serialization_dll.h"
 
 namespace seagame
 {
@@ -30,13 +32,13 @@ public:
 	GameState& operator=(const GameState& other);
 	GameState& operator=(GameState&& other) noexcept;
 
-	const Field& get_player_field() const noexcept;
-	const Field& get_enemy_field() const noexcept;
+	Field& get_player_field() noexcept;
+	Field& get_enemy_field() noexcept;
 
-	const ShipManager& get_player_ship_manager() const noexcept;
-	const ShipManager& get_enemy_ship_manager() const noexcept;
+	ShipManager& get_player_ship_manager() noexcept;
+	ShipManager& get_enemy_ship_manager() noexcept;
 
-	const SkillManager& get_player_skill_manager() const noexcept;
+	SkillManager& get_player_skill_manager() noexcept;
 
 
 	void set_player_field(Field &&_player_field) noexcept;
@@ -60,5 +62,12 @@ private:
 
 } // seagame
 
+seagame::File& operator<<(seagame::File &f, seagame::GameState &game_state);
+
+seagame::File& operator>>(seagame::File &f, seagame::GameState &game_state);
+
+seagame::File& operator<<(seagame::File &&f, seagame::GameState &game_state);
+
+seagame::File& operator>>(seagame::File &&f, seagame::GameState &game_state);
 
 #endif // _GAME_STATE_H
