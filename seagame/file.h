@@ -18,6 +18,8 @@ public:
     File(std::string &&name) noexcept;
 	File();
 
+    File(File &&other) noexcept;
+
     const std::string& name(const std::string &name) noexcept;
     const std::string& name() const noexcept;
 

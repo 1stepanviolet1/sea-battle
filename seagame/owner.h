@@ -20,7 +20,7 @@ public:
     accept(Args_T&& ..._args)
     {
         auto ptr_t = std::make_shared<T>(std::forward<Args_T>(_args)...);
-        Visitor *_v = ptr_t.get();
+        Visitor *_v = static_cast<Visitor*>(ptr_t.get());
         (*_v)(this);
         return ptr_t;
     }

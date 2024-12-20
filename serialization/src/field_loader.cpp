@@ -26,6 +26,8 @@ _GET_LOADER_NAME(Field)::load(const nlohmann::json &_json)
         throw std::invalid_argument("Invalid json for field");
     }
 
+    std::cout << '&' << std::endl;
+
     this->field_size_loader.load(_json["_size"]);
 
     Field field(
@@ -33,6 +35,8 @@ _GET_LOADER_NAME(Field)::load(const nlohmann::json &_json)
     );
 
     ShipManager &_sm = *this->_ship_manager;
+
+    std::cout << '&' << std::endl;
 
     for (const auto &_item : _json["_deployed_ships"])
     {
@@ -44,17 +48,23 @@ _GET_LOADER_NAME(Field)::load(const nlohmann::json &_json)
         );
     }
 
+    std::cout << '&' << std::endl;
+
     for (const auto &_item : _json["_hit_units"])
     {
         this->unit_loader.load(_item);
         field._hit_units.insert(*static_cast<Unit*>(this->unit_loader.get().get()));
     }
 
+    std::cout << '&' << std::endl;
+
     for (const auto &_item : _json["_unusable_units"])
     {
         this->unit_loader.load(_item);
         field._unusable_units.insert(*static_cast<Unit*>(this->unit_loader.get().get()));
     }
+
+    std::cout << '&' << std::endl;
 
     this->_obj = std::make_shared<Field>(std::move(field));
 

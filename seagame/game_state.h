@@ -7,8 +7,6 @@
 #include "field.h"
 #include "ship_manager.h"
 #include "skill_manager.h"
-#include "file.h"
-#include "serialization_dll.h"
 
 namespace seagame
 {
@@ -62,12 +60,6 @@ private:
 
 } // seagame
 
-seagame::File& operator<<(seagame::File &f, seagame::GameState &game_state);
 
-seagame::File& operator>>(seagame::File &f, seagame::GameState &game_state);
-
-seagame::File& operator<<(seagame::File &&f, seagame::GameState &game_state);
-
-seagame::File& operator>>(seagame::File &&f, seagame::GameState &game_state);
 
 #endif // _GAME_STATE_H

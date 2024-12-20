@@ -5,7 +5,11 @@
 #define _GAME_H
 
 #include "extract_error.h"
+#include "placement_error.h"
 #include "game_state.h"
+
+#include "file.h"
+#include "serialization_dll.h"
 
 namespace seagame
 {
@@ -45,6 +49,8 @@ public:
 
 	GameState& state() noexcept;
 
+	void set_state(GameState & _state) noexcept;
+
 	~Game() = default;
 
 private:
@@ -53,6 +59,14 @@ private:
 };
 
 } // seagame
+
+seagame::File& operator<<(seagame::File &f, seagame::GameState &game_state);
+
+seagame::File& operator>>(seagame::File &f, seagame::GameState &game_state);
+
+seagame::File& operator<<(seagame::File &&f, seagame::GameState &game_state);
+
+seagame::File& operator>>(seagame::File &&f, seagame::GameState &game_state);
 
 
 #endif // _GAME_H

@@ -1,5 +1,8 @@
+#include "setup_react_of_destroyed_ship.h"
 #include "game.h"
 #include "serialization_dll.h"
+#include "placement_error.h"
+#include "add_random_skill.h"
 
 #include <iostream>
 
@@ -128,48 +131,23 @@ int main()
 
     std::cout << skill_manager.empty() << std::endl;
 
-    std::cout << "-----" << std::endl;
+    std::cout << "GAME OBJECT" << std::endl;
 
-    std::cout << "JSON TEST" << std::endl;
+    seagame::Game game_object;
+    game_object.state().set_player_ship_manager(seagame::ShipManager(sm));
+    game_object.state().set_player_field(seagame::Field(field));
+    game_object.state().set_player_skill_manager(seagame::SkillManager(skill_manager));
+    game_object.setup_bot();
 
-    seagame::SerializationDLL serialization;
+    std::cout << "SERIALIZE TEST" << std::endl;
 
-    seagame::JsonSaver json_saver = serialization.get_json_saver();
-    seagame::JsonLoader json_loader = serialization.get_json_loader();
-
-    seagame::FieldSerializer_t field_serializer = serialization.get_field_serializer();
-
-    nlohmann::json json = field_serializer(field);
-
-    try
-    {
-        json_saver(json, "settings.json");
-    }
-    catch(const std::runtime_error& err)
-    {
-        std::cerr << "Error: " << err.what() << std::endl;
-    }
+    game_object.save_game();
 
     std::cout << "-----" << std::endl;
 
-    seagame::FieldLoader_t field_loader = serialization._GETTER(field_loader)();
+    std::cout << "LOAD TEST" << std::endl;
     
-    nlohmann::json loaded_json;
-    try
-    {
-        loaded_json = json_loader("settings.json");
-    }
-    catch(const std::runtime_error& err)
-    {
-        std::cerr << "Error: " << err.what() << std::endl;
-    }
-    std::cout << loaded_json.dump(2) << std::endl;
-    
-    std::cout << "-----" << std::endl;
-    
-    seagame::Field _field = *static_cast<seagame::Field*>(field_loader(loaded_json, sm).get());
-
-    std::cout << "Field is read" << std::endl;
+    game_object.load_game();
 
     std::cout << "-----" << std::endl;
 

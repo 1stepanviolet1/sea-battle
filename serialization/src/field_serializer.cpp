@@ -20,6 +20,9 @@ _GET_SERIALIZER_NAME(Field)::operator()(Void *_obj)
         _unit = _pair.first;
         this->unit_serializer.save(&_unit);
         _json["coords"] = this->unit_serializer.get();
+
+        std::cout << _pair.second.get().id() << std::endl;
+
         _json["ship_id"] = _pair.second.get().id();
         this->_json["_deployed_ships"].push_back(_json);
     }

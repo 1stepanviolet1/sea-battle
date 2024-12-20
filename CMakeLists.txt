@@ -5,8 +5,8 @@ project(seagame VERSION 3.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_subdirectory(seagame)
 add_subdirectory(utils)
+add_subdirectory(seagame)
 add_subdirectory(serialization)
 
 include_directories("${CMAKE_SOURCE_DIR}/nlohmann-json/include")

@@ -126,21 +126,34 @@ Game::new_game()
 void 
 Game::setup_bot()
 {
-    ShipManager &player_manager = this->_state.get_player_ship_manager();
-    
-    std::vector<Ship::Len> ship_lens;
-    for (const auto &_ship : player_manager.container())
-        ship_lens.push_back(_ship.len());
+    ShipManager e_ship_manager({});
 
-    this->_state.set_enemy_ship_manager(ShipManager(ship_lens));
-    Field &field = this->_state.get_enemy_field();
+    e_ship_manager.new_ship(Ship::Len::FOUR, Ship::Orientation::VERTICAL);
+    e_ship_manager.new_ship(Ship::Len::THREE, Ship::Orientation::HORIZONTAL);
+    e_ship_manager.new_ship(Ship::Len::THREE, Ship::Orientation::VERTICAL);
+    e_ship_manager.new_ship(Ship::Len::TWO, Ship::Orientation::VERTICAL);
+    e_ship_manager.new_ship(Ship::Len::TWO, Ship::Orientation::VERTICAL);
+    e_ship_manager.new_ship(Ship::Len::TWO, Ship::Orientation::HORIZONTAL);
+    e_ship_manager.new_ship(Ship::Len::ONE);
+    e_ship_manager.new_ship(Ship::Len::ONE);
+    e_ship_manager.new_ship(Ship::Len::ONE);
+    e_ship_manager.new_ship(Ship::Len::ONE);
 
-    for (const auto &_ship : this->_state.get_enemy_ship_manager().container())
-        field.add_ship(
-            const_cast<Ship&>(_ship),
-            this->_rd() % field.size().m(),
-            this->_rd() % field.size().n()
-        );
+    Field e_field(10, 10);
+
+    e_field.add_ship(e_ship_manager[0], Unit(3, 4));
+    e_field.add_ship(e_ship_manager[1], Unit(5, 2));
+    e_field.add_ship(e_ship_manager[2], Unit(9, 2));
+    e_field.add_ship(e_ship_manager[3], Unit(6, 5));
+    e_field.add_ship(e_ship_manager[4], Unit(9, 8));
+    e_field.add_ship(e_ship_manager[5], Unit(6, 9));
+    e_field.add_ship(e_ship_manager[6], Unit(2, 1));
+    e_field.add_ship(e_ship_manager[7], Unit(2, 9));
+    e_field.add_ship(e_ship_manager[8], Unit(4, 10));
+    e_field.add_ship(e_ship_manager[9], Unit(9, 6));
+
+    this->_state.set_enemy_field(Field(e_field));
+    this->_state.set_enemy_ship_manager(ShipManager(e_ship_manager));
 
 }
 
@@ -163,5 +176,56 @@ GameState&
 Game::state() noexcept
 { return this->_state; }
 
+void 
+Game::set_state(GameState & _state) noexcept
+{
+    this->_state = _state;
+
+}
+
 } // seagame
+
+seagame::File& operator<<(seagame::File &f, seagame::GameState &game_state)
+{
+	seagame::SerializationDLL dll;
+
+	seagame::JsonSaver saver = dll.get_json_saver();
+	seagame::GameStateSerializer_t serializer = dll.get_game_state_serializer();
+
+	saver(serializer(game_state), f.name());
+
+	return f;
+
+}
+
+seagame::File& operator>>(seagame::File &f, seagame::GameState &game_state)
+{
+	seagame::SerializationDLL dll;
+
+	seagame::JsonLoader loader = dll.get_json_loader();
+	seagame::GameStateLoader_t reader = dll.get_game_state_loader();
+
+	game_state = std::move(*static_cast<seagame::GameState*>(
+		reader(loader(f.name())).get()
+	));
+
+	return f;
+
+}
+
+seagame::File& operator<<(seagame::File &&f, seagame::GameState &game_state)
+{
+	seagame::File file(std::move(f.name()));
+	file << game_state;
+	return f;
+
+}
+
+seagame::File& operator>>(seagame::File &&f, seagame::GameState &game_state)
+{
+	seagame::File file(std::move(f.name()));
+	file >> game_state;
+	return f;
+	
+}
 
