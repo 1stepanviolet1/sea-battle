@@ -126,34 +126,29 @@ Game::new_game()
 void 
 Game::setup_bot()
 {
-    ShipManager e_ship_manager({});
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::FOUR, Ship::Orientation::VERTICAL);
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::THREE, Ship::Orientation::HORIZONTAL);
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::THREE, Ship::Orientation::VERTICAL);
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::TWO, Ship::Orientation::VERTICAL);
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::TWO, Ship::Orientation::VERTICAL);
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::TWO, Ship::Orientation::HORIZONTAL);
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::ONE);
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::ONE);
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::ONE);
+    this->_state.get_enemy_ship_manager().new_ship(Ship::Len::ONE);
 
-    e_ship_manager.new_ship(Ship::Len::FOUR, Ship::Orientation::VERTICAL);
-    e_ship_manager.new_ship(Ship::Len::THREE, Ship::Orientation::HORIZONTAL);
-    e_ship_manager.new_ship(Ship::Len::THREE, Ship::Orientation::VERTICAL);
-    e_ship_manager.new_ship(Ship::Len::TWO, Ship::Orientation::VERTICAL);
-    e_ship_manager.new_ship(Ship::Len::TWO, Ship::Orientation::VERTICAL);
-    e_ship_manager.new_ship(Ship::Len::TWO, Ship::Orientation::HORIZONTAL);
-    e_ship_manager.new_ship(Ship::Len::ONE);
-    e_ship_manager.new_ship(Ship::Len::ONE);
-    e_ship_manager.new_ship(Ship::Len::ONE);
-    e_ship_manager.new_ship(Ship::Len::ONE);
+    this->_state.get_enemy_field().size(Field::Size(10, 10));
 
-    Field e_field(10, 10);
-
-    e_field.add_ship(e_ship_manager[0], Unit(3, 4));
-    e_field.add_ship(e_ship_manager[1], Unit(5, 2));
-    e_field.add_ship(e_ship_manager[2], Unit(9, 2));
-    e_field.add_ship(e_ship_manager[3], Unit(6, 5));
-    e_field.add_ship(e_ship_manager[4], Unit(9, 8));
-    e_field.add_ship(e_ship_manager[5], Unit(6, 9));
-    e_field.add_ship(e_ship_manager[6], Unit(2, 1));
-    e_field.add_ship(e_ship_manager[7], Unit(2, 9));
-    e_field.add_ship(e_ship_manager[8], Unit(4, 10));
-    e_field.add_ship(e_ship_manager[9], Unit(9, 6));
-
-    this->_state.set_enemy_field(Field(e_field));
-    this->_state.set_enemy_ship_manager(ShipManager(e_ship_manager));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[0], Unit(3, 4));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[1], Unit(5, 2));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[2], Unit(9, 2));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[3], Unit(6, 5));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[4], Unit(9, 8));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[5], Unit(6, 9));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[6], Unit(2, 1));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[7], Unit(2, 9));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[8], Unit(4, 10));
+    this->_state.get_enemy_field().add_ship(this->_state.get_enemy_ship_manager()[9], Unit(9, 6));
 
 }
 

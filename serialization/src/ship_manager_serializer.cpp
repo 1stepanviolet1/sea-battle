@@ -7,7 +7,7 @@ namespace seagame
 void 
 _GET_SERIALIZER_NAME(ShipManager)::operator()(Void *_obj)
 {
-    ShipManager &ship_manager = static_cast<ShipManager&>(*_obj);
+    ShipManager &ship_manager = *static_cast<ShipManager*>(_obj);
 
     this->_json["_container"] = nlohmann::json::array();
 

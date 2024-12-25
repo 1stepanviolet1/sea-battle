@@ -14,11 +14,11 @@ namespace seagame
 class GameState : public Owner
 {
 public:
-	explicit GameState(Field &&_player_field, Field &&_enemy_field,
-					   ShipManager &&_player_ship_manager, ShipManager &&_enemy_ship_manager,
-					   SkillManager &&_player_skill_manager);
+	explicit GameState(const Field &_player_field, const Field &_enemy_field,
+					   const ShipManager &_player_ship_manager, const ShipManager &_enemy_ship_manager,
+					   const SkillManager &_player_skill_manager);
 
-	explicit GameState(Field &&_player_field, Field &&_enemy_field);
+	explicit GameState(const Field &_player_field, const Field &_enemy_field);
 
 	GameState();
 
@@ -39,13 +39,13 @@ public:
 	SkillManager& get_player_skill_manager() noexcept;
 
 
-	void set_player_field(Field &&_player_field) noexcept;
-	void set_enemy_field(Field &&_enemy_field) noexcept;
+	void set_player_field(const Field &_player_field) noexcept;
+	void set_enemy_field(const Field &_enemy_field) noexcept;
 
-	void set_player_ship_manager(ShipManager &&_player_ship_manager) noexcept;
-	void set_enemy_ship_manager(ShipManager &&_enemy_ship_manager) noexcept;
+	void set_player_ship_manager(const ShipManager &_player_ship_manager) noexcept;
+	void set_enemy_ship_manager(const ShipManager &_enemy_ship_manager) noexcept;
 
-	void set_player_skill_manager(SkillManager &&_player_skill_manager) noexcept;
+	void set_player_skill_manager(const SkillManager &_player_skill_manager) noexcept;
 
 private:
 	Field _player_field;

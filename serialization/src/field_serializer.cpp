@@ -7,8 +7,17 @@ namespace seagame
 void 
 _GET_SERIALIZER_NAME(Field)::operator()(Void *_obj)
 {
-    Field &field = static_cast<Field&>(*_obj);
+    Field &field = *static_cast<Field*>(_obj);
 
+    std::cout << "---" << std::endl;
+
+    for (auto &pair : field._deployed_ships)
+    {
+        std::cout << "ID: " << pair.second.get().id() << std::endl;
+    }
+
+    std::cout << "---" << std::endl;
+    
     this->field_size_serializer.save(&field._size);
     this->_json["_size"] = this->field_size_serializer.get();
 
@@ -20,9 +29,6 @@ _GET_SERIALIZER_NAME(Field)::operator()(Void *_obj)
         _unit = _pair.first;
         this->unit_serializer.save(&_unit);
         _json["coords"] = this->unit_serializer.get();
-
-        std::cout << _pair.second.get().id() << std::endl;
-
         _json["ship_id"] = _pair.second.get().id();
         this->_json["_deployed_ships"].push_back(_json);
     }

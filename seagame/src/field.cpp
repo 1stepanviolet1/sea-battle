@@ -108,6 +108,8 @@ Field::operator=(Field &&other) noexcept
         this->_deployed_ships = std::move(other._deployed_ships);
         this->_hit_units = std::move(other._hit_units);
         this->_unusable_units = std::move(other._unusable_units);
+
+        other._deployed_ships = std::unordered_map<Unit, std::reference_wrapper<Ship>>();
     }
     return *this;
 }
@@ -224,6 +226,14 @@ Field::accept_skill(std::shared_ptr<iSkill> _skill)
 const Field::Size& 
 Field::size() const noexcept
 { return this->_size; }
+
+const Field::Size& 
+Field::size(const Field::Size &_size) noexcept
+{
+    this->_size = _size;
+    return this->_size;
+    
+}
 
 
 void 

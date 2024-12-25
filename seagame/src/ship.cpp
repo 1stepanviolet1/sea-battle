@@ -117,7 +117,7 @@ namespace std
 std::size_t 
 hash<seagame::Ship>::operator()(const seagame::Ship& u) const
 {
-    return hash<string>()(to_string(u.id()) + to_string(u.len()) + to_string(u.orientation()));
+    return hash<string>()(to_string(u.id()));
 }
 
 bool 

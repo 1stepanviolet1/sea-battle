@@ -3,6 +3,8 @@
 #include "serialization_dll.h"
 #include "placement_error.h"
 #include "add_random_skill.h"
+#include "serialization_dll.h"
+
 
 #include <iostream>
 
@@ -146,7 +148,7 @@ int main()
     std::cout << "-----" << std::endl;
 
     std::cout << "LOAD TEST" << std::endl;
-    
+
     game_object.load_game();
 
     std::cout << "-----" << std::endl;

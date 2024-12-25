@@ -4,17 +4,17 @@
 namespace seagame
 {
 
-GameState::GameState(Field &&_player_field, Field &&_enemy_field,
-					 ShipManager &&_player_ship_manager, ShipManager &&_enemy_ship_manager,
-					 SkillManager &&_player_skill_manager)
+GameState::GameState(const Field &_player_field, const Field &_enemy_field,
+					 const ShipManager &_player_ship_manager, const ShipManager &_enemy_ship_manager,
+					 const SkillManager &_player_skill_manager)
 	: _player_field(_player_field), _enemy_field(_enemy_field),
 	  _player_ship_manager(_player_ship_manager), _enemy_ship_manager(_enemy_ship_manager),
 	  _player_skill_manager(_player_skill_manager)
 {    }
 
-GameState::GameState(Field &&_player_field, Field &&_enemy_field)
-	: GameState(Field(_player_field), Field(_enemy_field), 
-				ShipManager({}), ShipManager({}),
+GameState::GameState(const Field &_player_field, const Field &_enemy_field)
+	: GameState(_player_field, _enemy_field, 
+				{}, {},
 				SkillManager())
 {    }
 
@@ -94,31 +94,31 @@ GameState::get_player_skill_manager() noexcept
 
 
 void 
-GameState::set_player_field(Field&& _player_field) noexcept
+GameState::set_player_field(const Field& _player_field) noexcept
 {
 	this->_player_field = _player_field;
 }
 
 void 
-GameState::set_enemy_field(Field&& _enemy_field) noexcept
+GameState::set_enemy_field(const Field& _enemy_field) noexcept
 {
 	this->_enemy_field = _enemy_field;
 }
 
 void 
-GameState::set_player_ship_manager(ShipManager&& _player_ship_manager) noexcept
+GameState::set_player_ship_manager(const ShipManager& _player_ship_manager) noexcept
 {
 	this->_player_ship_manager = _player_ship_manager;
 }
 
 void 
-GameState::set_enemy_ship_manager(ShipManager&& _enemy_ship_manager) noexcept
+GameState::set_enemy_ship_manager(const ShipManager& _enemy_ship_manager) noexcept
 {
 	this->_enemy_ship_manager = _enemy_ship_manager;
 }
 
 void 
-GameState::set_player_skill_manager(SkillManager&& _player_skill_manager) noexcept
+GameState::set_player_skill_manager(const SkillManager& _player_skill_manager) noexcept
 {
 	this->_player_skill_manager = _player_skill_manager;
 }

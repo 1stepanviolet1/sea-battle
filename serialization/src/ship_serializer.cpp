@@ -7,7 +7,7 @@ namespace seagame
 void 
 _GET_SERIALIZER_NAME(Ship)::operator()(Void *_obj)
 {
-    Ship &ship = static_cast<Ship&>(*_obj);
+    Ship &ship = *static_cast<Ship*>(_obj);
     
     this->_json["_id"] = ship.id();
     this->_json["_len"] = ship.len();

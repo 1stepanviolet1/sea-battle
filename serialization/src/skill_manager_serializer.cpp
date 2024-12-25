@@ -7,7 +7,7 @@ namespace seagame
 void 
 _GET_SERIALIZER_NAME(SkillManager)::operator()(Void *_obj)
 {
-    SkillManager &skill_manager = static_cast<SkillManager&>(*_obj);
+    SkillManager &skill_manager = *static_cast<SkillManager*>(_obj);
     
     this->_json["_queue_of_skills"] = nlohmann::json::array();
 

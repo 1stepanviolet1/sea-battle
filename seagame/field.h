@@ -37,6 +37,14 @@ class Field : public Owner
     friend FieldLoader;
 
 public:
+    void test()
+    {
+        for (auto &pair : this->_deployed_ships)
+        {
+            std::cout << "ID: " << pair.second.get().id() << std::endl;
+        }
+    }
+
     class Size : public Owner
     {
     public:
@@ -58,8 +66,8 @@ public:
         std::uint64_t _n;
     };
 
-private:
     std::unordered_map<Unit, std::reference_wrapper<Ship>> _deployed_ships;
+private:
     std::unordered_set<Unit> _hit_units;
     std::unordered_set<Unit> _unusable_units;
 
@@ -88,6 +96,7 @@ public:
     void accept_skill(std::shared_ptr<iSkill> _skill);
 
     const Size& size() const noexcept;
+    const Size& size(const Size &_size) noexcept;
 
 private:
     void __block_unit(const Unit &_unit, const Ship::Orientation &_orie, bool _flag);
