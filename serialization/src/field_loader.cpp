@@ -1,4 +1,5 @@
 #include "field_loader.h"
+#include "placement_error.h"
 
 
 namespace seagame
@@ -38,10 +39,18 @@ _GET_LOADER_NAME(Field)::load(const nlohmann::json &_json)
     {
         this->unit_loader.load(_item["coords"]);
 
-        field.add_ship(
-            const_cast<Ship&>(_sm[_item["ship_id"]]),
-            *static_cast<Unit*>(this->unit_loader.get().get())
-        );
+        try
+        {
+            field.add_ship(
+                const_cast<Ship&>(_sm[_item["ship_id"]]),
+                *static_cast<Unit*>(this->unit_loader.get().get())
+            );
+        }
+        catch(const PlacementError& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+        
     }
 
     for (const auto &_item : _json["_hit_units"])
