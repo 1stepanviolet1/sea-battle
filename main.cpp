@@ -14,7 +14,18 @@ using SkillName = seagame::SkillName;
 
 int main()
 {
-    seagame::ShipManager sm;
+    seagame::Game game_object;
+    game_object.setup_bot();
+
+    seagame::ShipManager &sm = game_object.state().get_player_ship_manager();
+    seagame::Field &field = game_object.state().get_player_field();
+    seagame::SkillManager &skill_manager = game_object.state().get_player_skill_manager();
+    
+    field.accept<seagame::SetupReactOfDestroyedShip>(
+        std::make_shared<seagame::AddRandomSkill>(skill_manager)
+    );
+
+    std::uint64_t i;
 
     try
     {
@@ -22,20 +33,19 @@ int main()
             seagame::Ship::Len::TWO,
             seagame::Ship::Len::FOUR
         });
+
+        i = sm.new_ship(
+            seagame::Ship::Len::THREE,
+            seagame::Ship::Orientation::VERTICAL
+        );
     }
     catch (const std::invalid_argument& err)
     {
         std::cerr << "Error: " << err.what() << std::endl;
+        i = -1;
     }
 
-
-    std::uint64_t i = sm.new_ship(
-        seagame::Ship::Len::THREE,
-        seagame::Ship::Orientation::VERTICAL
-    );
-
-
-    seagame::Field field(1, 1);
+    
 
     try
     {
@@ -48,7 +58,7 @@ int main()
 
     try
     {
-        field.add_ship(sm[i], Unit(2, 1));
+        if (i != -1) field.add_ship(sm[i], Unit(2, 1));
         field.add_ship(sm[0], Unit(4, 2));
         field.add_ship(sm[1], Unit(2, 5));
     } catch (const seagame::PlacementError &err)
@@ -59,61 +69,24 @@ int main()
 
     try
     {
-        field.shot(Unit(1, 1));
+        game_object.user_attack(Unit(9, 6));
+        game_object.user_attack(Unit(9, 6));
     } catch (const std::invalid_argument &err)
     {
         std::cerr << "Error: " << err.what() << std::endl;
     }
-
-    
-    seagame::SkillManager skill_manager;
-    
-    field.accept<seagame::SetupReactOfDestroyedShip>(
-        std::make_shared<seagame::AddRandomSkill>(skill_manager)
-    );
-
-    std::shared_ptr<seagame::iSkillFactory> _f_skill;
-    std::shared_ptr<seagame::iSkill> _skill;
-    for (std::size_t i = 0; i < 3; ++i)
-    {
-        try
-        {
-            _f_skill = skill_manager.extract_skill();
-        } catch (const seagame::ExtractError &err)
-        {
-            std::cerr << "Error: " << err.what() << std::endl;
-            continue;
-        }
-
-        _skill = _f_skill->create(Unit(2, 3));
-        
-        try
-        {
-            field.accept_skill(_skill);
-        } catch (const std::invalid_argument &err)
-        {
-            std::cerr << "Error: " << err.what() << std::endl;
-        }
-
-        std::cout << _skill->result()->get() << std::endl;
-        
-    }
-
-    skill_manager.produce_skill(SkillName::DOUBLEHIT);
-    skill_manager.produce_skill(SkillName::DOUBLEHIT);
 
     try
     {
-        field.accept_skill(skill_manager.extract_skill()->create(Unit(4, 2)));
-        field.accept_skill(skill_manager.extract_skill()->create(Unit(5, 2)));
-    
-    } catch (const std::invalid_argument &err)
-    {
-        std::cerr << "Error: " << err.what() << std::endl;
-    } catch (const seagame::ExtractError &err)
-    {
-        std::cerr << "Error: " << err.what() << std::endl;
+        seagame::SkillResultStatus status = game_object.user_skill(Unit(3, 5));
+        std::cout << "Skill result: " << status << std::endl;
     }
+    catch(const seagame::ExtractError&)
+    {
+        std::cerr << "No skills" << std::endl;
+    }
+
+    game_object.bot_attack();
     
     std::cout << "-----" << std::endl;
     
@@ -131,25 +104,31 @@ int main()
 
     std::cout << "-----" << std::endl;
 
-    std::cout << skill_manager.empty() << std::endl;
-
-    std::cout << "GAME OBJECT" << std::endl;
-
-    seagame::Game game_object;
-    game_object.state().set_player_ship_manager(seagame::ShipManager(sm));
-    game_object.state().set_player_field(seagame::Field(field));
-    game_object.state().set_player_skill_manager(seagame::SkillManager(skill_manager));
-    game_object.setup_bot();
+    std::cout << "skill_manager len: " << skill_manager.empty() << std::endl;
 
     std::cout << "SERIALIZE TEST" << std::endl;
 
-    game_object.save_game();
+    try
+    {
+        game_object.save_game();
+    }
+    catch(const std::exception&)
+    {
+        std::cerr << "bad save" << std::endl;
+    }
 
     std::cout << "-----" << std::endl;
 
     std::cout << "LOAD TEST" << std::endl;
 
-    game_object.load_game();
+    try
+    {
+        game_object.load_game();
+    }
+    catch(const std::exception&)
+    {
+        std::cerr << "bad load" << std::endl;
+    }
 
     std::cout << "-----" << std::endl;
 

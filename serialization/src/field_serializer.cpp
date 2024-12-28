@@ -8,15 +8,6 @@ void
 _GET_SERIALIZER_NAME(Field)::operator()(Void *_obj)
 {
     Field &field = *static_cast<Field*>(_obj);
-
-    std::cout << "---" << std::endl;
-
-    for (auto &pair : field._deployed_ships)
-    {
-        std::cout << "ID: " << pair.second.get().id() << std::endl;
-    }
-
-    std::cout << "---" << std::endl;
     
     this->field_size_serializer.save(&field._size);
     this->_json["_size"] = this->field_size_serializer.get();

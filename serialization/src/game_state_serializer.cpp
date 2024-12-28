@@ -9,8 +9,6 @@ _GET_SERIALIZER_NAME(GameState)::operator()(Void *_obj)
 {
     GameState &game_state = *static_cast<GameState*>(_obj);
 
-    game_state.get_enemy_field().test();
-
     this->field_serializer.save(
         &this->__del_const(game_state.get_player_field())
     );

@@ -49,7 +49,7 @@ public:
 
 	GameState& state() noexcept;
 
-	void set_state(GameState & _state) noexcept;
+	void set_state(const GameState & _state) noexcept;
 
 	~Game() = default;
 

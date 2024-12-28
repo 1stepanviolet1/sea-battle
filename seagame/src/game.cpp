@@ -50,20 +50,19 @@ Game::_update_bot_attack_unit()
 
     Field &field = this->_state.get_player_field();
 
-    if (field.size().m() <= _bot_attack_unit.x())
-    {
-        _bot_attack_unit = Unit(
-            1,
-            _bot_attack_unit.y() + 1
-        );
-        return;
-    }
-
     if (field.size().n() <= _bot_attack_unit.y())
     {
         _bot_attack_unit = Unit(
             _bot_attack_unit.x(),
             1
+        );
+    }
+
+    if (field.size().m() <= _bot_attack_unit.x())
+    {
+        _bot_attack_unit = Unit(
+            1,
+            _bot_attack_unit.y() + 1
         );
         return;
     }
@@ -85,7 +84,7 @@ Game::user_skill(const Unit &_unit)
     std::shared_ptr<seagame::iSkill> _skill;
 
     _f_skill = skill_manager.extract_skill();
-    // maybe throw an std::ExtractError
+    // maybe throw an ExtractError
 
     _skill = _f_skill->create(_unit);
     
@@ -120,7 +119,8 @@ void
 Game::new_game()
 {
     this->_state = GameState();
-    // TODO:
+    this->setup_bot();
+
 }
 
 void 
@@ -172,7 +172,7 @@ Game::state() noexcept
 { return this->_state; }
 
 void 
-Game::set_state(GameState & _state) noexcept
+Game::set_state(const GameState & _state) noexcept
 {
     this->_state = _state;
 

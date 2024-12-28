@@ -19,6 +19,10 @@ namespace seagame
 
 class Json : public Owner
 {
+private:
+    std::fstream _file;
+    std::string _filename;
+
 public:
     Json(const std::string &_filename);
     Json();
@@ -33,10 +37,6 @@ public:
 
     void save(const nlohmann::json &_json);
     nlohmann::json load(void);
-
-private:
-    std::fstream _file;
-    std::string _filename;
 
 private:
     void __init_file();
